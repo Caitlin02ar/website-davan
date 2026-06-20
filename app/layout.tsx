@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
-import LenisProvider from "./components/LenisProvider";
+import LenisProvider from "./components/common/LenisProvider";
+import Navbar from "./components/common/Navbar";
 
 
 const sequel = localFont({
@@ -33,6 +34,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <LenisProvider>
+          <Navbar/>
           {children}
         </LenisProvider>
       </body>
