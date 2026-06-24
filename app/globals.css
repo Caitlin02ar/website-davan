@@ -13,6 +13,7 @@
   /* FONTS */
   --font-heading: var(--font-sequel);
   --font-body: var(--font-poppins);
+  /* --font-subheading: var(--font-subheading); */
 }
 
 @theme inline {
@@ -25,6 +26,7 @@
   --color-dark: var(--color-dark);
 
   --font-heading: var(--font-heading);
+  --font-subheading: var(--font-subheading);
   --font-body: var(--font-body);
 }
 

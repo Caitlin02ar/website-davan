@@ -21,7 +21,9 @@ export default function Hero() {
         </h6>
 
         <div className="flex flex-col items-center">
-            <Button/>
+          <Button theme="light">
+            Start Your Transformation
+          </Button>
         </div>
       </div>
     </section>
