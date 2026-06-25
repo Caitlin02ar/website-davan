@@ -1,6 +1,6 @@
 "use client";
 
-import CardElement from "./CardElement";
+import CardHome from "./CardHome";
 
 export default function Why(){
     return(
@@ -11,7 +11,7 @@ export default function Why(){
                     <p className="font-body text-sm  max-w-sm font-light">If any of these sound familiar, you are exactly who we built DAVAN for.</p>
                 </div>
                 <div className="right-content">
-                    hello
+                    <CardHome/>
                 </div>
             </div>
         </section>
