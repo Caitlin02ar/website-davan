@@ -5,8 +5,7 @@ import DescriptionBanner from "./DescriptionBanner";
 export default function Description(){
     return(
         <section className="py-16">
-            <DescriptionContent/>
-            <DescriptionBanner/>
+            {/* <DescriptionContent/> */}
         </section>
     )
 }

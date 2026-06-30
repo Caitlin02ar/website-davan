@@ -3,22 +3,32 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
-export default function LenisProvider({ children }: { children: React.ReactNode }) {
+export default function LenisProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 3,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 1,
       smoothWheel: true,
+      wheelMultiplier: 0.8,
+      touchMultiplier: 1,
     });
+
+    let rafId: number;
 
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
-    return () => lenis.destroy();
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
   }, []);
 
   return <>{children}</>;

@@ -43,7 +43,6 @@ export default function RootLayout({
         <LenisProvider>
           <Navbar/>
           {children}
-          <CTA/>
           <Footer/>
         </LenisProvider>
       </body>

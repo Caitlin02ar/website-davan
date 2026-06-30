@@ -1,18 +1,40 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+
 interface PillarCardProps {
   number: string;
   title: string;
   description: string;
+  shouldAnimate?: boolean;
+  delay?: number;
 }
 
 export default function PillarCard({
   number,
   title,
   description,
+  shouldAnimate,
+  delay = 0,
 }: PillarCardProps) {
+  const [triggered, setTriggered] = useState(false);
+
+  useEffect(() => {
+    if (!shouldAnimate) return;
+
+    const timeout = setTimeout(() => {
+      setTriggered(true);
+    }, delay * 1000);
+
+    return () => clearTimeout(timeout);
+  }, [shouldAnimate, delay]);
+
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 120 }}
+      animate={triggered ? { opacity: 1, y: 0 } : { opacity: 0, y: 120 }}
+      transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="
         w-[250px]
         h-[260px]
@@ -22,8 +44,7 @@ export default function PillarCard({
         flex flex-col
         justify-center
         bg-background
-        transition-all duration-300
-        hover:-translate-y-2
+       
       "
     >
       <p className="text-sm uppercase tracking-wider text-white mb-2">
@@ -37,6 +58,6 @@ export default function PillarCard({
       <p className="font-body text-white text-sm leading-relaxed">
         {description}
       </p>
-    </div>
+    </motion.div>
   );
 }

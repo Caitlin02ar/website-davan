@@ -1,16 +1,13 @@
 "use client";
 
-import ServicesCard from "./ServicesCard";
 import ServicesSlogan from "./ServicesSlogan";
+import { ServicesPillar } from "./ServicesPillar";
 
 export default function ServicesSection(){
     return(
         <section>
             <div>
-                <div className="p-24">
-                    <ServicesCard/>
-                </div>
-                <ServicesSlogan/>
+                {/* <ServicesPillar/> */}
             </div>
         </section>
     )

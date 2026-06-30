@@ -1,28 +1,134 @@
 "use client";
 
-export default function ServicesSlogan() {
+import { motion } from "framer-motion";
+import { renderHighlightedText } from "@/lib/highlightText";
+
+interface ServicesBannerProps {
+  data: {
+    heading: string;
+    highlightHeading: string;
+    description: string;
+    backgroundImage: string;
+  };
+}
+
+export default function ServicesSlogan({
+  data,
+}: ServicesBannerProps) {
+  const ease = [0.22, 1, 0.36, 1] as const;
+
   return (
-    <div className="relative w-full">
+    <div className="relative w-full overflow-hidden">
       <img
-        src="/photos/slogan-bg.webp"
+        src={data.backgroundImage}
         alt=""
-        className="w-full h-auto"
+        className="
+          h-[420px]
+          w-full
+          object-cover
+
+          sm:h-[500px]
+
+          md:h-auto
+          md:min-h-full
+        "
       />
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-        <h1 className="font-heading text-white text-5xl">
-          One connected system.
-        </h1>
+      {/* OVERLAY */}
+      <div className="absolute inset-0 bg-black/35" />
 
-        <h1 className="font-heading text-primary text-5xl">
-          Four distinct disciplines.
-        </h1>
+      {/* CONTENT */}
+      <div
+        className="
+          absolute
+          inset-0
+          flex
+          flex-col
+          items-center
+          justify-center
+          px-5
+          text-center
 
-        <p className="font-body text-white max-w-3xl mt-4">
-          Each pillar work independently and more powerfully together. From
-          brand identity through to revenue growth, every discipline is
-          designed to close the gaps in your business.
-        </p>
+          sm:px-8
+
+          md:px-12
+        "
+      >
+        {/* HEADING */}
+        <motion.h1
+          initial={{
+            opacity: 0,
+            y: -120,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.5,
+          }}
+          transition={{
+            duration: 1.2,
+            ease,
+          }}
+          className="
+            font-heading
+            max-w-[95%]
+            text-2xl
+            leading-tight
+
+            sm:max-w-3xl
+            sm:text-4xl
+
+            md:max-w-4xl
+            md:text-5xl
+          "
+        >
+          {renderHighlightedText(
+            data.heading,
+            data.highlightHeading
+          )}
+        </motion.h1>
+
+        {/* DESCRIPTION */}
+        <motion.p
+          initial={{
+            opacity: 0,
+            y: -60,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.5,
+          }}
+          transition={{
+            duration: 0.9,
+            delay: 0.8,
+            ease,
+          }}
+          className="
+            font-body
+            mt-4
+            max-w-[95%]
+            text-xs
+            leading-relaxed
+            text-white
+
+            sm:mt-5
+            sm:max-w-2xl
+            sm:text-sm
+
+            md:mt-6
+            md:max-w-3xl
+            md:text-md
+          "
+        >
+          {data.description}
+        </motion.p>
       </div>
     </div>
   );

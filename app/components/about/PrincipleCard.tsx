@@ -23,11 +23,11 @@ export default function PrincipleCard({
       </div>
 
       <div>
-        <h3 className="font-heading text-lg leading-none text-primary">
+        <h3 className="font-subheading font-semibold text-lg leading-none text-primary">
           {title}
         </h3>
 
-        <p className="mt-4 max-w-xs font-body text-white text-sm leading-relaxed">
+        <p className="mt-4 max-w-xs font-body text-white text-sm leading-relaxed font-light">
           {description}
         </p>
       </div>

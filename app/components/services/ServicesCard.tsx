@@ -1,97 +1,156 @@
 "use client";
 
-import Tag from "../common/Tag";
-import BubbleTag from "../common/BubbleTag";
+import Image from "next/image";
 
-export default function ServicesCard() {
-  const CardItems = [
-    {
-      subtitle: "Pillar 1",
-      title: "Branding",
-      description:
-        "We design brand systems that connect visibility to profitability. Our process ensures your identity is built to outlive the creator, driven by creativity and created to last.",
-      tag: [
-        "Visual Identity",
-        "Messaging Framework",
-        "Brand Strategy & Positioning",
-        "Brand Guidelines",
-      ],
-    },
-    {
-      subtitle: "Pillar 2",
-      title: "Website Development",
-      description:
-        "We build digital experiences that do more than impress. Our websites help business establish a stronger presence, capture leads, and position themselves for sustainable growth.",
-      tag: [
-        "UI & UX Design",
-        "Custom Development",
-        "SEO & AI Search Readiness",
-        "Integrated Lead Capture & Analytics",
-      ],
-    },
-    {
-      subtitle: "Pillar 3",
-      title: "AI & Automation Systems",
-      description:
-        "Intelligent foundations for scalable growth. The systems that turn your website and marketing into a connected, always-on growth engine.",
-      tag: [
-        "Creative Systems",
-        "Revenue Intelligence",
-        "Funnel & CRM Automation",
-        "AI Conversation System",
-        "AI Search Visibility (GEO)",
-      ],
-    },
-    {
-      subtitle: "Pillar 4",
-      title: "Shoot by Code",
-      description:
-        "Cinematic speed. Intelligent impact. High-end AI-powered production that outpaces traditional workflows and delivers cinematic-quality content at a fraction of the cost and time.",
-      tag: [
-        "Digital Series",
-        "Commercial Video",
-        "IP and Mascot Development",
-        "Conceptual Video",
-      ],
-    },
-  ];
+interface ServicesCardProps {
+  subtitle: string;
+  title: string;
+  description: string;
+  tag: string[];
+  backgroundImage: string;
 
+  width?: string;
+}
+
+export default function ServicesCard({
+  subtitle,
+  title,
+  description,
+  tag,
+  backgroundImage,
+
+  width = "w-full lg:w-[75%]",
+}: ServicesCardProps) {
   return (
-    <main className="w-full">
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {CardItems.map((item, index) => (
-          <div
-            key={index}
-            className="relative overflow-hidden rounded-[32px] min-h-[500px] p-8"
-          >
-            <img
-              src="/photos/card-bg.webp"
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+    <div
+      className={`
+        relative
+        overflow-hidden
 
-            <div className="absolute inset-0 bg-black/60" />
+        rounded-[28px]
 
-            <div className="relative z-10 flex h-full flex-col">
-              <h5 className="flex flex-col items-start uppercase font-light tracking-wide font-body">{item.subtitle}</h5>
+        ${width}
 
-              <h2 className="mt-6 text-4xl font-heading text-primary">
-                {item.title}
-              </h2>
+        px-6
+        py-10
 
-              <p className="mt-4 text-white/80 leading-relaxed">
-                {item.description}
-              </p>
+        sm:px-8
+        sm:py-12
 
-              <div className="mt-auto flex flex-wrap gap-3 pt-8">
-                {item.tag.map((tag, tagIndex) => (
-                    <BubbleTag key={tagIndex} text={tag}/>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
+        flex
+        flex-col
+
+        min-h-[420px]
+
+        sm:min-h-[500px]
+      `}
+    >
+
+      {/* BACKGROUND */}
+      <Image
+        src={backgroundImage}
+        alt=""
+        fill
+        className="object-cover object-center"
+      />
+
+      {/* CONTENT */}
+      <div className="relative z-10 flex flex-col justify-center h-full">
+
+        {/* SUBTITLE */}
+        <span
+          className="
+            text-xs
+            sm:text-sm
+
+            uppercase
+
+            tracking-[0.18em]
+
+            text-white
+            font-medium
+          "
+        >
+          {subtitle}
+        </span>
+
+        {/* TITLE */}
+        <h3
+          className="
+            mt-3
+
+            font-heading
+            text-primary
+
+            text-2xl
+            sm:text-2xl
+
+            leading-[0.93]
+
+            tracking-[-0.01em]
+
+            max-w-[260px]
+          "
+        >
+          {title}
+        </h3>
+
+        {/* DESCRIPTION */}
+        <p
+          className="
+            mt-4
+            text-sm
+            sm:text-sm
+
+            leading-relaxed
+
+            text-white
+
+            max-w-[320px]
+          "
+        >
+          {description}
+        </p>
+
+        {/* TAGS */}
+        <div className="pt-5 flex flex-wrap gap-[7px]">
+
+          {tag?.map((item, index) => (
+
+            <span
+              key={index}
+              className="
+                inline-block
+
+                px-3
+                py-1.5
+
+                rounded-full
+
+                border
+                border-white/15
+
+                bg-white/5
+
+                text-[11px]
+                sm:text-xs
+
+                text-white/70
+
+                whitespace-nowrap
+
+                backdrop-blur-sm
+              "
+            >
+              {item}
+            </span>
+
+          ))}
+
+        </div>
+
       </div>
-    </main>
+
+    </div>
   );
 }

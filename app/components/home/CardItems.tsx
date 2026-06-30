@@ -1,154 +1,255 @@
 "use client";
 
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Card from "./Card";
 
-export default function CardItems() {
-  const cards = [
-    {
-      number: "1",
-      heading:
-        "You are paying multiple agencies and still not growing the way you should be.",
-    },
-    {
-      number: "2",
-      heading:
-        "Your website looks dated, or it just doesn't bring in enquiries.",
-    },
-    {
-      number: "3",
-      heading:
-        "You have heard about AI and automation but have no idea where to start.",
-    },
-    {
-      number: "4",
-      heading:
-        "Leads come in, but nothing happens to them. Follow-up is manual and slow.",
-    },
-  ];
+const ease = [0.22, 1, 0.36, 1] as const;
 
-  const [active, setActive] = useState(0);
+export default function CardItems({
+  cards,
+}: {
+  cards: any[];
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const nextCard = () => {
-    setActive((prev) => (prev + 1) % cards.length);
+    if (activeIndex < cards.length - 1) {
+      setActiveIndex((prev) => prev + 1);
+    }
   };
 
   const prevCard = () => {
-    setActive((prev) =>
-      prev === 0 ? cards.length - 1 : prev - 1
-    );
+    if (activeIndex > 0) {
+      setActiveIndex((prev) => prev - 1);
+    }
   };
 
   return (
-    <div className="relative flex justify-center items-center h-[700px]">
-      {/* LEFT BUTTON */}
+    <section
+      className="
+        relative
+        flex
+        flex-col
+        items-center
+        justify-center
+        overflow-hidden
 
-      <button
-        onClick={prevCard}
+        h-[620px]
+
+        md:h-[700px]
+      "
+    >
+      {/* CARD STACK */}
+      <div
         className="
-          absolute
-          left-20
-          z-50
-          w-12
-          h-12
-          rounded-xl
-          border
-          border-primary
-          flex
-          items-center
-          justify-center
-          text-primary
+          relative
+          h-[420px]
+          w-full
+          max-w-[320px]
+
+          sm:h-[460px]
+          sm:max-w-[360px]
+
+          md:h-[500px]
+          md:w-[600px]
+          md:max-w-none
         "
       >
-        ←
-      </button>
+        {cards.map((card, index) => {
+          const offset = index - activeIndex;
 
-      {/* STACK CARDS */}
+          const isActive = offset === 0;
 
-      <div className="relative w-[700px] h-[560px]">
-        {/* BACK CARD 3 */}
+          const isMobile =
+            typeof window !== "undefined" &&
+            window.innerWidth < 768;
 
-        <div
-          className="
-            absolute
-            top-[30px]
-            left-[120px]
-            w-[340px]
-            h-[520px]
-            rounded-[24px]
-            bg-white/[0.03]
-            border
-            border-white/10
-            backdrop-blur-sm
-          "
-        />
+          return (
+            <motion.div
+              key={index}
+              className="absolute top-0"
+              animate={{
+                // MOBILE → stack turun ke bawah
+                x: isMobile ? 0 : offset * -32,
 
-        {/* BACK CARD 2 */}
+                y: isMobile
+                  ? Math.abs(offset) * 14
+                  : Math.abs(offset) * -12,
 
-        <div
-          className="
-            absolute
-            top-[20px]
-            left-[90px]
-            w-[340px]
-            h-[520px]
-            rounded-[24px]
-            bg-white/[0.04]
-            border
-            border-white/10
-            backdrop-blur-sm
-          "
-        />
+                scale: 1,
+              }}
+              transition={{
+                duration: 0.65,
+                ease,
+              }}
+              style={{
+                left: "50%",
+                translateX: "-50%",
 
-        {/* BACK CARD 1 */}
+                zIndex: isActive
+                  ? 50
+                  : 40 - Math.abs(offset),
 
-        <div
-          className="
-            absolute
-            top-[10px]
-            left-[60px]
-            w-[340px]
-            h-[520px]
-            rounded-[24px]
-            bg-white/[0.05]
-            border
-            border-white/10
-            backdrop-blur-sm
-          "
-        />
+                opacity:
+                  isActive
+                    ? 1
+                    : 0.22 - Math.abs(offset) * 0.04,
+              }}
+            >
+              {/* ACTIVE CARD */}
+              {isActive ? (
+                <div className="scale-[0.78] sm:scale-[0.88] md:scale-100">
+                  <Card
+                    active={true}
+                    tag={card.tag}
+                    heading={card.title}
+                    button={card.buttonText}
+                  />
+                </div>
+              ) : (
+                /* STACK CARD */
+                <div
+                  className="
+                    h-[320px]
+                    w-[240px]
+                    rounded-[22px]
 
-        {/* ACTIVE CARD */}
+                    border
+                    border-white
 
-        <div className="absolute z-20">
-          <Card
-            tag="IS THIS YOU?"
-            heading={cards[active].heading}
-            button="Start Your Transformation"
-          />
-        </div>
+                    bg-white/50
+
+                    backdrop-blur-md
+
+                    shadow-[0_0_20px_rgba(255,255,255,0.02)]
+
+                    sm:h-[380px]
+                    sm:w-[300px]
+
+                    md:h-[450px]
+                    md:w-[360px]
+                    md:rounded-[28px]
+                  "
+                />
+              )}
+            </motion.div>
+          );
+        })}
       </div>
 
-      {/* RIGHT BUTTON */}
-
-      <button
-        onClick={nextCard}
+      {/* MOBILE BUTTONS */}
+      <div
         className="
-          absolute
-          right-20
-          z-50
-          w-12
-          h-12
-          rounded-xl
-          border
-          border-primary
+          mt-6
           flex
           items-center
           justify-center
-          text-primary
+          gap-4
+
+          md:hidden
         "
       >
-        →
-      </button>
-    </div>
+        {activeIndex > 0 && (
+          <button
+            onClick={prevCard}
+            className="
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
+              rounded-xl
+              border
+              border-primary
+              text-primary
+              transition-all
+              hover:bg-primary
+              hover:text-black
+            "
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+        )}
+
+        {activeIndex < cards.length - 1 && (
+          <button
+            onClick={nextCard}
+            className="
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
+              rounded-xl
+              border
+              border-primary
+              text-primary
+              transition-all
+              hover:bg-primary
+              hover:text-black
+            "
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        )}
+      </div>
+
+      {/* DESKTOP LEFT BUTTON */}
+      {activeIndex > 0 && (
+        <button
+          onClick={prevCard}
+          className="
+            absolute
+            left-[8%]
+            z-50
+            hidden
+            h-12
+            w-12
+            items-center
+            justify-center
+            rounded-xl
+            border
+            border-primary
+            text-primary
+            transition-all
+            hover:bg-primary
+            hover:text-black
+
+            md:flex
+          "
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+      )}
+
+      {/* DESKTOP RIGHT BUTTON */}
+      {activeIndex < cards.length - 1 && (
+        <button
+          onClick={nextCard}
+          className="
+            absolute
+            right-[8%]
+            z-50
+            hidden
+            h-12
+            w-12
+            items-center
+            justify-center
+            rounded-xl
+            border
+            border-primary
+            text-primary
+            transition-all
+            hover:bg-primary
+            hover:text-black
+            md:flex
+          "
+        >
+          <ChevronRight className="h-6 w-6" />
+        </button>
+      )}
+    </section>
   );
 }

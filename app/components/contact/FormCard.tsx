@@ -1,165 +1,485 @@
 "use client";
 
-import Button from "../common/Button";
+import { useState } from "react";
 
-export default function FormCard() {
-  const options = [
-    "Outdated website",
-    "No lead system",
-    "Disconnected tools",
-    "Unsure where AI fits",
-    "Others.",
-  ];
+import Button from "../common/Button";
+import SuccessModal from "./SuccessModal";
+
+import { renderHighlightedText } from "@/lib/highlightText";
+
+interface FormCardProps {
+  data: {
+    form: {
+      title: string;
+      heading: string;
+      hightlightText: string;
+      description: string;
+
+      formFields: {
+        fieldName: string;
+        fieldType: string;
+      }[];
+    };
+
+    fieldReasons: {
+      reason: string;
+    }[];
+
+    formButtonText: string;
+  };
+
+  modalData: {
+    message: string;
+
+    icon: {
+      asset: {
+        url: string;
+      };
+    };
+  };
+}
+
+export default function FormCard({
+  data,
+  modalData,
+}: FormCardProps) {
+
+  const {
+    form,
+    fieldReasons,
+    formButtonText,
+  } = data;
+
+  // FORM STATE
+  const [formData, setFormData] =
+    useState<Record<string, string>>({});
+
+  // MODAL
+  const [openModal, setOpenModal] =
+    useState(false);
+
+  // LOADING
+  const [isSending, setIsSending] =
+    useState(false);
+
+  // HANDLE INPUT
+  const handleChange = (
+    name: string,
+    value: string
+  ) => {
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+  };
+
+  // HANDLE SUBMIT
+  const handleSubmit = async (
+    e: React.FormEvent
+  ) => {
+
+    e.preventDefault();
+
+    try {
+
+      setIsSending(true);
+
+      const response = await fetch(
+        "/api/contact",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          body: JSON.stringify(
+            formData
+          ),
+        }
+      );
+
+      const result =
+        await response.json();
+
+      if (result.success) {
+
+        // OPEN MODAL
+        setOpenModal(true);
+
+        // RESET FORM
+        setFormData({});
+
+      } else {
+
+        alert(
+          "Failed to send message."
+        );
+
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "Something went wrong."
+      );
+
+    } finally {
+
+      setIsSending(false);
+
+    }
+
+  };
 
   return (
-    <section className="px-24 py-32">
-      <div className="max-w-[1400px] mx-auto rounded-[32px] bg-[#050505] p-6">
-        <div className="grid grid-cols-[1.05fr_0.95fr] gap-8">
-          {/* LEFT */}
-          <div className="relative h-[620px] overflow-hidden rounded-[24px]">
-            <img
-              src="/photos/how-3.webp"
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+    <>
+      <section className="px-10 py-24">
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+        {/* OUTER CARD */}
+        <div
+          className="
+            mx-auto
+            max-w-[1180px]
+            rounded-[28px]
+            border
+            border-white/[0.04]
+            bg-black/60
+            p-5
+            shadow-[0_20px_80px_rgba(0,0,0,0.45)]
+            backdrop-blur-xl
+          "
+        >
 
-            <div className="absolute bottom-10 left-10 max-w-md">
-              <h2 className="font-heading text-2xl leading-none text-primary">
-                Connecting the gaps
-              </h2>
+          <div
+            className="
+              grid
+              grid-cols-[0.82fr_1fr]
+              gap-7
+            "
+          >
 
-              <h2 className="font-heading text-2xl leading-none text-white mb-6">
-                in your growth
-              </h2>
+            {/* LEFT IMAGE */}
+            <div
+              className="
+                relative
+                h-full
+                overflow-hidden
+                rounded-[22px]
+              "
+            >
 
-              <p className="font-body text-white text-sm leading-relaxed">
-                We exist to remove friction and replace it with flow.
-                Tell us where your growth is breaking, and we'll
-                show you how to close the gap.
-              </p>
-            </div>
-          </div>
+              <img
+                src="/photos/how-3.webp"
+                alt=""
+                className="
+                  absolute
+                  inset-0
+                  h-full
+                  w-full
+                  scale-[2.5]
+                  object-cover
+                "
+              />
 
-          {/* RIGHT */}
-          <div className="flex flex-col justify-center">
-            <h1 className="font-heading text-4xl leading-none text-white mb-12 max-w-sm">
-              Send us a message
-            </h1>
+              <div
+                className="
+                  absolute
+                  inset-0
+                  bg-gradient-to-t
+                  from-black
+                  via-black/20
+                  to-transparent
+                "
+              />
 
-            <form className="space-y-6">
-              {/* Row 1 */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-white text-sm mb-2">
-                    Name
-                  </label>
+              <div
+                className="
+                  absolute
+                  bottom-8
+                  left-8
+                  max-w-[350px]
+                "
+              >
 
-                  <input
-                    type="text"
-                    className="
-                      w-full
-                      h-14
-                      rounded-lg
-                      bg-[#A0A0A0]
-                      px-4
-                      text-black
-                      outline-none
-                    "
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-white text-sm mb-2">
-                    Business Name
-                  </label>
-
-                  <input
-                    type="text"
-                    className="
-                      w-full
-                      h-14
-                      rounded-lg
-                      bg-[#A0A0A0]
-                      px-4
-                      text-black
-                      outline-none
-                    "
-                  />
-                </div>
-              </div>
-
-              {/* Email */}
-              <div>
-                <label className="block text-white text-sm mb-2">
-                  Email
-                </label>
-
-                <input
-                  type="email"
+                <h2
                   className="
-                    w-full
-                    h-14
-                    rounded-lg
-                    bg-[#A0A0A0]
-                    px-4
-                    text-black
-                    outline-none
+                    font-heading
+                    text-2xl
+                    text-white
                   "
-                />
+                >
+                  {renderHighlightedText(
+                    form.heading,
+                    form.hightlightText
+                  )}
+                </h2>
+
+                <p
+                  className="
+                    mt-5
+                    font-body
+                    text-[13px]
+                    leading-relaxed
+                    text-white/80
+                  "
+                >
+                  {form.description}
+                </p>
+
               </div>
 
-              {/* Question */}
-              <div>
-                <label className="block text-white text-sm mb-4">
-                  What's the biggest gap in your growth right now?
-                </label>
+            </div>
 
-                <div className="grid grid-cols-[1fr_220px] gap-4">
-                  <textarea
-                    rows={4}
-                    className="
-                      rounded-lg
-                      bg-[#A0A0A0]
-                      px-4
-                      py-3
-                      text-black
-                      resize-none
-                      outline-none
-                    "
-                  />
+            {/* RIGHT FORM */}
+            <div
+              className="
+                flex
+                flex-col
+                justify-center
+                px-1
+              "
+            >
 
-                  <div className="flex flex-col gap-3 justify-center">
-                    {options.map((option) => (
-                      <label
-                        key={option}
-                        className="flex items-center gap-3 cursor-pointer"
-                      >
+              <h1
+                className="
+                  mb-8
+                  font-heading
+                  text-3xl
+                  max-w-xs
+                  leading-[0.9]
+                  tracking-[-0.05em]
+                  text-white
+                "
+              >
+                {form.title}
+              </h1>
+
+              <form
+                className="space-y-4"
+                onSubmit={handleSubmit}
+              >
+
+                {/* DYNAMIC FIELDS */}
+                {form.formFields.map(
+                  (field, index) => {
+
+                    const fieldKey =
+                      field.fieldName
+                        .toLowerCase()
+                        .replace(/\s+/g, "");
+
+                    // TEXTAREA
+                    if (
+                      field.fieldType ===
+                      "textarea"
+                    ) {
+
+                      return (
+                        <div key={index}>
+
+                          <label
+                            className="
+                              mb-3
+                              block
+                              text-[11px]
+                              text-white/75
+                            "
+                          >
+                            {field.fieldName}
+                          </label>
+
+                          <div
+                            className="
+                              grid
+                              grid-cols-[1fr_170px]
+                              gap-3
+                            "
+                          >
+
+                            {/* TEXTAREA */}
+                            <textarea
+                              rows={4}
+                              value={
+                                formData[fieldKey] || ""
+                              }
+                              onChange={(e) =>
+                                handleChange(
+                                  fieldKey,
+                                  e.target.value
+                                )
+                              }
+                              className="
+                                resize-none
+                                rounded-[10px]
+                                border
+                                border-white/[0.05]
+                                bg-white/[0.08]
+                                px-4
+                                py-3
+                                text-[13px]
+                                text-white
+                                outline-none
+                                transition-all
+                                focus:border-primary
+                              "
+                            />
+
+                            {/* OPTIONS */}
+                            <div
+                              className="
+                                flex
+                                flex-col
+                                justify-center
+                                gap-2.5
+                              "
+                            >
+
+                              {fieldReasons.map(
+                                (
+                                  option,
+                                  optionIndex
+                                ) => (
+
+                                  <label
+                                    key={optionIndex}
+                                    className="
+                                      flex
+                                      cursor-pointer
+                                      items-center
+                                      gap-2.5
+                                    "
+                                  >
+
+                                    <input
+                                      type="radio"
+                                      name="gap"
+                                      value={
+                                        option.reason
+                                      }
+                                      onChange={(e) =>
+                                        handleChange(
+                                          "reason",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="
+                                        h-3.5
+                                        w-3.5
+                                        accent-primary
+                                      "
+                                    />
+
+                                    <span
+                                      className="
+                                        text-[11px]
+                                        text-white/75
+                                      "
+                                    >
+                                      {option.reason}
+                                    </span>
+
+                                  </label>
+
+                                )
+                              )}
+
+                            </div>
+
+                          </div>
+
+                        </div>
+                      );
+
+                    }
+
+                    // INPUT
+                    return (
+                      <div key={index}>
+
+                        <label
+                          className="
+                            mb-2
+                            block
+                            text-[11px]
+                            text-white/75
+                          "
+                        >
+                          {field.fieldName}
+                        </label>
+
                         <input
-                          type="radio"
-                          name="gap"
-                          className="accent-white"
+                          type={field.fieldType}
+                          value={
+                            formData[fieldKey] || ""
+                          }
+                          onChange={(e) =>
+                            handleChange(
+                              fieldKey,
+                              e.target.value
+                            )
+                          }
+                          className="
+                            h-[48px]
+                            w-full
+                            rounded-[10px]
+                            border
+                            border-white/[0.05]
+                            bg-white/[0.08]
+                            px-4
+                            text-[13px]
+                            text-white
+                            outline-none
+                            transition-all
+                            focus:border-primary
+                          "
                         />
 
-                        <span className="text-sm text-white">
-                          {option}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              </div>
+                      </div>
+                    );
 
-              <div className="pt-2">
-                <Button>
-                  Submit
-                </Button>
-              </div>
-            </form>
+                  }
+                )}
+
+                {/* BUTTON */}
+                <div className="pt-1">
+
+                  <Button
+                    type="submit"
+                    disabled={isSending}
+                  >
+
+                    {isSending
+                      ? "Sending..."
+                      : formButtonText}
+
+                  </Button>
+
+                </div>
+
+              </form>
+
+            </div>
+
           </div>
+
         </div>
-      </div>
-    </section>
+
+      </section>
+
+      <SuccessModal
+        open={openModal}
+        onClose={() =>
+          setOpenModal(false)
+        }
+        message={modalData.message}
+        icon={modalData.icon.asset.url}
+      />
+    </>
   );
 }

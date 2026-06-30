@@ -1,51 +1,106 @@
 "use client";
 
+import { motion } from "motion/react";
 import PrincipleCard from "./PrincipleCard";
 
-export default function PrinciplesItems() {
-  const PrinciplesItems = [
-    {
-      no: "1",
-      title: "Creative Intelligence",
-      description:
-        "Strategic thinking meets AI capability to solve real marketing challenges.",
-      icon: "/assets/lamp.svg",
-    },
-    {
-      no: "2",
-      title: "Intelligent Growth",
-      description:
-        "Creating meaningful, scalable outcomes through modernisation.",
-      icon: "/assets/rocket.svg",
-    },
-    {
-      no: "3",
-      title: "Connecting the Gaps",
-      description:
-        "A seamless approach where identity, visibility, and profitability are unified.",
-      icon: "/assets/link.svg",
-    },
-    {
-      no: "4",
-      title: "End-to-End Support",
-      description:
-        "Acting as a true extension of your team from strategy through to execution.",
-      icon: "/assets/infinity.svg",
-    },
-  ];
+const ease = [0.22, 1, 0.36, 1] as const;
+
+interface PrinciplesItemsProps {
+  shouldAnimate: boolean;
+
+  data: {
+    title: string;
+    description: string;
+
+    icon: {
+      asset: {
+        url: string;
+      };
+    };
+  }[];
+}
+
+export default function PrinciplesItems({
+  shouldAnimate,
+  data,
+}: PrinciplesItemsProps) {
+
+  const PrinciplesItems = data.map(
+    (item, index) => ({
+      no: `${index + 1}`,
+
+      title: item.title,
+
+      description: item.description,
+
+      icon: item.icon.asset.url,
+    })
+  );
 
   return (
-    <section className="px-24 ">
-      <div className="grid grid-cols-2 gap-y-24 gap-x-32">
-        {PrinciplesItems.map((item) => (
-          <PrincipleCard
+    <section
+      className="
+        overflow-hidden
+
+        px-5
+        sm:px-8
+        md:px-12
+        lg:px-0
+      "
+    >
+
+      <div
+        className="
+          grid
+          grid-cols-1
+          gap-y-14
+
+          sm:grid-cols-2
+          sm:gap-x-10
+
+          lg:gap-x-16
+          lg:gap-y-28
+        "
+      >
+
+        {PrinciplesItems.map((item, i) => (
+
+          <motion.div
             key={item.no}
-            icon={item.icon}
-            title={item.title}
-            description={item.description}
-          />
+            initial={{
+              opacity: 0,
+              x: -120,
+            }}
+            animate={
+              shouldAnimate
+                ? {
+                    opacity: 1,
+                    x: 0,
+                  }
+                : {
+                    opacity: 0,
+                    x: -120,
+                  }
+            }
+            transition={{
+              duration: 0.9,
+              ease,
+              delay: 1.2 + i * 0.6,
+            }}
+          >
+
+            <PrincipleCard
+              icon={item.icon}
+              title={item.title}
+              description={item.description}
+            />
+
+          </motion.div>
+
         ))}
+
       </div>
+
     </section>
   );
 }

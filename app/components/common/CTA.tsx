@@ -12,12 +12,12 @@ export default function CTA() {
           className="h-full w-full object-cover"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-black/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-black/90 pointer-events-none" />
 
         <img
           src="/photos/cta-logo.webp"
           alt="CTA Logo"
-          className="absolute left-1/2 top-1/2 z-10 w-[80%] max-w-5xl -translate-x-1/2 -translate-y-1/2"
+          className="absolute left-1/2 top-1/2 z-10 w-[80%] max-w-5xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"
         />
 
         <div className="absolute left-1/2 top-1/2 z-10 max-w-5xl -translate-x-1/2 -translate-y-1/2 flex flex-col text-center gap-18 mt-12">

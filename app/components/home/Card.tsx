@@ -1,9 +1,11 @@
 "use client";
+import Button from "../common/Button";
 
 interface CardProps {
   tag: string;
   heading: string;
   button: string;
+  active: boolean;
 }
 
 export default function Card({
@@ -14,46 +16,43 @@ export default function Card({
   return (
     <div
       className="
-        w-[340px]
-        h-[520px]
+        w-[360px]
+        h-[450px]
+        rounded-[28px]
         bg-primary
-        rounded-[24px]
         px-12
         py-14
         flex
         flex-col
+        text-black
       "
     >
-      <span className="uppercase text-xs tracking-widest">
+      <span
+        className="
+          uppercase
+          tracking-wide
+          text-[13px]
+        "
+      >
         {tag}
       </span>
 
-      <h3
+      <h2
         className="
-          mt-12
-          text-black
-          font-heading
-          text-[52px]
-          leading-[0.95]
+          mt-14
+          max-w-[280px]
+          text-3xl
+          font-body
+          tracking-[-0.04em]
+          font-medium
         "
       >
         {heading}
-      </h3>
+      </h2>
 
-      <button
-        className="
-          mt-auto
-          w-fit
-          px-8
-          py-3
-          rounded-full
-          border
-          border-black
-          text-black
-        "
-      >
+      <Button className="text-sm mt-auto w-fit" theme="dark">
         {button}
-      </button>
+      </Button>
     </div>
   );
 }

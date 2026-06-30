@@ -1,11 +1,18 @@
+// CardHome.tsx
+
 "use client";
 
 import CardItems from "./CardItems";
 
-export default function CardHome() {
+export default function CardHome({
+  cards,
+}: {
+  cards: any[];
+}) {
+
   return (
-    <section className="relative py-32 overflow-hidden">
-      <CardItems />
+    <section className="relative overflow-hidden">
+      <CardItems cards={cards} />
     </section>
   );
 }

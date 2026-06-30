@@ -18,11 +18,13 @@ export default function HowCard({
       className={`
         relative
         overflow-hidden
-        rounded-[28px]
+        rounded-[24px]
+
+        md:rounded-[28px]
+
         ${className}
       `}
     >
-      {/* Background Image */}
       <img
         src={image}
         alt={title}
@@ -33,12 +35,48 @@ export default function HowCard({
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
       {/* Content */}
-      <div className="absolute bottom-8 left-8 z-10">
-        <h3 className="font-heading text-white text-2xl leading-none mb-2">
+      <div
+        className="
+          absolute
+          bottom-5
+          left-5
+          z-10
+
+          sm:bottom-6
+          sm:left-6
+
+          md:bottom-8
+          md:left-8
+        "
+      >
+        <h3
+          className="
+            font-heading
+            text-white
+            leading-none
+            mb-2
+
+            text-xl
+
+            sm:text-2xl
+          "
+        >
           {title}
         </h3>
 
-        <p className="max-w-sm font-body text-white leading-relaxed text-sm">
+        <p
+          className="
+            font-body
+            text-white
+            leading-relaxed
+
+            max-w-[260px]
+            text-xs
+
+            sm:max-w-sm
+            sm:text-sm
+          "
+        >
           {description}
         </p>
       </div>
