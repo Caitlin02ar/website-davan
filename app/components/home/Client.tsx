@@ -1,5 +1,3 @@
-// Client.tsx
-
 "use client";
 
 import RunningPicture from "./RunningPicture";
@@ -16,7 +14,6 @@ export default function Client({
   return (
     <section className="mt-16 flex flex-col">
 
-      {/* TOP PICTURE */}
       <div className="top-content">
 
         <RunningPicture
@@ -25,7 +22,6 @@ export default function Client({
 
       </div>
 
-      {/* TEXT */}
       <div
         className="
           flex
@@ -40,10 +36,11 @@ export default function Client({
         <h3
           className="
             font-heading
-            text-3xl
+            md:text-3xl
             text-primary
             max-w-2xl
             text-center
+            text-xl
           "
         >
           {data.title}
@@ -51,7 +48,7 @@ export default function Client({
 
         {data.description && (
 
-          <p className="font-body text-m">
+          <p className="font-body text-xs md:text-sm text-center max-w-xs md:max-w-5xl">
             {data.description}
           </p>
 

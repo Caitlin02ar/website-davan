@@ -7,7 +7,6 @@ export default function FourPillarItems({
 }: {
   items: any[];
 }) {
-
   return (
     <div
       className="
@@ -21,7 +20,6 @@ export default function FourPillarItems({
       "
     >
       {items.map((item, index) => (
-
         <FourPillarCard
           key={index}
           index={index}
@@ -30,7 +28,6 @@ export default function FourPillarItems({
           description={item.description}
           image={item.picture}
         />
-
       ))}
     </div>
   );

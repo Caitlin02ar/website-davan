@@ -1,7 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "motion/react";
+import {
+  motion,
+  useInView,
+} from "motion/react";
 
 interface MethodItemsProps {
   items: {
@@ -18,12 +21,12 @@ function MethodRow({
   item: MethodItemsProps["items"][0];
   index: number;
 }) {
-
-  const ref = useRef<HTMLDivElement>(null);
+  const ref =
+    useRef<HTMLDivElement>(null);
 
   const isInView = useInView(ref, {
     once: true,
-    margin: "-100px",
+    margin: "-120px",
   });
 
   return (
@@ -43,7 +46,6 @@ function MethodRow({
         md:py-16
       "
     >
-
       {/* LINE */}
       {index !== 0 && (
         <motion.div
@@ -53,20 +55,27 @@ function MethodRow({
             top-0
             h-px
             w-full
+            origin-left
             bg-gradient-to-r
             from-transparent
             via-white/40
             to-transparent
           "
-          initial={{ opacity: 0 }}
+          initial={{
+            scaleX: 0,
+            opacity: 0,
+          }}
           animate={
             isInView
-              ? { opacity: 1 }
-              : { opacity: 0 }
+              ? {
+                  scaleX: 1,
+                  opacity: 1,
+                }
+              : {}
           }
           transition={{
-            duration: 0.4,
-            delay: 0,
+            duration: 0.7,
+            ease: [0.22, 1, 0.36, 1],
           }}
         />
       )}
@@ -88,15 +97,12 @@ function MethodRow({
                 opacity: 1,
                 y: 0,
               }
-            : {
-                opacity: 0,
-                y: -100,
-              }
+            : {}
         }
         transition={{
-          duration: 0.6,
-          ease: "easeOut",
-          delay: 0.3,
+          duration: 0.8,
+          ease: [0.22, 1, 0.36, 1],
+          delay: 0.35,
         }}
       >
         <h1
@@ -133,18 +139,14 @@ function MethodRow({
                 opacity: 1,
                 y: 0,
               }
-            : {
-                opacity: 0,
-                y: -100,
-              }
+            : {}
         }
         transition={{
-          duration: 0.6,
-          ease: "easeOut",
-          delay: 0.45,
+          duration: 0.8,
+          ease: [0.22, 1, 0.36, 1],
+          delay: 0.35,
         }}
       >
-
         <h2
           className="
             mb-3
@@ -170,7 +172,6 @@ function MethodRow({
         >
           {item.description}
         </p>
-
       </motion.div>
     </div>
   );
@@ -179,10 +180,8 @@ function MethodRow({
 export default function MethodItems({
   items,
 }: MethodItemsProps) {
-
   return (
     <section className="w-full bg-background">
-
       {items.map((item, index) => (
         <MethodRow
           key={index}
@@ -190,19 +189,6 @@ export default function MethodItems({
           index={index}
         />
       ))}
-
-      {/* BOTTOM LINE */}
-      <div
-        className="
-          h-px
-          w-full
-          bg-gradient-to-r
-          from-transparent
-          via-white/40
-          to-transparent
-        "
-      />
-
     </section>
   );
 }

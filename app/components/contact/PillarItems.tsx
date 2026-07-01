@@ -49,7 +49,7 @@ export default function PillarItems({
             shouldAnimate={true}
             delay={
               startDelay +
-              index * 0.2
+              index * 1
             }
           />
 

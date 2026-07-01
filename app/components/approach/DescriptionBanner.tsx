@@ -123,7 +123,7 @@ export default function DescriptionBanner({
           <motion.p
             initial={{
               opacity: 0,
-              y: 80,
+              y: -80,
             }}
             whileInView={{
               opacity: 1,

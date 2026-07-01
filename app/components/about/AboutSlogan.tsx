@@ -63,7 +63,7 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
             }}
             viewport={{
               once: true,
-              amount: 0.5,
+              amount: 1,
             }}
             className="
               font-heading
@@ -107,9 +107,9 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
               leading-relaxed
 
               sm:max-w-lg
-              sm:text-base
+              sm:text-sm
 
-              md:max-w-3xl
+              md:max-w-2xl
             "
           >
             {data.description}

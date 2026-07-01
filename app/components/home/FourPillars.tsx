@@ -39,14 +39,15 @@ export default function FourPillars({
           width: "100%",
           opacity: 1,
         }}
-        transition={{
-          duration: 1.8,
-          ease: [0.22, 1, 0.36, 1],
-          delay: 0.2,
-        }}
         viewport={{
           once: true,
-          amount: 0.45,
+          amount: 0.35,
+        }}
+        transition={{
+          duration: 1.6,
+          ease: [0.22, 1, 0.36, 1],
+
+          delay: 1.3,
         }}
         className="
           h-[1px]
@@ -63,89 +64,98 @@ export default function FourPillars({
         "
       />
 
-      {/* TAG */}
+      {/* TAG + HEADING */}
       <motion.div
-        initial={{
-          y: -25,
-          opacity: 0,
-        }}
-        whileInView={{
-          y: 0,
-          opacity: 1,
-        }}
-        transition={{
-          duration: 1,
-          ease: [0.22, 1, 0.36, 1],
-          delay: 0.15,
-        }}
+        initial="hidden"
+        whileInView="visible"
         viewport={{
           once: true,
-          amount: 0.5,
+          amount: 0.35,
         }}
-        className="
-          flex
-          justify-center
-
-          mb-3
-          sm:mb-4
-        "
+        variants={{
+          hidden: {},
+          visible: {
+            transition: {
+              staggerChildren: 0.12,
+            },
+          },
+        }}
       >
-        <Tag text={data.tag} />
-      </motion.div>
-
-      {/* HEADING */}
-      <motion.div
-        initial={{
-          y: -90,
-          opacity: 0,
-        }}
-        whileInView={{
-          y: 0,
-          opacity: 1,
-        }}
-        transition={{
-          duration: 1.4,
-          ease: [0.22, 1, 0.36, 1],
-          delay: 0.25,
-        }}
-        viewport={{
-          once: true,
-          amount: 0.55,
-        }}
-        className="
-          text-center
-
-          mb-10
-          sm:mb-14
-          md:mb-16
-
-          flex
-          flex-col
-          items-center
-        "
-      >
-        <h3
+        {/* TAG */}
+        <motion.div
+          variants={{
+            hidden: {
+              y: -40,
+              opacity: 0,
+            },
+            visible: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                duration: 1,
+                ease: [0.22, 1, 0.36, 1],
+              },
+            },
+          }}
           className="
-            font-heading
-
-            text-2xl
-            leading-[1.2]
-
-            sm:text-3xl
-            md:text-4xl
-
-            mt-2
-
-            max-w-[95%]
-            sm:max-w-2xl
-            md:max-w-xl
+            flex
+            justify-center
           "
         >
-          {renderHighlightedText(
-            data.title,
-            data.highlight
-          )}
-        </h3>
+          <Tag text={data.tag} />
+        </motion.div>
+
+        {/* HEADING */}
+        <motion.div
+          variants={{
+            hidden: {
+              y: -70,
+              opacity: 0,
+            },
+            visible: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                duration: 1.2,
+                ease: [0.22, 1, 0.36, 1],
+              },
+            },
+          }}
+          className="
+            text-center
+
+            mb-10
+            sm:mb-14
+            md:mb-16
+
+            flex
+            flex-col
+            items-center
+          "
+        >
+          <h3
+            className="
+              font-heading
+
+              text-2xl
+              leading-[1.2]
+
+              sm:text-3xl
+              md:text-4xl
+
+              mt-2
+
+              max-w-[95%]
+              sm:max-w-2xl
+              md:max-w-xl
+            "
+          >
+            {renderHighlightedText(
+              data.title,
+              data.highlight
+            )}
+          </h3>
+        </motion.div>
       </motion.div>
 
       {/* ITEMS */}
@@ -160,7 +170,12 @@ export default function FourPillars({
           hidden: {},
           visible: {
             transition: {
-              staggerChildren: 0.7,
+              // card baru mulai setelah:
+              // heading + garis selesai
+              delayChildren: 2.7,
+
+              // card satu selesai dulu baru next
+              staggerChildren: 1,
             },
           },
         }}

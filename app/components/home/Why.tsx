@@ -11,6 +11,11 @@ export default function Why({
 }) {
   const ease = [0.22, 1, 0.36, 1] as const;
 
+  const viewportSettings = {
+    once: true,
+    amount: 0.35,
+  };
+
   return (
     <section
       id="why-davan"
@@ -39,23 +44,7 @@ export default function Why({
         "
       >
         {/* LEFT CONTENT */}
-        <motion.div
-          initial={{
-            opacity: 0,
-            x: -100,
-          }}
-          whileInView={{
-            opacity: 1,
-            x: 0,
-          }}
-          transition={{
-            duration: 1.4,
-            ease,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.35,
-          }}
+        <div
           className="
             left-content
             flex
@@ -71,7 +60,21 @@ export default function Why({
             lg:max-w-md
           "
         >
-          <h3
+          {/* HEADING */}
+          <motion.h3
+            initial={{
+              opacity: 0,
+              x: -100,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            transition={{
+              duration: 1.2,
+              ease,
+            }}
+            viewport={viewportSettings}
             className="
               font-heading
               max-w-full
@@ -88,9 +91,24 @@ export default function Why({
             "
           >
             {renderHighlightedText(data.title, data.highlight)}
-          </h3>
+          </motion.h3>
 
-          <p
+          {/* DESCRIPTION */}
+          <motion.p
+            initial={{
+              opacity: 0,
+              x: -100,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            transition={{
+              duration: 1.2,
+              delay: 1.25,
+              ease,
+            }}
+            viewport={viewportSettings}
             className="
               font-body
               max-w-full
@@ -106,8 +124,8 @@ export default function Why({
             "
           >
             {data.description}
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
 
         {/* RIGHT CONTENT */}
         <motion.div
@@ -121,13 +139,10 @@ export default function Why({
           }}
           transition={{
             duration: 1.4,
-            delay: 0.8,
+            delay: 2.6,
             ease,
           }}
-          viewport={{
-            once: true,
-            amount: 0.35,
-          }}
+          viewport={viewportSettings}
           className="right-content w-full"
         >
           <CardHome cards={data.cards} />

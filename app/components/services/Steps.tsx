@@ -28,8 +28,18 @@ export default function Steps({
   );
 
   return (
-    <section
+    <motion.section
       id="how-we-work"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{
+        once: true,
+        amount: 0.2,
+      }}
+      variants={{
+        hidden: {},
+        visible: {},
+      }}
       className="
         overflow-hidden
         px-5
@@ -42,21 +52,19 @@ export default function Steps({
       {/* HEADING */}
       <div className="flex flex-col items-center text-center">
         <motion.div
-          initial={{
-            opacity: 0,
-            y: -100,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.6,
-          }}
-          transition={{
-            duration: 1.2,
-            ease,
+          variants={{
+            hidden: {
+              opacity: 0,
+              y: -100,
+            },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 1.2,
+                ease,
+              },
+            },
           }}
           className="flex flex-col items-center"
         >
@@ -97,22 +105,23 @@ export default function Steps({
 
         {/* HORIZONTAL LINE */}
         <motion.div
-          initial={{
-            scaleX: 0,
-            opacity: 0,
-          }}
-          whileInView={{
-            scaleX: 1,
-            opacity: 1,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.4,
-          }}
-          transition={{
-            duration: 1.2,
-            delay: 1.3,
-            ease: [0.65, 0, 0.35, 1],
+          variants={{
+            hidden: {
+              scaleX: 0,
+              opacity: 0,
+            },
+            visible: {
+              scaleX: 1,
+              opacity: 1,
+              transition: {
+                duration: 1.2,
+
+                // setelah heading selesai
+                delay: 1.2,
+
+                ease: [0.65, 0, 0.35, 1],
+              },
+            },
           }}
           style={{
             originX: 0,
@@ -134,15 +143,46 @@ export default function Steps({
         />
 
         {/* DESKTOP */}
-        <div className="relative z-10 hidden md:grid grid-cols-4">
-          {StepsItems.map((item, index) => {
+        <motion.div
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
 
-            // STEP BERURUTAN
-            const sequenceDelay = 2.3 + index * 1.5;
+                // nunggu heading + garis selesai
+                delayChildren: 2.6,
 
+                // step satu selesai dulu baru lanjut
+                staggerChildren: 1.35,
+              },
+            },
+          }}
+          className="
+            relative
+            z-10
+            hidden
+            grid-cols-4
+            md:grid
+          "
+        >
+          {StepsItems.map((item) => {
             return (
-              <div
+              <motion.div
                 key={item.number}
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    // y: 80,
+                  },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 1,
+                      ease,
+                    },
+                  },
+                }}
                 className={`
                   relative
                   flex
@@ -155,24 +195,7 @@ export default function Steps({
               >
 
                 {/* TITLE */}
-                <motion.h3
-                  initial={{
-                    opacity: 0,
-                    y: -70,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.4,
-                  }}
-                  transition={{
-                    duration: 0.8,
-                    delay: sequenceDelay,
-                    ease,
-                  }}
+                <h3
                   className="
                     font-heading
                     text-lg
@@ -180,7 +203,7 @@ export default function Steps({
                   "
                 >
                   {item.title}
-                </motion.h3>
+                </h3>
 
                 {/* VERTICAL LINE */}
                 <div
@@ -194,20 +217,17 @@ export default function Steps({
                   `}
                 >
                   <motion.div
-                    initial={{
-                      height: 0,
-                    }}
-                    whileInView={{
-                      height: item.tall ? 128 : 96,
-                    }}
-                    viewport={{
-                      once: true,
-                      amount: 0.4,
-                    }}
-                    transition={{
-                      duration: 0.8,
-                      delay: sequenceDelay,
-                      ease: [0.65, 0, 0.35, 1],
+                    variants={{
+                      hidden: {
+                        height: 0,
+                      },
+                      visible: {
+                        height: item.tall ? 128 : 96,
+                        transition: {
+                          duration: 0.8,
+                          ease: [0.65, 0, 0.35, 1],
+                        },
+                      },
                     }}
                     className="
                       w-[1px]
@@ -219,21 +239,18 @@ export default function Steps({
 
                 {/* DOT */}
                 <motion.div
-                  initial={{
-                    opacity: 0,
-                    scale: 0.7,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    scale: 1,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.4,
-                  }}
-                  transition={{
-                    duration: 0.5,
-                    delay: sequenceDelay,
+                  variants={{
+                    hidden: {
+                      opacity: 0,
+                      scale: 0.7,
+                    },
+                    visible: {
+                      opacity: 1,
+                      scale: 1,
+                      transition: {
+                        duration: 0.5,
+                      },
+                    },
                   }}
                   className={`
                     absolute
@@ -252,22 +269,19 @@ export default function Steps({
 
                 {/* DESCRIPTION */}
                 <motion.p
-                  initial={{
-                    opacity: 0,
-                    y: 40,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.4,
-                  }}
-                  transition={{
-                    duration: 0.8,
-                    delay: sequenceDelay,
-                    ease,
+                  variants={{
+                    hidden: {
+                      opacity: 0,
+                      y: 40,
+                    },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 0.8,
+                        ease,
+                      },
+                    },
                   }}
                   className="
                     mt-8
@@ -281,13 +295,22 @@ export default function Steps({
                   {item.description}
                 </motion.p>
 
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* MOBILE */}
-        <div
+        <motion.div
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                delayChildren: 1.8,
+                staggerChildren: 1,
+              },
+            },
+          }}
           className="
             relative
             z-10
@@ -299,13 +322,23 @@ export default function Steps({
           "
         >
           {StepsItems.map((item, index) => {
-
-            // STEP BERURUTAN
-            const sequenceDelay = 2.3 + index * 1.5;
-
             return (
-              <div
+              <motion.div
                 key={item.number}
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    y: 50,
+                  },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.9,
+                      ease,
+                    },
+                  },
+                }}
                 className="relative flex items-start gap-5"
               >
 
@@ -314,21 +347,18 @@ export default function Steps({
 
                   {/* DOT */}
                   <motion.div
-                    initial={{
-                      opacity: 0,
-                      scale: 0.7,
-                    }}
-                    whileInView={{
-                      opacity: 1,
-                      scale: 1,
-                    }}
-                    viewport={{
-                      once: true,
-                      amount: 0.4,
-                    }}
-                    transition={{
-                      duration: 0.5,
-                      delay: sequenceDelay,
+                    variants={{
+                      hidden: {
+                        opacity: 0,
+                        scale: 0.7,
+                      },
+                      visible: {
+                        opacity: 1,
+                        scale: 1,
+                        transition: {
+                          duration: 0.5,
+                        },
+                      },
                     }}
                     className="
                       h-2.5
@@ -342,20 +372,17 @@ export default function Steps({
                   {index !== StepsItems.length - 1 && (
                     <div className="flex h-20 items-end overflow-hidden">
                       <motion.div
-                        initial={{
-                          height: 0,
-                        }}
-                        whileInView={{
-                          height: 80,
-                        }}
-                        viewport={{
-                          once: true,
-                          amount: 0.4,
-                        }}
-                        transition={{
-                          duration: 0.8,
-                          delay: sequenceDelay,
-                          ease: [0.65, 0, 0.35, 1],
+                        variants={{
+                          hidden: {
+                            height: 0,
+                          },
+                          visible: {
+                            height: 80,
+                            transition: {
+                              duration: 0.8,
+                              ease: [0.65, 0, 0.35, 1],
+                            },
+                          },
                         }}
                         className="
                           w-[1px]
@@ -368,27 +395,10 @@ export default function Steps({
 
                 </div>
 
+                {/* CONTENT */}
                 <div className="flex-1">
 
-                  {/* TITLE */}
-                  <motion.h3
-                    initial={{
-                      opacity: 0,
-                      y: -50,
-                    }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    viewport={{
-                      once: true,
-                      amount: 0.4,
-                    }}
-                    transition={{
-                      duration: 0.8,
-                      delay: sequenceDelay,
-                      ease,
-                    }}
+                  <h3
                     className="
                       font-heading
                       text-base
@@ -398,26 +408,22 @@ export default function Steps({
                     "
                   >
                     {item.title}
-                  </motion.h3>
+                  </h3>
 
-                  {/* DESCRIPTION */}
                   <motion.p
-                    initial={{
-                      opacity: 0,
-                      y: 35,
-                    }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    viewport={{
-                      once: true,
-                      amount: 0.4,
-                    }}
-                    transition={{
-                      duration: 0.8,
-                      delay: sequenceDelay,
-                      ease,
+                    variants={{
+                      hidden: {
+                        opacity: 0,
+                        y: 30,
+                      },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          duration: 0.8,
+                          ease,
+                        },
+                      },
                     }}
                     className="
                       mt-2
@@ -431,12 +437,12 @@ export default function Steps({
                   </motion.p>
 
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
       </div>
-    </section>
+    </motion.section>
   );
 }

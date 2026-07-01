@@ -102,7 +102,7 @@ export default function FAQ({
 
             <h1
               className="
-                mt-4
+                
 
                 text-3xl
                 sm:text-4xl

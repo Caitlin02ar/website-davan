@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 import Tag from "../common/Tag";
 import MethodItems from "./MethodItems";
 import { renderHighlightedText } from "@/lib/highlightText";
@@ -21,7 +23,6 @@ interface FourMethodProps {
 export default function FourMethod({
   data,
 }: FourMethodProps) {
-
   return (
     <section
       className="
@@ -37,16 +38,28 @@ export default function FourMethod({
         lg:px-28
       "
     >
-
       {/* TOP */}
-      <div
+      <motion.div
+        initial={{
+          opacity: 0,
+        }}
+        whileInView={{
+          opacity: 1,
+        }}
+        viewport={{
+          once: true,
+          amount: 0.25,
+        }}
+        transition={{
+          duration: 1.6,
+          ease: [0.16, 1, 0.3, 1],
+        }}
         className="
           flex
           flex-col
           items-start
         "
       >
-
         <Tag text={data.tag} />
 
         <h1
@@ -69,16 +82,14 @@ export default function FourMethod({
             data.highlight
           )}
         </h1>
-
-      </div>
+      </motion.div>
 
       {/* METHOD ITEMS */}
-      <div className="mt-14 md:mt-24">
+      <div className="mt-14 md:mt-16">
         <MethodItems
           items={data.methodContent}
         />
       </div>
-
     </section>
   );
 }

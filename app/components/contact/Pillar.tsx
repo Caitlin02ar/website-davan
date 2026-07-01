@@ -84,11 +84,12 @@ export default function Pillar({
             opacity: 0,
           }}
           className="
-            max-w-5xl
+            max-w-3xl
             font-heading
-            text-3xl
+            md:text-3xl
             leading-tight
             text-white
+            text-2xl
           "
         >
           {renderHighlightedText(
@@ -96,13 +97,12 @@ export default function Pillar({
             data.highlight
           )}
         </h1>
-
       </div>
 
       {/* ITEMS */}
       <PillarItems
         data={data.card}
-        startDelay={0.7}
+        startDelay={0.8}
       />
 
     </section>

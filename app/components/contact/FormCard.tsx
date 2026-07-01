@@ -139,18 +139,18 @@ export default function FormCard({
 
   return (
     <>
-      <section className="px-10 py-24">
+      <section className="px-6 py-16">
 
         {/* OUTER CARD */}
         <div
           className="
             mx-auto
-            max-w-[1180px]
+            max-w-[1020px]
             rounded-[28px]
             border
             border-white/[0.04]
             bg-black/60
-            p-5
+            p-4
             shadow-[0_20px_80px_rgba(0,0,0,0.45)]
             backdrop-blur-xl
           "
@@ -160,7 +160,7 @@ export default function FormCard({
             className="
               grid
               grid-cols-[0.82fr_1fr]
-              gap-7
+              gap-5
             "
           >
 
@@ -222,9 +222,9 @@ export default function FormCard({
 
                 <p
                   className="
-                    mt-5
+                    mt-2
                     font-body
-                    text-[13px]
+                    text-xs
                     leading-relaxed
                     text-white/80
                   "
@@ -398,7 +398,6 @@ export default function FormCard({
 
                     }
 
-                    // INPUT
                     return (
                       <div key={index}>
 
@@ -425,7 +424,7 @@ export default function FormCard({
                             )
                           }
                           className="
-                            h-[48px]
+                            h-[40px]
                             w-full
                             rounded-[10px]
                             border

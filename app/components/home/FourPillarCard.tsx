@@ -15,35 +15,29 @@ export default function FourPillarCard({
   title,
   description,
   image,
-  index,
 }: FourPillarCardProps) {
   return (
     <motion.div
-      initial={{ y: 100, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      viewport={{ once: true, amount: 0.1 }}
-      
-      transition={{ 
-        y: { 
-          duration: 0.9, 
-          ease: [0.16, 1, 0.3, 1], 
-          delay: index * 0.45 
+      variants={{
+        hidden: {
+          y: 120,
+          opacity: 0,
         },
-        opacity: { 
-          duration: 0.9, 
-          ease: [0.16, 1, 0.3, 1], 
-          delay: index * 0.45 
+        visible: {
+          y: 0,
+          opacity: 1,
+          transition: {
+            duration: 1.15,
+            ease: [0.16, 1, 0.3, 1],
+          },
         },
-        scale: { 
-          duration: 0.2, 
-          ease: "easeOut",
-          delay: 0 
-        }
       }}
-      
-      // Animasi zoom saat di-hover
-      whileHover={{ 
-        scale: 1.04 
+      whileHover={{
+        scale: 1.04,
+        transition: {
+          duration: 0.25,
+          ease: "easeOut",
+        },
       }}
       className="
         relative
@@ -65,13 +59,13 @@ export default function FourPillarCard({
         <img
           src={image}
           alt={title}
-          className="w-full h-[200px] sm:h-[260px] md:h-[280px] lg:h-[320px] object-cover"
+          className="w-full h-[180px] sm:h-[220px] md:h-[220px] lg:h-[280px] object-cover"
         />
       </div>
 
       {/* CONTENT */}
       <div className="pt-4 sm:pt-5 md:pt-6 px-2 pb-3 md:pb-4">
-        <span className="text-xs sm:text-sm uppercase tracking-wider text-white/60">
+        <span className="text-xs sm:text-sm uppercase tracking-wider text-white">
           {number}
         </span>
 
@@ -93,11 +87,13 @@ export default function FourPillarCard({
           className="
             mt-3
             sm:mt-4
-            text-white/75
+            text-white
             text-xs
             sm:text-sm
             leading-relaxed
             max-w-[220px]
+            font-light
+            hover:font-medium
           "
         >
           {description}
