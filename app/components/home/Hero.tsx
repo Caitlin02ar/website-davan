@@ -28,6 +28,8 @@ export default function Hero({
     backgroundImage,
   } = data;
 
+  const ease = [0.22, 1, 0.36, 1] as const;
+
   return (
     <section className="relative min-h-screen overflow-hidden">
 
@@ -38,6 +40,7 @@ export default function Hero({
       />
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 pointer-events-none" />
+
       <div
         className="
           absolute
@@ -68,18 +71,19 @@ export default function Hero({
         "
       >
 
+        {/* HEADING */}
         <motion.h1
           initial={{
             opacity: 0,
-            y: -40,
+            y: -60,
           }}
           animate={{
             opacity: 1,
             y: 0,
           }}
           transition={{
-            duration: 0.9,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 1.2,
+            ease,
           }}
           className="
             font-heading
@@ -99,16 +103,16 @@ export default function Hero({
         <motion.h6
           initial={{
             opacity: 0,
-            y: -20,
+            y: -30,
           }}
           animate={{
             opacity: 1,
             y: 0,
           }}
           transition={{
-            duration: 0.9,
-            delay: 0.2,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 1,
+            delay: 1.25, // tunggu heading selesai
+            ease,
           }}
           className="
             font-body
@@ -125,19 +129,18 @@ export default function Hero({
         </motion.h6>
 
         {/* BUTTON */}
+        {/* BUTTON */}
         <motion.div
           initial={{
             opacity: 0,
-            y: 0,
           }}
           animate={{
             opacity: 1,
-            y: 0,
           }}
           transition={{
-            duration: 2,
-            delay: 0.8,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.9,
+            delay: 2.35,
+            ease,
           }}
           className="mt-2 flex flex-col items-center"
         >
