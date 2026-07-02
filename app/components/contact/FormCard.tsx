@@ -139,28 +139,32 @@ export default function FormCard({
 
   return (
     <>
-      <section className="px-6 py-16">
+      <section className="px-4 py-12 md:px-6 md:py-16">
 
         {/* OUTER CARD */}
         <div
           className="
             mx-auto
             max-w-[1020px]
-            rounded-[28px]
+            rounded-[22px]
             border
             border-white/[0.04]
             bg-black/60
             p-4
             shadow-[0_20px_80px_rgba(0,0,0,0.45)]
             backdrop-blur-xl
+
+            md:rounded-[28px]
           "
         >
 
           <div
             className="
               grid
-              grid-cols-[0.82fr_1fr]
+              grid-cols-1
               gap-5
+
+              md:grid-cols-[0.82fr_1fr]
             "
           >
 
@@ -168,9 +172,11 @@ export default function FormCard({
             <div
               className="
                 relative
-                h-full
+                h-[200px]
                 overflow-hidden
                 rounded-[22px]
+
+                md:h-full
               "
             >
 
@@ -182,8 +188,10 @@ export default function FormCard({
                   inset-0
                   h-full
                   w-full
-                  scale-[2.5]
+                  scale-[1.6]
                   object-cover
+
+                  md:scale-[2.5]
                 "
               />
 
@@ -201,17 +209,24 @@ export default function FormCard({
               <div
                 className="
                   absolute
-                  bottom-8
-                  left-8
-                  max-w-[350px]
+                  bottom-5
+                  left-5
+                  right-5
+
+                  md:bottom-8
+                  md:left-8
+                  md:right-auto
+                  md:max-w-[350px]
                 "
               >
 
                 <h2
                   className="
                     font-heading
-                    text-2xl
+                    text-xl
                     text-white
+
+                    md:text-2xl
                   "
                 >
                   {renderHighlightedText(
@@ -243,18 +258,24 @@ export default function FormCard({
                 flex-col
                 justify-center
                 px-1
+                pt-2
+
+                md:pt-0
               "
             >
 
               <h1
                 className="
-                  mb-8
+                  mb-6
                   font-heading
-                  text-3xl
+                  text-2xl
                   max-w-xs
                   leading-[0.9]
                   tracking-[-0.05em]
                   text-white
+
+                  md:mb-8
+                  md:text-3xl
                 "
               >
                 {form.title}
@@ -297,8 +318,10 @@ export default function FormCard({
                           <div
                             className="
                               grid
-                              grid-cols-[1fr_170px]
+                              grid-cols-1
                               gap-3
+
+                              md:grid-cols-[1fr_170px]
                             "
                           >
 

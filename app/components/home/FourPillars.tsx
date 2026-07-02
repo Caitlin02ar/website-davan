@@ -23,10 +23,10 @@ export default function FourPillars({
         md:px-12
         lg:px-28
 
-        py-10
-        sm:py-14
-        md:py-16
-        lg:py-20
+        py-6
+        sm:py-10
+        md:py-12
+        lg:py-16
       "
     >
       {/* TOP LINE */}
@@ -124,9 +124,9 @@ export default function FourPillars({
           className="
             text-center
 
-            mb-10
-            sm:mb-14
-            md:mb-16
+            mb-6
+            sm:mb-4
+            md:mb-10
 
             flex
             flex-col
@@ -170,11 +170,8 @@ export default function FourPillars({
           hidden: {},
           visible: {
             transition: {
-              // card baru mulai setelah:
-              // heading + garis selesai
               delayChildren: 2.7,
 
-              // card satu selesai dulu baru next
               staggerChildren: 1,
             },
           },

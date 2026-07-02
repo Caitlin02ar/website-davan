@@ -38,7 +38,7 @@ export default function CardItems({
 
         h-[620px]
 
-        md:h-[700px]
+        md:h-[590px]
       "
     >
       {/* CARD STACK */}

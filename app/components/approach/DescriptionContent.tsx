@@ -172,8 +172,6 @@ function DescriptionBlock({
         flex-col
         overflow-hidden
         px-6
-        py-16
-
         sm:px-12
 
         lg:px-24
@@ -181,7 +179,7 @@ function DescriptionBlock({
         ${
           index === 0
             ? "justify-center pt-12 sm:pt-16"
-            : "min-h-screen justify-center"
+            : "min-h-[50vh] sm:min-h-screen justify-center"
         }
       `}
     >
@@ -190,11 +188,10 @@ function DescriptionBlock({
       {index === 0 && (
         <motion.div
           className="
-            mb-8
+            mb-2
             flex
             flex-col
             items-start
-
             lg:mb-0
           "
           initial="hidden"
@@ -207,7 +204,7 @@ function DescriptionBlock({
         </motion.div>
       )}
 
-      {/* IMAGE */}
+      {/* IMAGE — decorative only (alt=""), hidden on mobile where it has no room to bleed */}
       <motion.div
         initial={{
           opacity: 0,
@@ -233,6 +230,9 @@ function DescriptionBlock({
           absolute
           top-1/2
           -translate-y-1/2
+
+          hidden
+          sm:block
 
           ${
             item.imagePosition === "right"
@@ -265,17 +265,19 @@ function DescriptionBlock({
         />
       </motion.div>
 
-      {/* CONTENT */}
+      {/* CONTENT — left-aligned on mobile; desktop keeps the alternating left/right alignment */}
       <div
         className={`
           relative
           z-10
           max-w-xl
 
+          text-left
+
           ${
             item.alignment === "right"
-              ? "ml-auto text-right"
-              : "text-left"
+              ? "sm:ml-auto sm:text-right"
+              : "sm:text-left"
           }
         `}
       >

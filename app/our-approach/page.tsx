@@ -113,8 +113,6 @@ export default async function OurApproach() {
 
       <HeroApproach data={heroData} />
 
-      <Description />
-
       <DescriptionContent data={descriptionData} />
 
       <DescriptionBanner data={bannerData} />

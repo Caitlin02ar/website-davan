@@ -1,8 +1,8 @@
 
 import Form from "../components/contact/Form";
 import Pillar from "../components/contact/Pillar";
-import CTA from "../components/common/CTA";
 import { client } from "@/sanity/lib/client";
+import CTAGlobal from "../components/common/CTAGlobal";
 
 export default async function ContactUs(){
     const fourPillarData = await client.fetch(`
@@ -70,12 +70,33 @@ const modalData = await client.fetch(`
   }
 `);
 
+const ctaData = await client.fetch(`
+  *[
+    _type == "ctaGlobal"
+    && page == "contact"
+      ][0]{
+        heading,
+        subheadingTop,
+        subheadingBottom,
+        buttonText,
+        titleColor,
+        "backgroundImage": backgroundImage.asset->url
+      }
+  `)
+
 
     return(
         <main>
             <Form data={contactData} modalData={modalData}/>
             <Pillar data={fourPillarData}/>
-            <CTA/>
+            <CTAGlobal  
+            topText={ctaData.subheadingTop}
+            title={ctaData.heading}
+            bottomText={ctaData.subheadingBottom}
+            buttonText={ctaData.buttonText}
+            titleColor={ctaData.titleColor}
+            backgroundImage={ctaData.backgroundImage}
+            href="/contact-us" />
         </main>
     )
 }

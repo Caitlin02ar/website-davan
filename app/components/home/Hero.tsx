@@ -71,7 +71,6 @@ export default function Hero({
         "
       >
 
-        {/* HEADING */}
         <motion.h1
           initial={{
             opacity: 0,
@@ -99,7 +98,6 @@ export default function Hero({
           {renderHighlightedText(title, highlightText)}
         </motion.h1>
 
-        {/* DESCRIPTION */}
         <motion.h6
           initial={{
             opacity: 0,
@@ -111,7 +109,7 @@ export default function Hero({
           }}
           transition={{
             duration: 1,
-            delay: 1.25, // tunggu heading selesai
+            delay: 1.25,
             ease,
           }}
           className="
@@ -120,7 +118,7 @@ export default function Hero({
             max-w-xl
             text-xs
             leading-relaxed
-            text-white/80
+            text-white
             sm:text-xs
             md:max-w-2xl
           "
@@ -128,8 +126,6 @@ export default function Hero({
           {description}
         </motion.h6>
 
-        {/* BUTTON */}
-        {/* BUTTON */}
         <motion.div
           initial={{
             opacity: 0,

@@ -19,8 +19,11 @@ export default function Form({
         relative
         min-h-screen
         overflow-hidden
-        px-24
-        py-24
+        px-4
+        py-16
+
+        md:px-24
+        md:py-24
       "
     >
 

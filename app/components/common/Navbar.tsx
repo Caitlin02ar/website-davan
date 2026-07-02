@@ -78,7 +78,9 @@ export default function Navbar() {
           }
         `}
       >
-        <Link href="/">
+        <Link href="/" className="outline-none
+    focus:outline-none
+    focus-visible:outline-none">
           <Image
             src="/photos/logo-1.webp"
             alt="Davan Logo"

@@ -300,14 +300,14 @@ export default function Steps({
           })}
         </motion.div>
 
-        {/* MOBILE */}
+        {/* MOBILE — rebuilt: continuous connector line, numbered dots, synced fade-in */}
         <motion.div
           variants={{
             hidden: {},
             visible: {
               transition: {
-                delayChildren: 1.8,
-                staggerChildren: 1,
+                delayChildren: 0.2,
+                staggerChildren: 0.25,
               },
             },
           }}
@@ -316,87 +316,108 @@ export default function Steps({
             z-10
             flex
             flex-col
-            gap-12
 
             md:hidden
           "
         >
-          {StepsItems.map((item, index) => {
+
+          {/* CONTINUOUS CONNECTOR LINE
+              Absolutely positioned down the dot column. Grows once from top to
+              bottom, so it always reaches every dot regardless of text length —
+              this is what fixes the old broken/short line on the last step. */}
+          <motion.div
+            aria-hidden
+            variants={{
+              hidden: { scaleY: 0 },
+              visible: {
+                scaleY: 1,
+                transition: {
+                  duration: 1,
+                  delay: 0.2,
+                  ease: [0.65, 0, 0.35, 1],
+                },
+              },
+            }}
+            style={{ originY: 0 }}
+            className="
+              absolute
+              left-[13px]
+              top-3
+              bottom-3
+              w-[1px]
+              bg-gradient-to-b
+              from-white/80
+              via-white/40
+              to-transparent
+            "
+          />
+
+          {StepsItems.map((item) => {
             return (
               <motion.div
                 key={item.number}
                 variants={{
                   hidden: {
                     opacity: 0,
-                    y: 50,
+                    y: 24,
                   },
                   visible: {
                     opacity: 1,
                     y: 0,
                     transition: {
-                      duration: 0.9,
+                      duration: 0.6,
                       ease,
                     },
                   },
                 }}
-                className="relative flex items-start gap-5"
+                className="
+                  relative
+                  flex
+                  items-start
+                  gap-5
+
+                  pb-12
+                  last:pb-0
+                "
               >
 
-                {/* LEFT */}
-                <div className="flex flex-col items-center">
-
-                  {/* DOT */}
-                  <motion.div
-                    variants={{
-                      hidden: {
-                        opacity: 0,
-                        scale: 0.7,
+                <motion.div
+                  variants={{
+                    hidden: {
+                      opacity: 0,
+                      scale: 0.6,
+                    },
+                    visible: {
+                      opacity: 1,
+                      scale: 1,
+                      transition: {
+                        duration: 0.4,
+                        ease,
                       },
-                      visible: {
-                        opacity: 1,
-                        scale: 1,
-                        transition: {
-                          duration: 0.5,
-                        },
-                      },
-                    }}
-                    className="
-                      h-2.5
-                      w-2.5
-                      rounded-full
-                      bg-primary
-                      shadow-[0_0_10px_#D7FF00]
-                    "
-                  />
-
-                  {index !== StepsItems.length - 1 && (
-                    <div className="flex h-20 items-end overflow-hidden">
-                      <motion.div
-                        variants={{
-                          hidden: {
-                            height: 0,
-                          },
-                          visible: {
-                            height: 80,
-                            transition: {
-                              duration: 0.8,
-                              ease: [0.65, 0, 0.35, 1],
-                            },
-                          },
-                        }}
-                        className="
-                          w-[1px]
-                          self-end
-                          bg-white
-                        "
-                      />
-                    </div>
-                  )}
-
-                </div>
+                    },
+                  }}
+                  className="
+                    relative
+                    z-10
+                    flex
+                    h-7
+                    w-7
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-primary
+                    font-heading
+                    text-xs
+                    font-bold
+                    text-[#0F0F11]
+                    shadow-[0_0_12px_#D7FF00]
+                  "
+                >
+                </motion.div>
 
                 {/* CONTENT */}
-                <div className="flex-1">
+                <div className="flex-1 pt-0.5">
 
                   <h3
                     className="
@@ -410,31 +431,17 @@ export default function Steps({
                     {item.title}
                   </h3>
 
-                  <motion.p
-                    variants={{
-                      hidden: {
-                        opacity: 0,
-                        y: 30,
-                      },
-                      visible: {
-                        opacity: 1,
-                        y: 0,
-                        transition: {
-                          duration: 0.8,
-                          ease,
-                        },
-                      },
-                    }}
+                  <p
                     className="
                       mt-2
                       font-body
                       text-sm
                       leading-relaxed
-                      text-white
+                      text-white/90
                     "
                   >
                     {item.description}
-                  </motion.p>
+                  </p>
 
                 </div>
               </motion.div>

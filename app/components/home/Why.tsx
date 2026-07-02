@@ -22,12 +22,10 @@ export default function Why({
       className="
         overflow-hidden
         px-5
-        py-20
+        py-16
         sm:px-6
         md:px-12
-        md:py-24
         lg:px-28
-        lg:py-28
       "
     >
       <div
@@ -35,7 +33,7 @@ export default function Why({
           flex
           flex-col
           items-start
-          justify-center
+          justify-between
           gap-12
           md:gap-14
           lg:flex-row
@@ -51,13 +49,12 @@ export default function Why({
             w-full
             flex-col
             items-center
-            justify-center
             gap-4
             text-center
 
+            lg:max-w-md
             lg:items-start
             lg:text-left
-            lg:max-w-md
           "
         >
           {/* HEADING */}
@@ -143,7 +140,10 @@ export default function Why({
             ease,
           }}
           viewport={viewportSettings}
-          className="right-content w-full"
+          className="
+            right-content
+            w-full
+            lg:pt-4"
         >
           <CardHome cards={data.cards} />
         </motion.div>

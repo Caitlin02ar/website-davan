@@ -26,7 +26,6 @@ export default function ServicesCardItems({
     "/photos/services-pillar-4.webp",
   ];
 
-  // CMS CONTENT + HARDCODE IMAGE
   const CardItems = data.cardContent.map(
     (item, index) => ({
       subtitle: item.tag,
@@ -34,7 +33,6 @@ export default function ServicesCardItems({
       description: item.description,
       tag: item.badgesItems,
 
-      // IMAGE HARDCODE
       backgroundImage: images[index],
     })
   );
@@ -59,14 +57,20 @@ export default function ServicesCardItems({
         xl:gap-6
 
         lg:px-24
+        md:mb-10
       "
     >
 
-      {/* LEFT COLUMN */}
+      {/* LEFT COLUMN
+          On mobile: `contents` dissolves this wrapper so its cards become direct
+          grid children, letting `order-*` interleave them correctly (1,2,3,4).
+          On lg: reverts to a normal flex column — original desktop layout intact. */}
       <div
         className="
-          flex
-          flex-col
+          contents
+
+          lg:flex
+          lg:flex-col
 
           gap-10
 
@@ -100,14 +104,18 @@ export default function ServicesCardItems({
               delay: i * 0.4,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="
+            className={`
               w-full
 
               flex
               justify-center
 
               lg:justify-start
-            "
+
+              lg:order-none
+
+              ${i === 0 ? "order-1" : "order-3"}
+            `}
           >
 
             <ServicesCard
@@ -121,11 +129,14 @@ export default function ServicesCardItems({
 
       </div>
 
-      {/* RIGHT COLUMN */}
+      {/* RIGHT COLUMN
+          Same technique: `contents` on mobile, normal flex column on lg. */}
       <div
         className="
-          flex
-          flex-col
+          contents
+
+          lg:flex
+          lg:flex-col
 
           gap-10
 
@@ -162,6 +173,9 @@ export default function ServicesCardItems({
             justify-center
 
             lg:justify-end
+
+            order-2
+            lg:order-none
           "
         >
 
@@ -199,6 +213,9 @@ export default function ServicesCardItems({
 
             lg:justify-end
             lg:mt-6
+
+            order-4
+            lg:order-none
           "
         >
 

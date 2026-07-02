@@ -40,6 +40,7 @@ export default function FourPillarCard({
         },
       }}
       className="
+        group
         relative
         origin-top
         hover:z-30
@@ -48,7 +49,6 @@ export default function FourPillarCard({
         rounded-[28px]
         p-4
         cursor-pointer
-        
         transition-[border-color,box-shadow]
         duration-300
         hover:border-white/20
@@ -59,7 +59,7 @@ export default function FourPillarCard({
         <img
           src={image}
           alt={title}
-          className="w-full h-[180px] sm:h-[220px] md:h-[220px] lg:h-[280px] object-cover"
+          className="w-full h-[160px] sm:h-[200px] md:h-[210px] lg:h-[260px] object-cover"
         />
       </div>
 
@@ -74,9 +74,10 @@ export default function FourPillarCard({
             mt-2
             text-primary
             font-heading
-            text-lg
-            sm:text-xl
-            md:text-xl
+            text-md
+            sm:text-md
+            md:text-md
+            lg:text-md
             leading-tight
           "
         >
@@ -93,7 +94,7 @@ export default function FourPillarCard({
             leading-relaxed
             max-w-[220px]
             font-light
-            hover:font-medium
+            group-hover:font-medium
           "
         >
           {description}

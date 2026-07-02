@@ -15,27 +15,38 @@ export default function HeroServices({
 }: HeroServicesProps) {
   return (
     <section className="relative min-h-screen overflow-hidden">
+
+      {/* BACKGROUND */}
       <img
         src={data.backgroundImage}
         alt="Services Page Background"
         className="absolute inset-0 h-full w-full object-cover"
       />
 
+      {/* OVERLAY */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
 
+      {/* CONTENT */}
       <div
         className="
           relative
           z-10
+
           flex
           min-h-screen
           flex-col
           items-center
           justify-center
+
           px-6
+          sm:px-8
+          md:px-12
+
           text-center
         "
       >
+
+        {/* TITLE */}
         <motion.h1
           initial={{ opacity: 0, y: -80 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,15 +56,21 @@ export default function HeroServices({
           }}
           className="
             font-heading
-            text-5xl
-            sm:text-3xl
+            leading-none
+
+            text-4xl
+
+            sm:text-5xl
+
             md:text-5xl
+
             lg:text-6xl
-            leading-none"
+          "
         >
           {data.title}
         </motion.h1>
 
+        {/* SUBHEADING */}
         <motion.h4
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,17 +81,28 @@ export default function HeroServices({
           }}
           className="
             mt-4
+
             max-w-[90%]
+            sm:max-w-xl
+            lg:max-w-2xl
+
             font-subheading
-            text-md
             text-primary
-            sm:text-md
-            md:text-md
+
+            text-sm
+
+            sm:text-base
+
+            md:text-base
+
             lg:text-md
+
+            leading-relaxed
           "
         >
           {data.subheading}
         </motion.h4>
+
       </div>
     </section>
   );

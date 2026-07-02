@@ -11,7 +11,7 @@ export default function CardHome({
 }) {
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden mt-16">
       <CardItems cards={cards} />
     </section>
   );

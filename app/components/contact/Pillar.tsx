@@ -63,8 +63,11 @@ export default function Pillar({
     <section
       ref={sectionRef}
       className="
-        px-12
-        py-32
+        px-6
+        py-16
+
+        md:px-12
+        md:py-32
       "
     >
 

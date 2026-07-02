@@ -43,14 +43,24 @@ export default function FAQ({
         relative
         overflow-hidden
         min-h-screen
-        bg-top
-        bg-cover
-        bg-no-repeat
       "
-      style={{
-        backgroundImage: `url('${faqData.backgroundImage}')`,
-      }}
     >
+
+      {/* BACKGROUND IMAGE LAYER */}
+      <div
+        className="
+          absolute
+          inset-0
+
+          bg-top
+          bg-no-repeat
+
+          bg-[length:100%_auto]
+        "
+        style={{
+          backgroundImage: `url('${faqData.backgroundImage}')`,
+        }}
+      />
 
       {/* OVERLAY */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
@@ -74,7 +84,7 @@ export default function FAQ({
           md:px-12
 
           lg:flex-row
-          lg:items-stretch
+          lg:items-start
           lg:gap-24
           lg:p-24
           lg:min-h-screen
@@ -89,8 +99,8 @@ export default function FAQ({
 
             gap-10
 
-            lg:justify-between
-            lg:self-stretch
+            lg:sticky
+            lg:top-24
             lg:w-[30%]
           "
         >
@@ -102,8 +112,6 @@ export default function FAQ({
 
             <h1
               className="
-                
-
                 text-3xl
                 sm:text-4xl
 

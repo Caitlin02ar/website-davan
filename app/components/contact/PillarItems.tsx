@@ -21,12 +21,14 @@ export default function PillarItems({
   return (
     <section
       className="
-        mt-20
+        mt-12
         grid
         grid-cols-1
-        gap-8
+        gap-6
 
+        md:mt-20
         md:grid-cols-2
+        md:gap-8
 
         xl:grid-cols-4
       "
@@ -38,6 +40,7 @@ export default function PillarItems({
           key={index}
           className="
             flex
+            w-full
             justify-center
           "
         >
