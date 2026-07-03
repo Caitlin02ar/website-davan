@@ -90,7 +90,6 @@ export default function Why({
             {renderHighlightedText(data.title, data.highlight)}
           </motion.h3>
 
-          {/* DESCRIPTION */}
           <motion.p
             initial={{
               opacity: 0,
@@ -124,7 +123,6 @@ export default function Why({
           </motion.p>
         </div>
 
-        {/* RIGHT CONTENT */}
         <motion.div
           initial={{
             opacity: 0,

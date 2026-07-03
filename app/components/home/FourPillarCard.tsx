@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 interface FourPillarCardProps {
   number: string;
@@ -16,18 +17,27 @@ export default function FourPillarCard({
   description,
   image,
 }: FourPillarCardProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <motion.div
       variants={{
         hidden: {
-          y: 120,
+          y: isMobile ? 40 : 120,
           opacity: 0,
         },
         visible: {
           y: 0,
           opacity: 1,
           transition: {
-            duration: 1.15,
+            duration: isMobile ? 0.5 : 1.15,
             ease: [0.16, 1, 0.3, 1],
           },
         },
@@ -54,7 +64,6 @@ export default function FourPillarCard({
         hover:border-white/20
       "
     >
-      {/* IMAGE CONTAINER */}
       <div className="overflow-hidden rounded-[22px]">
         <img
           src={image}

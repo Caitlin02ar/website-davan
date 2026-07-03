@@ -23,10 +23,8 @@ export default function HeroServices({
         className="absolute inset-0 h-full w-full object-cover"
       />
 
-      {/* OVERLAY */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
 
-      {/* CONTENT */}
       <div
         className="
           relative
@@ -46,7 +44,6 @@ export default function HeroServices({
         "
       >
 
-        {/* TITLE */}
         <motion.h1
           initial={{ opacity: 0, y: -80 }}
           animate={{ opacity: 1, y: 0 }}
@@ -70,7 +67,6 @@ export default function HeroServices({
           {data.title}
         </motion.h1>
 
-        {/* SUBHEADING */}
         <motion.h4
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -89,7 +85,7 @@ export default function HeroServices({
             font-subheading
             text-primary
 
-            text-sm
+            text-xs
 
             sm:text-base
 

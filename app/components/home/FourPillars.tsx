@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 import Tag from "../common/Tag";
 import FourPillarItems from "./FourPillarItems";
@@ -12,6 +13,15 @@ export default function FourPillars({
 }: {
   data: any;
 }) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <section
       className="
@@ -170,9 +180,9 @@ export default function FourPillars({
           hidden: {},
           visible: {
             transition: {
-              delayChildren: 2.7,
+              delayChildren: isMobile ? 0.2 : 2.7,
 
-              staggerChildren: 1,
+              staggerChildren: isMobile ? 0.15 : 1,
             },
           },
         }}

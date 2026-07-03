@@ -48,6 +48,7 @@ export default function Button({
     return (
       <button
         type={type}
+        suppressHydrationWarning
         disabled={disabled}
         onClick={onClick}
         className={`
@@ -89,6 +90,7 @@ export default function Button({
       type={type}
       disabled={disabled}
       onClick={onClick}
+      suppressHydrationWarning
       className={`
         group relative flex items-center justify-center gap-2
         rounded-full border px-8 py-3

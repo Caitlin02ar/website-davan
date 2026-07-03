@@ -35,13 +35,10 @@ export default function CardItems({
         items-center
         justify-center
         overflow-hidden
-
-        h-[620px]
-
+        h-[520px]
         md:h-[590px]
       "
     >
-      {/* CARD STACK */}
       <div
         className="
           relative
@@ -71,7 +68,6 @@ export default function CardItems({
               key={index}
               className="absolute top-0"
               animate={{
-                // MOBILE → stack turun ke bawah
                 x: isMobile ? 0 : offset * -32,
 
                 y: isMobile
@@ -196,7 +192,6 @@ export default function CardItems({
         )}
       </div>
 
-      {/* DESKTOP LEFT BUTTON */}
       {activeIndex > 0 && (
         <button
           onClick={prevCard}

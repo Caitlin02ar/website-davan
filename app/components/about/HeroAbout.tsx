@@ -80,15 +80,13 @@ export default function HeroAbout({
             }}
             className="
               font-heading
-              text-4xl
+              text-3xl
               sm:text-5xl
               lg:text-5xl
               max-w-4xl
               leading-tight
             "
           >
-            {/* <span className="text-primary">Integrated </span>
-            <span className="text-white">creative thinkers</span> */}
             {renderHighlightedText(data.title, data.highlightText)}
           </motion.h1>
 
