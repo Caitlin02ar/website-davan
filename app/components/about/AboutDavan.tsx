@@ -26,6 +26,7 @@ export default function AboutDavan({
         sm:px-10
         lg:px-32
         overflow-hidden
+        overflow-x-hidden 
       "
     >
       <div className="flex flex-col">

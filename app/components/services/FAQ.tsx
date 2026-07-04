@@ -4,6 +4,7 @@ import Tag from "../common/Tag";
 import Dropdown from "./Dropdown";
 import CTAGlobal from "../common/CTAGlobal";
 import { renderHighlightedText } from "@/lib/highlightText";
+import Image from "next/image";
 
 interface FAQProps {
   faqData: FAQDataProps;
@@ -47,20 +48,17 @@ export default function FAQ({
     >
 
       {/* BACKGROUND IMAGE LAYER */}
-      <div
-        className="
-          absolute
-          inset-0
-
-          bg-top
-          bg-no-repeat
-
-          bg-[length:100%_auto]
-        "
-        style={{
-          backgroundImage: `url('${faqData.backgroundImage}')`,
-        }}
-      />
+      {/* BACKGROUND IMAGE */}
+<Image
+  src={faqData.backgroundImage}
+  alt=""
+  fill
+  priority
+  className="
+    object-cover
+    object-top
+  "
+/>
 
       {/* OVERLAY */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />

@@ -16,7 +16,7 @@ interface AboutSloganProps {
 
 export default function AboutSlogan({ data }: AboutSloganProps) {
   return (
-    <section className="overflow-hidden">
+    <section className="overflow-hidden overflow-x-hidden ">
       <div className="relative w-full">
 
         {/* BACKGROUND IMAGE */}
@@ -110,6 +110,7 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
               sm:text-sm
 
               md:max-w-2xl
+              
             "
           >
             {data.description}
