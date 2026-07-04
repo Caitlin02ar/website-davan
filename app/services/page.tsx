@@ -81,18 +81,18 @@ export default async function Services() {
 
 const servicesCardData = await client.fetch(`
   *[
-    _type == "servicesCard"
+    _type == "fourpillar" && page == "services"
   ][0]{
-    cardContent[]{
+    card[]{
       tag,
       title,
       description,
       badgesItems,
-      "backgroundImage": backgroundImage.asset->url
-
     }
   }
 `);
+
+
 
   return (
     <main>

@@ -1,7 +1,23 @@
-import { MapPin, Mail } from "lucide-react";
+// app/components/common/Footer.tsx
+
 import Link from "next/link";
 
-export default function Footer() {
+interface FooterProps {
+  data: {
+    footerLogo: string;
+    copyright: string;
+
+    information: {
+      text: string;
+      icon: string;
+    }[];
+  };
+}
+
+export default function Footer({
+  data,
+}: FooterProps) {
+
   const footerLinks = [
     {
       title: "About Us",
@@ -31,11 +47,13 @@ export default function Footer() {
 
   return (
     <footer className="bg-dark px-5 py-14 sm:px-6 lg:px-28 lg:py-16">
+
       <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
-        {/* Logo */}
+
+        {/* LOGO */}
         <div className="w-full lg:w-auto">
           <img
-            src="/photos/logo-1.webp"
+            src={data.footerLogo}
             alt="Davan Logo"
             className="
               w-[200px]
@@ -46,7 +64,7 @@ export default function Footer() {
           />
         </div>
 
-        {/* Navigation */}
+        {/* NAVIGATION */}
         <div
           className="
             grid
@@ -63,15 +81,21 @@ export default function Footer() {
             lg:gap-16
           "
         >
+
           {footerLinks.map((section) => (
+
             <div key={section.title}>
+
               <h4 className="font-body mb-5 text-xs text-primary">
                 {section.title}
               </h4>
 
               <ul className="space-y-3">
+
                 {section.links.map((link) => (
+
                   <li key={link.name}>
+
                     <a
                       href={link.href}
                       className="
@@ -84,14 +108,20 @@ export default function Footer() {
                     >
                       {link.name}
                     </a>
+
                   </li>
+
                 ))}
+
               </ul>
+
             </div>
+
           ))}
 
-          {/* Contact */}
+          {/* CONTACT */}
           <div className="col-span-2 md:col-span-1">
+
             <Link
               href="/contact-us"
               className="
@@ -109,11 +139,16 @@ export default function Footer() {
               Contact Us
 
               <span className="absolute left-0 -bottom-1 h-[1px] w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>
+
             </Link>
+
           </div>
+
         </div>
+
       </div>
 
+      {/* BOTTOM */}
       <div
         className="
           mt-14
@@ -131,10 +166,13 @@ export default function Footer() {
           md:justify-between
         "
       >
-        <p className="font-body text-left ">
-          © 2025 DAVAN Digital. All rights reserved.
+
+        {/* COPYRIGHT */}
+        <p className="font-body text-left">
+          {data.copyright}
         </p>
 
+        {/* INFORMATION */}
         <div
           className="
             flex
@@ -150,17 +188,44 @@ export default function Footer() {
             md:justify-end
           "
         >
-          <span className="font-body flex items-center gap-1">
-            <MapPin size={14} />
-            Perth, Australia
-          </span>
 
-          <span className="font-body flex items-center gap-1 break-all sm:break-normal">
-            <Mail size={14} />
-            team@davan.digital
-          </span>
+          {data.information?.map((item, index) => (
+
+            <span
+              key={index}
+              className="
+                font-body
+                flex
+                items-center
+                gap-2
+
+                break-all
+                sm:break-normal
+              "
+            >
+
+              <img
+                src={item.icon}
+                alt=""
+                className="
+                  w-[14px]
+                  h-[14px]
+
+                  object-contain
+                  shrink-0
+                "
+              />
+
+              {item.text}
+
+            </span>
+
+          ))}
+
         </div>
+
       </div>
+
     </footer>
   );
 }

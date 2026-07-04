@@ -5,7 +5,7 @@ import ServicesCard from "./ServicesCard";
 
 interface ServicesCardItemsProps {
   data: {
-    cardContent: {
+    card: {
       tag: string;
       title: string;
       description: string;
@@ -26,7 +26,7 @@ export default function ServicesCardItems({
     "/photos/services-pillar-4.webp",
   ];
 
-  const CardItems = data.cardContent.map(
+  const CardItems = data.card.map(
     (item, index) => ({
       subtitle: item.tag,
       title: item.title,
@@ -61,10 +61,6 @@ export default function ServicesCardItems({
       "
     >
 
-      {/* LEFT COLUMN
-          On mobile: `contents` dissolves this wrapper so its cards become direct
-          grid children, letting `order-*` interleave them correctly (1,2,3,4).
-          On lg: reverts to a normal flex column — original desktop layout intact. */}
       <div
         className="
           contents

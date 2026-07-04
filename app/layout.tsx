@@ -1,12 +1,16 @@
+// app/layout.tsx
+
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+
 import localFont from "next/font/local";
+
 import LenisProvider from "./components/common/LenisProvider";
 import Navbar from "./components/common/Navbar";
-import CTA from "./components/common/CTA";
 import Footer from "./components/common/Footer";
 
+import { client } from "@/sanity/lib/client";
 
 const sequel = localFont({
   src: "./fonts/Sequel100Black-75.ttf",
@@ -14,9 +18,9 @@ const sequel = localFont({
 });
 
 const sequelSubheading = localFont({
-  src:"./fonts/Sequel100Black-45.ttf",
-  variable:"--font-subheading"
-})
+  src: "./fonts/Sequel100Black-45.ttf",
+  variable: "--font-subheading",
+});
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -29,22 +33,44 @@ export const metadata: Metadata = {
   description: "DAVAN Digital",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const footerData = await client.fetch(`
+    *[
+      _type == "footerContent"
+    ][0]{
+      copyright,
+
+      "footerLogo": footerLogo.asset->url,
+
+      information[]{
+        "icon": icon.asset->url,
+        text
+      }
+    }
+  `);
+
   return (
     <html
       lang="en"
       className={`${sequel.variable} ${poppins.variable} ${sequelSubheading.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+
         <LenisProvider>
-          <Navbar/>
+
+          <Navbar />
+
           {children}
-          <Footer/>
+
+          <Footer data={footerData} />
+
         </LenisProvider>
+
       </body>
     </html>
   );
