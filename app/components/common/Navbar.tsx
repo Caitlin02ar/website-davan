@@ -43,7 +43,6 @@ export default function Navbar() {
         w-full
         transition-all
         duration-500
-
         ${
           scrolled
             ? `
@@ -79,8 +78,9 @@ export default function Navbar() {
         `}
       >
         <Link href="/" className="outline-none
-    focus:outline-none
-    focus-visible:outline-none">
+          focus:outline-none
+          focus-visible:outline-none"
+        >
           <Image
             src="/photos/logo-1.webp"
             alt="Davan Logo"

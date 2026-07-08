@@ -100,10 +100,8 @@ export default function Steps({
         </motion.div>
       </div>
 
-      {/* TIMELINE */}
       <div className="relative mt-14 md:mt-24">
 
-        {/* HORIZONTAL LINE */}
         <motion.div
           variants={{
             hidden: {
@@ -116,7 +114,6 @@ export default function Steps({
               transition: {
                 duration: 1.2,
 
-                // setelah heading selesai
                 delay: 1.2,
 
                 ease: [0.65, 0, 0.35, 1],
@@ -149,10 +146,8 @@ export default function Steps({
             visible: {
               transition: {
 
-                // nunggu heading + garis selesai
                 delayChildren: 2.6,
 
-                // step satu selesai dulu baru lanjut
                 staggerChildren: 1.35,
               },
             },
@@ -170,18 +165,10 @@ export default function Steps({
               <motion.div
                 key={item.number}
                 variants={{
-                  hidden: {
-                    opacity: 0,
-                    // y: 80,
-                  },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: {
-                      duration: 1,
-                      ease,
-                    },
-                  },
+                  hidden: {},
+                  // Tidak ada stagger antar-child: title, garis, dot,
+                  // description semua mulai BERSAMAAN saat step ini visible.
+                  visible: {},
                 }}
                 className={`
                   relative
@@ -194,8 +181,23 @@ export default function Steps({
                 `}
               >
 
-                {/* TITLE */}
-                <h3
+                {/* TITLE — dianimasikan (bukan h3 polos) supaya tidak telat,
+                    durasi & mulai sama seperti elemen lain. */}
+                <motion.h3
+                  variants={{
+                    hidden: {
+                      opacity: 0,
+                      y: -12,
+                    },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 0.8,
+                        ease,
+                      },
+                    },
+                  }}
                   className="
                     font-heading
                     text-lg
@@ -203,7 +205,7 @@ export default function Steps({
                   "
                 >
                   {item.title}
-                </h3>
+                </motion.h3>
 
                 {/* VERTICAL LINE */}
                 <div
@@ -357,18 +359,10 @@ export default function Steps({
               <motion.div
                 key={item.number}
                 variants={{
-                  hidden: {
-                    opacity: 0,
-                    y: 24,
-                  },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: {
-                      duration: 0.6,
-                      ease,
-                    },
-                  },
+                  hidden: {},
+                  // Sama seperti desktop: dot, title, description
+                  // muncul BERSAMAAN dalam tiap step.
+                  visible: {},
                 }}
                 className="
                   relative
@@ -391,7 +385,7 @@ export default function Steps({
                       opacity: 1,
                       scale: 1,
                       transition: {
-                        duration: 0.4,
+                        duration: 0.5,
                         ease,
                       },
                     },
@@ -419,7 +413,21 @@ export default function Steps({
                 {/* CONTENT */}
                 <div className="flex-1 pt-0.5">
 
-                  <h3
+                  <motion.h3
+                    variants={{
+                      hidden: {
+                        opacity: 0,
+                        y: -8,
+                      },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          duration: 0.5,
+                          ease,
+                        },
+                      },
+                    }}
                     className="
                       font-heading
                       text-base
@@ -429,9 +437,23 @@ export default function Steps({
                     "
                   >
                     {item.title}
-                  </h3>
+                  </motion.h3>
 
-                  <p
+                  <motion.p
+                    variants={{
+                      hidden: {
+                        opacity: 0,
+                        y: 16,
+                      },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          duration: 0.5,
+                          ease,
+                        },
+                      },
+                    }}
                     className="
                       mt-2
                       font-body
@@ -441,7 +463,7 @@ export default function Steps({
                     "
                   >
                     {item.description}
-                  </p>
+                  </motion.p>
 
                 </div>
               </motion.div>

@@ -7,6 +7,7 @@ export const bannerQuery = `
             asset->{
             url
             }
-        }
+        },
+        altText,
     }
 `;

@@ -9,6 +9,7 @@ interface RunningLogoProps {
 
   logos: {
     src: string;
+    clientName?:string;
   }[];
 
   duration?: number;
@@ -21,7 +22,6 @@ export default function RunningLogo({
   gap = "gap-16",
 }: RunningLogoProps) {
 
-  // SAFETY
   const safeLogos = logos.filter(
     (logo) => logo?.src
   );
@@ -81,7 +81,7 @@ export default function RunningLogo({
 
               <Image
                 src={logo.src}
-                alt="Client Logo"
+                alt={logo.clientName ? `${logo.clientName} logo` : ""}
                 fill
                 className="object-contain"
               />
@@ -123,7 +123,7 @@ export default function RunningLogo({
 
               <Image
                 src={logo.src}
-                alt="Client Logo"
+                alt={logo.clientName ? `${logo.clientName} logo` : ""}
                 fill
                 className="object-contain"
               />

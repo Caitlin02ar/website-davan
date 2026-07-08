@@ -16,6 +16,7 @@ interface RunningTextProps {
         url: string;
       };
     };
+    altText:string;
   };
 }
 
@@ -46,7 +47,6 @@ export default function RunningTextClient({
         md:pb-28
       "
     >
-      {/* BACKGROUND IMAGE */}
       <motion.div
         initial={{
           x: "-100%",
@@ -77,7 +77,7 @@ export default function RunningTextClient({
       >
         <Image
           src={data.backgroundImage.asset.url}
-          alt={data.title}
+          alt={data.altText || ""}
           fill
           priority
           className="
@@ -144,6 +144,10 @@ export default function RunningTextClient({
           }}
           className="flex w-max"
         >
+          {/* Hanya untuk screen reader */}
+          <span className="sr-only">{data.runningText}</span>
+
+          {/* Decorative marquee */}
           <motion.div
             animate={
               startLoop
@@ -160,6 +164,7 @@ export default function RunningTextClient({
               repeat: Infinity,
             }}
             className="flex w-max"
+            aria-hidden="true"
           >
             {[0, 1].map((set) => (
               <div key={set} className="flex shrink-0">

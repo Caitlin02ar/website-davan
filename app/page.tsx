@@ -5,6 +5,12 @@ import FourPillars from "./components/home/FourPillars";
 import Client from "./components/home/Client";
 import Why from "./components/home/Why";
 import CTAGlobal from "./components/common/CTAGlobal";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home - DAVAN Digital",
+  description: "Welcome to DAVAN Digital, your trusted partner for innovative digital solutions. Explore our services, approach, and success stories.",
+};
 
 import { client } from "@/sanity/lib/client";
 
@@ -59,7 +65,8 @@ const clientData = await client.fetch(`
     },
 
     logos[]{
-      "src": asset->url
+      "src": image.asset->url,
+      clientName
     }
 
   }

@@ -21,14 +21,14 @@ export default function Footer({
   const footerLinks = [
     {
       title: "About Us",
+      href: "/about-us",
       links: [
-        { name: "History", href: "/about-us/#history" },
         { name: "Four Anchors", href: "/about-us/#four-anchors" },
-        { name: "Review", href: "/about-us/#review" },
       ],
     },
     {
       title: "Services",
+      href: "/services",
       links: [
         { name: "Four Pillars", href: "/services/#four-pillars" },
         { name: "How We Work", href: "/services/#how-we-work" },
@@ -37,14 +37,15 @@ export default function Footer({
     },
     {
       title: "Our Approach",
+      href: "/our-approach",
       links: [
         { name: "The Gap", href: "/our-approach/#the-gap" },
         { name: "Our Clients", href: "/our-approach/#our-clients" },
-        { name: "Portfolio", href: "/our-approach/#portfolio" },
       ],
     },
   ];
 
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-dark px-5 py-14 sm:px-6 lg:px-28 lg:py-16">
 
@@ -62,6 +63,48 @@ export default function Footer({
               lg:-ml-3
             "
           />
+
+            <div
+            className="
+              flex
+              flex-col
+              items-start
+              gap-3
+              font-body
+              text-xs
+              mt-4
+            "
+          >
+
+            {data.information?.map((item, index) => (
+
+              <span
+                key={index}
+                className="
+                  font-body
+                  flex
+                  items-center
+                  gap-2
+
+                  break-all
+                  sm:break-normal
+                "
+              >
+
+                <img
+                  src={item.icon}
+                  alt=""
+                  className="
+                    w-[14px]
+                    h-[14px]
+                    object-contain
+                    shrink-0
+                  "
+                />
+                {item.text}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* NAVIGATION */}
@@ -86,9 +129,22 @@ export default function Footer({
 
             <div key={section.title}>
 
-              <h4 className="font-body mb-5 text-xs text-primary">
+              <Link
+                href={section.href}
+                className="
+                  group
+                  relative
+                  inline-block
+                  align-top
+
+                  font-body
+                  mb-5
+                  text-xs
+                  text-primary"
+              >
                 {section.title}
-              </h4>
+                <span className="absolute left-0 -bottom-1 h-[1px] w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>
+              </Link>
 
               <ul className="space-y-3">
 
@@ -108,15 +164,10 @@ export default function Footer({
                     >
                       {link.name}
                     </a>
-
                   </li>
-
                 ))}
-
               </ul>
-
             </div>
-
           ))}
 
           {/* CONTACT */}
@@ -133,25 +184,21 @@ export default function Footer({
                 font-body
                 mb-5
                 text-xs
-                text-primary
-              "
-            >
+                text-primary">
               Contact Us
 
               <span className="absolute left-0 -bottom-1 h-[1px] w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>
-
             </Link>
-
           </div>
-
         </div>
-
       </div>
 
-      {/* BOTTOM */}
+      <div className="mt-14 border-t border-white/10 md:mt-16" />
+
+
       <div
         className="
-          mt-14
+
           flex
           flex-col
           gap-5
@@ -160,20 +207,17 @@ export default function Footer({
           text-[11px]
           text-primary
 
-          md:mt-16
+          
           md:flex-row
           md:items-center
           md:justify-between
         "
       >
 
-        {/* COPYRIGHT */}
         <p className="font-body text-left">
-          {data.copyright}
+          &copy; {currentYear} {data.copyright}
         </p>
-
-        {/* INFORMATION */}
-        <div
+         <div
           className="
             flex
             flex-col
@@ -182,50 +226,46 @@ export default function Footer({
 
             sm:flex-row
             sm:items-center
-            sm:justify-center
-            sm:gap-8
-
-            md:justify-end
+            sm:gap-6
           "
         >
 
-          {data.information?.map((item, index) => (
+          <Link
+            href="/privacy-policy"
+            className="
+              group
+              relative
+              inline-block
 
-            <span
-              key={index}
-              className="
-                font-body
-                flex
-                items-center
-                gap-2
+              font-body
+              transition-colors
+              hover:text-white
+            "
+          >
+            Privacy Policy
 
-                break-all
-                sm:break-normal
-              "
-            >
+            <span className="absolute left-0 -bottom-1 h-[1px] w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>
 
-              <img
-                src={item.icon}
-                alt=""
-                className="
-                  w-[14px]
-                  h-[14px]
+          </Link>
 
-                  object-contain
-                  shrink-0
-                "
-              />
+          <Link
+            href="/terms-of-use"
+            className="
+              group
+              relative
+              inline-block
 
-              {item.text}
+              font-body
+              transition-colors
+              hover:text-white
+            "
+          >
+            Terms of Use
 
-            </span>
-
-          ))}
-
+            <span className="absolute left-0 -bottom-1 h-[1px] w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>
+          </Link>
         </div>
-
       </div>
-
     </footer>
   );
 }

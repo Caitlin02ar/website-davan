@@ -11,7 +11,7 @@ interface HeroAboutProps {
     highlightText: string;
     description: string;
     aboutSlogan: string;
-    highlightSlogan:string;
+    highlightSlogan: string;
     backgroundImage: string;
   };
 }
@@ -21,14 +21,27 @@ export default function HeroAbout({
 }: HeroAboutProps) {
   return (
     <section className="relative h-[180vh] overflow-hidden">
-      <img
+      {/* Background */}
+      <motion.img
         src={data.backgroundImage}
-        alt=""
+        alt="About Background"
+        initial={{
+          scale: 1.08,
+          opacity: 0,
+        }}
+        animate={{
+          scale: 1,
+          opacity: 1,
+        }}
+        transition={{
+          duration: 1.8,
+          ease,
+        }}
         className="
           h-full
           w-full
           object-cover
-          object-[center_center]
+          object-center
           lg:object-[center_-600px]
         "
       />
@@ -43,7 +56,7 @@ export default function HeroAbout({
           bottom-0
           left-0
           right-0
-          h-[500px]
+          h-[180px]
           bg-gradient-to-b
           from-transparent
           via-background/70
@@ -68,22 +81,24 @@ export default function HeroAbout({
           <motion.h1
             initial={{
               opacity: 0,
-              y: -100,
+              y: -140,
+              filter: "blur(10px)",
             }}
             animate={{
               opacity: 1,
               y: 0,
+              filter: "blur(0px)",
             }}
             transition={{
-              duration: 1,
+              duration: 1.3,
               ease,
             }}
             className="
               font-heading
               text-3xl
               sm:text-5xl
-              lg:text-5xl
-              max-w-4xl
+              lg:text-6xl
+              max-w-5xl
               leading-tight
             "
           >
@@ -94,7 +109,7 @@ export default function HeroAbout({
           <motion.p
             initial={{
               opacity: 0,
-              y: -60,
+              y: -50,
             }}
             animate={{
               opacity: 1,
@@ -102,16 +117,17 @@ export default function HeroAbout({
             }}
             transition={{
               duration: 0.9,
-              delay: 0.7,
+              delay: 1.2,
               ease,
             }}
             className="
               font-body
               text-xs
-              sm:text-sm
-              text-white
+              sm:text-xs
+              md:text-sm
+              text-white/90
               max-w-2xl
-              mt-4
+              mt-6
               leading-relaxed
               px-2
             "
@@ -126,30 +142,35 @@ export default function HeroAbout({
             initial={{
               opacity: 0,
               y: -100,
+              filter: "blur(8px)",
             }}
             whileInView={{
               opacity: 1,
               y: 0,
+              filter: "blur(0px)",
             }}
             transition={{
-              duration: 1,
+              duration: 1.1,
               ease,
             }}
             viewport={{
               once: true,
-              amount: 0.5,
+              amount: 0.4,
             }}
             className="
               font-subheading
               text-center
-              max-w-3xl
+              max-w-4xl
               text-2xl
               sm:text-3xl
-              lg:text-3xl
+              lg:text-4xl
               leading-relaxed
             "
           >
-            {renderHighlightedText(data.aboutSlogan, data.highlightSlogan)}
+            {renderHighlightedText(
+              data.aboutSlogan,
+              data.highlightSlogan
+            )}
           </motion.h1>
         </div>
       </div>

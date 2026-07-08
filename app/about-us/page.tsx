@@ -4,10 +4,17 @@ import AboutSlogan from "../components/about/AboutSlogan";
 import Principles from "../components/about/Principles";
 import HowWeWork from "../components/about/HowWeWork";
 import CTAGlobal from "../components/common/CTAGlobal";
+import { Metadata } from "next";
 
 import { client } from "@/sanity/lib/client";
 
+export const metadata: Metadata = {
+    title: "About Us - DAVAN Digital",
+    description: "Learn more about DAVAN Digital, our mission, values, and how we work.",
+  };
+
 export default async function About() {
+
 
   const heroData = await client.fetch(`
     *[

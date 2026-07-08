@@ -9,21 +9,24 @@ import { renderHighlightedText } from "@/lib/highlightText";
 
 interface FormCardProps {
   data: {
-    form: {
+    
       title: string;
       heading: string;
-      hightlightText: string;
+      highlightText: string;
       description: string;
 
       formFields: {
         fieldName: string;
         fieldType: string;
+        required:boolean;
+      }[];
+
+    reasonField: {
+      required:boolean,
+      options: {
+        reason:string
       }[];
     };
-
-    fieldReasons: {
-      reason: string;
-    }[];
 
     formButtonText: string;
   };
@@ -45,24 +48,19 @@ export default function FormCard({
 }: FormCardProps) {
 
   const {
-    form,
-    fieldReasons,
+    reasonField,
     formButtonText,
   } = data;
 
-  // FORM STATE
   const [formData, setFormData] =
     useState<Record<string, string>>({});
 
-  // MODAL
   const [openModal, setOpenModal] =
     useState(false);
 
-  // LOADING
   const [isSending, setIsSending] =
     useState(false);
 
-  // HANDLE INPUT
   const handleChange = (
     name: string,
     value: string
@@ -75,7 +73,6 @@ export default function FormCard({
 
   };
 
-  // HANDLE SUBMIT
   const handleSubmit = async (
     e: React.FormEvent
   ) => {
@@ -83,7 +80,6 @@ export default function FormCard({
     e.preventDefault();
 
     try {
-
       setIsSending(true);
 
       const response = await fetch(
@@ -107,10 +103,8 @@ export default function FormCard({
 
       if (result.success) {
 
-        // OPEN MODAL
         setOpenModal(true);
 
-        // RESET FORM
         setFormData({});
 
       } else {
@@ -128,20 +122,15 @@ export default function FormCard({
       alert(
         "Something went wrong."
       );
-
     } finally {
-
       setIsSending(false);
-
     }
-
   };
 
   return (
     <>
       <section className="px-4 py-12 md:px-6 md:py-16">
 
-        {/* OUTER CARD */}
         <div
           className="
             mx-auto
@@ -153,7 +142,6 @@ export default function FormCard({
             p-4
             shadow-[0_20px_80px_rgba(0,0,0,0.45)]
             backdrop-blur-xl
-
             md:rounded-[28px]
           "
         >
@@ -163,7 +151,6 @@ export default function FormCard({
               grid
               grid-cols-1
               gap-5
-
               md:grid-cols-[0.82fr_1fr]
             "
           >
@@ -175,7 +162,6 @@ export default function FormCard({
                 h-[200px]
                 overflow-hidden
                 rounded-[22px]
-
                 md:h-full
               "
             >
@@ -190,7 +176,6 @@ export default function FormCard({
                   w-full
                   scale-[1.6]
                   object-cover
-
                   md:scale-[2.5]
                 "
               />
@@ -212,7 +197,6 @@ export default function FormCard({
                   bottom-5
                   left-5
                   right-5
-
                   md:bottom-8
                   md:left-8
                   md:right-auto
@@ -225,13 +209,12 @@ export default function FormCard({
                     font-heading
                     text-xl
                     text-white
-
                     md:text-2xl
                   "
                 >
                   {renderHighlightedText(
-                    form.heading,
-                    form.hightlightText
+                    data.heading,
+                    data.highlightText
                   )}
                 </h2>
 
@@ -244,7 +227,7 @@ export default function FormCard({
                     text-white/80
                   "
                 >
-                  {form.description}
+                  {data.description}
                 </p>
 
               </div>
@@ -278,7 +261,7 @@ export default function FormCard({
                   md:text-3xl
                 "
               >
-                {form.title}
+                {data.title}
               </h1>
 
               <form
@@ -286,8 +269,7 @@ export default function FormCard({
                 onSubmit={handleSubmit}
               >
 
-                {/* DYNAMIC FIELDS */}
-                {form.formFields.map(
+                {data.formFields.map(
                   (field, index) => {
 
                     const fieldKey =
@@ -327,6 +309,7 @@ export default function FormCard({
 
                             {/* TEXTAREA */}
                             <textarea
+                              required
                               rows={4}
                               value={
                                 formData[fieldKey] || ""
@@ -353,7 +336,6 @@ export default function FormCard({
                               "
                             />
 
-                            {/* OPTIONS */}
                             <div
                               className="
                                 flex
@@ -363,7 +345,7 @@ export default function FormCard({
                               "
                             >
 
-                              {fieldReasons.map(
+                              {reasonField.options.map(
                                 (
                                   option,
                                   optionIndex
@@ -380,6 +362,7 @@ export default function FormCard({
                                   >
 
                                     <input
+                                      required={field.required}
                                       type="radio"
                                       name="gap"
                                       value={
@@ -436,6 +419,7 @@ export default function FormCard({
                         </label>
 
                         <input
+                          required
                           type={field.fieldType}
                           value={
                             formData[fieldKey] || ""
@@ -469,37 +453,26 @@ export default function FormCard({
                   }
                 )}
 
-                {/* BUTTON */}
                 <div className="pt-1">
-
                   <Button
                     type="submit"
-                    disabled={isSending}
-                  >
+                    disabled={isSending}>
 
                     {isSending
                       ? "Sending..."
                       : formButtonText}
-
                   </Button>
-
                 </div>
-
               </form>
-
             </div>
-
           </div>
-
         </div>
-
       </section>
 
       <SuccessModal
         open={openModal}
         onClose={() =>
-          setOpenModal(false)
-        }
+          setOpenModal(false)}
         message={modalData.message}
         icon={modalData.icon.asset.url}
       />

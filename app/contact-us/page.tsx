@@ -3,6 +3,12 @@ import Form from "../components/contact/Form";
 import Pillar from "../components/contact/Pillar";
 import { client } from "@/sanity/lib/client";
 import CTAGlobal from "../components/common/CTAGlobal";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us - DAVAN Digital",
+  description: "Get in touch with DAVAN Digital for inquiries, support, or collaboration opportunities.",
+};
 
 export default async function ContactUs(){
     const fourPillarData = await client.fetch(`
@@ -21,35 +27,28 @@ export default async function ContactUs(){
     const contactData = await client.fetch(`
   *[
     _type == "contactContent"
-  ][0]{
-
-    form{
+    ][0]{
       title,
       heading,
-      hightlightText,
+      highlightText,
       description,
 
       formFields[]{
         fieldName,
-        fieldType
-      }
-    },
+        fieldType,
+        required
+      },
 
-    fieldReasons[]{
-      reason
-    },
+      reasonField{
+        required,
+        options[]{
+          reason
+        }
+      },
 
-    formButtonText,
+      formButtonText
 
-    headingCard,
-
-    pillarContact[]{
-      tag,
-      title,
-      description
     }
-
-  }
 `);
 
 const modalData = await client.fetch(`
@@ -80,7 +79,8 @@ const ctaData = await client.fetch(`
         subheadingBottom,
         buttonText,
         titleColor,
-        "backgroundImage": backgroundImage.asset->url
+        "backgroundImage": backgroundImage.asset->url,
+        linkContact
       }
   `)
 
@@ -96,7 +96,7 @@ const ctaData = await client.fetch(`
             buttonText={ctaData.buttonText}
             titleColor={ctaData.titleColor}
             backgroundImage={ctaData.backgroundImage}
-            href="/contact-us" />
+            href={ctaData.linkContact}/>
         </main>
     )
 }

@@ -47,24 +47,39 @@ export default function FAQ({
       "
     >
 
-      {/* BACKGROUND IMAGE LAYER */}
-      {/* BACKGROUND IMAGE */}
-<Image
-  src={faqData.backgroundImage}
-  alt=""
-  fill
-  priority
-  className="
-    object-cover
-    object-top
-  "
-/>
-
-      {/* OVERLAY */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
-
-      {/* FAQ CONTENT */}
+      {/* BACKGROUND LAYER
+          Dikunci ke dalam container absolute dengan tinggi tetap (min-h-screen).
+          Karena tidak lagi mengikuti tinggi <section> yang bertambah saat
+          dropdown dibuka, background tidak ikut memanjang / nge-zoom. */}
       <div
+        className="
+          pointer-events-none
+          absolute
+          inset-x-0
+          top-0
+          h-screen
+          overflow-hidden
+        "
+      >
+        <Image
+          src={faqData.backgroundImage}
+          alt=""
+          fill
+          priority
+          className="
+            object-cover
+            object-top
+          "
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
+      </div>
+
+      {/* Fallback gelap untuk area di bawah background bila konten
+          (dropdown terbuka) melebihi tinggi layar. */}
+      <div className="absolute inset-0 -z-10 bg-black" />
+
+       <div
         className="
           relative
           z-10
@@ -82,7 +97,7 @@ export default function FAQ({
           md:px-12
 
           lg:flex-row
-          lg:items-start
+          lg:items-stretch
           lg:gap-24
           lg:p-24
           lg:min-h-screen
@@ -97,8 +112,6 @@ export default function FAQ({
 
             gap-10
 
-            lg:sticky
-            lg:top-24
             lg:w-[30%]
           "
         >
@@ -129,12 +142,15 @@ export default function FAQ({
 
           </div>
 
-          {/* CARD DESKTOP ONLY */}
+          {/* CARD DESKTOP ONLY
+              mt-auto mendorong card ke bawah kolom, sehingga bawah card
+              rata dengan bawah dropdown terakhir di kolom kanan. */}
           <div
             className="
               hidden
 
               lg:block
+              lg:mt-auto
 
               w-full
               p-6

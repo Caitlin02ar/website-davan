@@ -8,7 +8,6 @@ type CTAGlobalProps = {
   topText?: string;
   title: string;
   bottomText?: string;
-
   buttonText: string;
 
   onClick?: () => void;
@@ -41,19 +40,55 @@ export default function CTAGlobal({
   height = "h-[75vh] sm:h-[75vh]",
   titleColor = "primary",
 }: CTAGlobalProps) {
-  const ctaButton = href ? (
-    <Link href={href}>
-      <Button theme="dark">{buttonText}</Button>
-    </Link>
-  ) : (
-    <Button theme="dark" onClick={onClick}>
-      {buttonText}
-    </Button>
-  );
+
+  // Decide how to render the button:
+  // - Anchor on the same page (starts with "#") -> plain <a> for reliable smooth scroll
+  // - External URL (http/https) -> <a> with target/rel
+  // - Internal route -> Next.js <Link>
+  // - No href but onClick provided -> button with onClick
+  // - No href and no onClick -> fallback to the contact form anchor
+  let ctaButton;
+
+  if (href) {
+    const isAnchor = href.startsWith("#");
+    const isExternal = href.startsWith("http");
+
+    if (isAnchor) {
+      ctaButton = (
+        <a href={href}>
+          <Button theme="dark">{buttonText}</Button>
+        </a>
+      );
+    } else if (isExternal) {
+      ctaButton = (
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          <Button theme="dark">{buttonText}</Button>
+        </a>
+      );
+    } else {
+      ctaButton = (
+        <Link href={href}>
+          <Button theme="dark">{buttonText}</Button>
+        </Link>
+      );
+    }
+  } else if (onClick) {
+    ctaButton = (
+      <Button theme="dark" onClick={onClick}>
+        {buttonText}
+      </Button>
+    );
+  } else {
+    // FALLBACK: no href and no onClick -> scroll to the contact form.
+    ctaButton = (
+      <a href="#form">
+        <Button theme="dark">{buttonText}</Button>
+      </a>
+    );
+  }
 
   return (
     <>
-      {/* ================= DESKTOP — original code, untouched ================= */}
       <section
         className={`
           hidden
@@ -68,7 +103,6 @@ export default function CTAGlobal({
       >
         <div className="relative h-full w-full overflow-hidden">
 
-          {/* BACKGROUND */}
           {showBackground && (
             <>
               <Image
@@ -82,7 +116,6 @@ export default function CTAGlobal({
             </>
           )}
 
-          {/* LOGO */}
           <Image
             src={logoImage}
             alt="CTA Logo"
@@ -109,7 +142,6 @@ export default function CTAGlobal({
             "
           />
 
-          {/* CONTENT */}
           <div
             className="
               absolute
@@ -144,44 +176,33 @@ export default function CTAGlobal({
             "
           >
 
-            {/* TEXT */}
-            <div className="flex flex-col gap-3 sm:gap-3">
+            <div className="flex flex-col gap-2 sm:gap-2">
 
               {topText && (
                 <h3
                   className="
-                    font-body
+                    font-subheading
                     text-white
 
-                    text-xs
-                    sm:text-base
+                    text-xl
+                    sm:text-2xl
                   "
                 >
                   {topText}
                 </h3>
               )}
 
-              {/* TITLE */}
               <h3
                 className={`
                   font-heading
-
                   text-xl
-
                   sm:text-xl
-
                   lg:text-3xl
-
                   leading-[0.9]
-
                   sm:leading-normal
-
                   max-w-[320px]
-
                   sm:max-w-xl
-
                   mx-auto
-
                   ${
                     titleColor === "primary"
                       ? "text-primary"
@@ -195,16 +216,12 @@ export default function CTAGlobal({
               {bottomText && (
                 <h3
                   className="
-                    font-body
+                    font-subheading
                     text-white
-
-                    text-xs
-                    sm:text-base
-
+                    text-lg
+                    sm:text-2xl
                     max-w-[280px]
-
                     sm:max-w-none
-
                     mx-auto
                   "
                 >
@@ -215,7 +232,7 @@ export default function CTAGlobal({
             </div>
 
             {/* BUTTON */}
-            <div className="flex flex-col items-center pt-2 sm:pt-0">
+            <div className="flex flex-col items-center pt-2 sm:pt-0 -mt-4">
               {ctaButton}
             </div>
 
@@ -224,7 +241,6 @@ export default function CTAGlobal({
         </div>
       </section>
 
-      {/* ================= MOBILE — rebuilt separately, flow-based ================= */}
       <section className="sm:hidden relative overflow-hidden">
 
         {showBackground && (
@@ -241,7 +257,6 @@ export default function CTAGlobal({
 
         <div className="relative z-10 flex flex-col items-center px-4 py-10">
 
-          {/* Logo at its own natural proportions so the full pill shows (no cropping) */}
           <div className="relative w-full max-w-[380px]">
             <Image
               src={logoImage}
@@ -251,10 +266,9 @@ export default function CTAGlobal({
               className="w-full h-auto pointer-events-none"
             />
 
-            {/* Text overlaid only on the logo box, centered on the pill's dark cutout */}
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-10 text-center">
               {topText && (
-                <h3 className="font-body text-white text-xs">
+                <h3 className="font-heading text-white text-xs">
                   {topText}
                 </h3>
               )}
@@ -273,7 +287,7 @@ export default function CTAGlobal({
               </h3>
 
               {bottomText && (
-                <h3 className="font-body text-white text-xs max-w-[220px] mx-auto">
+                <h3 className="font-heading text-white text-xs max-w-[220px] mx-auto">
                   {bottomText}
                 </h3>
               )}

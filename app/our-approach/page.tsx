@@ -5,8 +5,14 @@ import Clients from "../components/approach/Clients";
 import CTAGlobal from "../components/common/CTAGlobal";
 import DescriptionBanner from "../components/approach/DescriptionBanner";
 import DescriptionContent from "../components/approach/DescriptionContent";
+import { Metadata } from "next";
 
 import { client } from "@/sanity/lib/client";
+
+export const metadata: Metadata = {
+  title:"Our Approach - DAVAN Digital",
+  description:"Discover DAVAN Digital's approach to delivering innovative solutions, our methodology, and how we engage with clients to achieve success.",
+}
 
 export default async function OurApproach() {
 
@@ -36,7 +42,8 @@ export default async function OurApproach() {
       },
 
       logos[]{
-        "src": asset->url
+        "src": image.asset->url,
+        clientName
       }
 
     }
