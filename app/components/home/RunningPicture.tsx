@@ -48,9 +48,11 @@ export default function RunningPicture({
             >
               <Image
                 src={item.src}
-                alt={item.alt ?? "Client Picture"}
+                alt={item.alt ?? ""}
                 fill
-                quality={100}
+                sizes="180px"
+                loading="lazy"
+                quality={75}
                 className="object-cover transition-transform duration-700"
                 suppressHydrationWarning
               />

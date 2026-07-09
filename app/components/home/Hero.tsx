@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import Button from "../common/Button";
 import { renderHighlightedText } from "@/lib/highlightText";
+import { urlFor } from "@/lib/image";
+import Image from "next/image";
 
 type HeroData = {
   title: string;
@@ -33,10 +35,17 @@ export default function Hero({
   return (
     <section className="relative min-h-screen overflow-hidden">
 
-      <img
-        src={backgroundImage}
-        alt="Hero Background"
-        className="absolute inset-0 h-full w-full object-cover"
+      <Image
+        src={urlFor(backgroundImage)
+          .width(1920)
+          .quality(80)
+          .auto("format")
+          .url()}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="absolute inset-0 object-cover h-auto w-auto"
       />
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 pointer-events-none" />
@@ -144,7 +153,6 @@ export default function Hero({
             {buttonText}
           </Button>
         </motion.div>
-
       </div>
     </section>
   );

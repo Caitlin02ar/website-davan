@@ -88,6 +88,7 @@ export default function Navbar() {
             height={60}
             priority
             className={`
+              h-auto
               transition-all
               duration-500
 

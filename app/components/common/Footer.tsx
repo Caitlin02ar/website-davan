@@ -1,6 +1,6 @@
-// app/components/common/Footer.tsx
-
 import Link from "next/link";
+import Image from "next/image";
+
 
 interface FooterProps {
   data: {
@@ -53,16 +53,15 @@ export default function Footer({
 
         {/* LOGO */}
         <div className="w-full lg:w-auto">
-          <img
+        <div className="relative w-[200px] h-[60px] sm:w-[230px] lg:w-[250px] lg:-ml-3">
+          <Image
             src={data.footerLogo}
             alt="Davan Logo"
-            className="
-              w-[200px]
-              sm:w-[230px]
-              lg:w-[250px]
-              lg:-ml-3
-            "
+            fill
+            sizes="250px"
+            className="object-contain object-left"
           />
+        </div>
 
             <div
             className="

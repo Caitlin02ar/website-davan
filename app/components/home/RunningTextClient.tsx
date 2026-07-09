@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
+import { urlFor } from "@/lib/image";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -76,20 +77,21 @@ export default function RunningTextClient({
         "
       >
         <Image
-          src={data.backgroundImage.asset.url}
+          src={urlFor(data.backgroundImage)
+            .width(1920)
+            .quality(80)
+            .auto("format")
+            .url()
+          }
           alt={data.altText || ""}
           fill
           priority
-          className="
-            object-cover
-            opacity-55
-          "
+          className="object-cover opacity-55"
         />
 
         <div className="absolute inset-0 bg-black/40 pointer-events-none" />
       </motion.div>
 
-      {/* TAPE */}
       <motion.div
         initial={{
           x: "120%",
