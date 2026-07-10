@@ -33,12 +33,16 @@ export const metadata: Metadata = {
     default: "DAVAN Digital | Digital Transformation & Integration Services",
     template: "%s | DAVAN Digital",
   },
+
   description:
     "DAVAN Digital helps organisations close digital gaps through system integration, automation, and digital transformation services.",
-  metadataBase: new URL("https://www.davan.digital"),
+
+  metadataBase: new URL("https://website-davan.vercel.app"),
+
   alternates: {
     canonical: "/",
   },
+
   keywords: [
     "digital transformation",
     "system integration",
@@ -47,34 +51,30 @@ export const metadata: Metadata = {
     "DAVAN Digital",
     "Perth",
   ],
+
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
   },
+
   openGraph: {
     title: "DAVAN Digital | Digital Transformation & Integration Services",
     description:
       "DAVAN Digital helps organisations close digital gaps through system integration, automation, and digital transformation services.",
-    url: "https://www.davan.digital",
+    url: "https://website-davan.vercel.app",
     siteName: "DAVAN Digital",
     images: [
       {
         url: "/photos/davan-og-image.png",
         width: 1200,
         height: 630,
-        alt: "DAVAN Digital | Digital Transformation & Integration Services",
+        alt: "DAVAN Digital",
       },
     ],
     locale: "en_AU",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
     title: "DAVAN Digital | Digital Transformation & Integration Services",
