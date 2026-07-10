@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     title: "DAVAN Digital | Digital Transformation & Integration Services",
     description:
       "DAVAN Digital helps organisations close digital gaps through system integration, automation, and digital transformation services.",
-    images: ["/images/davan-og-image.png"],
+    images: ["/photos/davan-og-image.png"],
   },
 };
 
