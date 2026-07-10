@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     siteName: "DAVAN Digital",
     images: [
       {
-        url: "/images/davan-og-image.png",
+        url: "/photos/davan-og-image.png",
         width: 1200,
         height: 630,
         alt: "DAVAN Digital | Digital Transformation & Integration Services",

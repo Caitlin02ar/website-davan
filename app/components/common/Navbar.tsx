@@ -87,8 +87,8 @@ export default function Navbar() {
             width={180}
             height={60}
             priority
+            style={{ width:"100%", height: "auto" }}
             className={`
-              h-auto
               transition-all
               duration-500
 
