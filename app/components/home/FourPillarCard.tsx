@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import Image from "next/image";
+import { sanityImage } from "@/lib/image";
 
 interface FourPillarCardProps {
   number: string;
@@ -20,10 +22,16 @@ export default function FourPillarCard({
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1024);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    // matchMedia tidak memicu forced reflow, berbeda dengan window.innerWidth
+    // yang memaksa browser menghitung ulang layout setiap kali dibaca.
+    const mq = window.matchMedia("(max-width: 1023px)");
+
+    setIsMobile(mq.matches);
+
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
   }, []);
 
   return (
@@ -64,11 +72,13 @@ export default function FourPillarCard({
         hover:border-white/20
       "
     >
-      <div className="overflow-hidden rounded-[22px]">
-        <img
-          src={image}
+      <div className="relative overflow-hidden rounded-[22px] h-[160px] sm:h-[200px] md:h-[210px] lg:h-[260px]">
+        <Image
+          src={sanityImage(image, 640, 520)}
           alt={title}
-          className="w-full h-[160px] sm:h-[200px] md:h-[210px] lg:h-[260px] object-cover"
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-cover"
         />
       </div>
 

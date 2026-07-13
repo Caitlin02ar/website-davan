@@ -81,7 +81,7 @@ export default function Pillar({
         "
       >
 
-        <h1
+        <h2
           ref={headingRef}
           style={{
             opacity: 0,
@@ -99,7 +99,7 @@ export default function Pillar({
             data.title,
             data.highlight
           )}
-        </h1>
+        </h2>
       </div>
 
       {/* ITEMS */}

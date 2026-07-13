@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 import Button from "../common/Button";
 import SuccessModal from "./SuccessModal";
+import { sanityImage } from "@/lib/image";
 
 import { renderHighlightedText } from "@/lib/highlightText";
 
@@ -14,6 +16,7 @@ interface FormCardProps {
       heading: string;
       highlightText: string;
       description: string;
+      imageContent:string;
 
       formFields: {
         fieldName: string;
@@ -127,6 +130,7 @@ export default function FormCard({
     }
   };
 
+  
   return (
     <>
       <section className="px-4 py-12 md:px-6 md:py-16">
@@ -166,17 +170,17 @@ export default function FormCard({
               "
             >
 
-              <img
-                src="/photos/how-3.webp"
+              <Image
+                src={sanityImage(data.imageContent, 760, 1200)}
                 alt=""
+                fill
+                sizes="(min-width: 768px) 380px, calc(100vw - 64px)"
                 className="
                   absolute
                   inset-0
-                  h-full
-                  w-full
-                  scale-[1.6]
+                 
                   object-cover
-                  md:scale-[2.5]
+                 
                 "
               />
 
@@ -287,6 +291,7 @@ export default function FormCard({
                         <div key={index}>
 
                           <label
+                            
                             className="
                               mb-3
                               block
@@ -309,7 +314,7 @@ export default function FormCard({
 
                             {/* TEXTAREA */}
                             <textarea
-                              required
+                              required={field.required}
                               rows={4}
                               value={
                                 formData[fieldKey] || ""
@@ -419,7 +424,7 @@ export default function FormCard({
                         </label>
 
                         <input
-                          required
+                          required={field.required}
                           type={field.fieldType}
                           value={
                             formData[fieldKey] || ""

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { renderHighlightedText } from "@/lib/highlightText";
 
@@ -22,9 +23,7 @@ export default function HeroAbout({
   return (
     <section className="relative h-[180vh] overflow-hidden">
       {/* Background */}
-      <motion.img
-        src={data.backgroundImage}
-        alt="About Background"
+      <motion.div
         initial={{
           scale: 1.08,
           opacity: 0,
@@ -37,14 +36,21 @@ export default function HeroAbout({
           duration: 1.8,
           ease,
         }}
-        className="
-          h-full
-          w-full
-          object-cover
-          object-center
-          lg:object-[center_-600px]
-        "
-      />
+        className="absolute inset-0"
+      >
+        <Image
+          src={data.backgroundImage}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="
+            object-cover
+            object-center
+            lg:object-[center_-600px]
+          "
+        />
+      </motion.div>
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />

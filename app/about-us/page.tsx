@@ -9,29 +9,26 @@ import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 
 export const metadata: Metadata = {
-    title: "About Us - DAVAN Digital",
-    description: "Learn more about DAVAN Digital, our mission, values, and how we work.",
-  };
+  title: "About Us - DAVAN Digital",
+  description:
+    "Learn more about DAVAN Digital, our mission, values, and how we work.",
+};
 
-export default async function About() {
+const ABOUT_QUERY = `{
 
+  "hero": *[
+    _type == "heroGlobal"
+    && page == "about"
+  ][0]{
+    title,
+    highlightText,
+    description,
+    aboutSlogan,
+    highlightSlogan,
+    "backgroundImage": backgroundImage.asset->url
+  },
 
-  const heroData = await client.fetch(`
-    *[
-      _type == "heroGlobal"
-      && page == "about"
-    ][0]{
-      title,
-      highlightText,
-      description,
-      aboutSlogan,
-      highlightSlogan,
-      "backgroundImage": backgroundImage.asset->url
-    }
-  `);
-
-  const bannerData = await client.fetch(`
-    *[
+  "banner": *[
     _type == "bannerSection"
     && page == "about"
   ][0]{
@@ -39,14 +36,11 @@ export default async function About() {
     highlightHeading,
     description,
     "backgroundImage": backgroundImage.asset->url
-  }
-    `)
+  },
 
-    const howWeWorkData = await client.fetch(`
-  *[
+  "howWeWork": *[
     _type == "HowWeWork"
   ][0]{
-
     tag,
     heading,
     hightlightText,
@@ -54,31 +48,26 @@ export default async function About() {
     contentHowWeWork[]{
       title,
       description,
+
       image{
         asset->{
           url
         }
       }
     }
+  },
 
-  }
-`);
-
-const aboutData = await client.fetch(`
-  *[
-  _type == "aboutSlogan"
+  "about": *[
+    _type == "aboutSlogan"
   ][0]{
-  heading,
-  highlightText,
-  description,
-  }
-  `);
+    heading,
+    highlightText,
+    description,
+  },
 
-  const principlesData = await client.fetch(`
-  *[
+  "principles": *[
     _type == "principlesAbout"
   ][0]{
-
     tag,
     heading,
     hightlightText,
@@ -93,27 +82,36 @@ const aboutData = await client.fetch(`
         }
       }
     }
+  },
 
+  "cta": *[
+    _type == "ctaGlobal"
+    && page == "about"
+  ][0]{
+    heading,
+    buttonText,
+    titleColor,
+    "backgroundImage": backgroundImage.asset->url
   }
-`);
 
-const ctaData = await client.fetch(`
-    *[
-      _type == "ctaGlobal"
-      && page == "about"
-    ][0]{
-      heading,
-      buttonText,
-      titleColor,
-      "backgroundImage": backgroundImage.asset->url
-    }
-  `);
+}`;
+
+export default async function About() {
+
+  const data = await client.fetch(ABOUT_QUERY);
+
+  const heroData = data.hero;
+  const bannerData = data.banner;
+  const howWeWorkData = data.howWeWork;
+  const aboutData = data.about;
+  const principlesData = data.principles;
+  const ctaData = data.cta;
 
   return (
     <main>
       <HeroAbout data={heroData} />
 
-      <AboutDavan data={aboutData}/>
+      <AboutDavan data={aboutData} />
 
       <AboutSlogan data={bannerData} />
 

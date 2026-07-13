@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { renderHighlightedText } from "@/lib/highlightText";
+import { sanityImage } from "@/lib/image";
 
 interface ServicesBannerProps {
   data: {
@@ -18,20 +20,13 @@ export default function ServicesSlogan({
   const ease = [0.22, 1, 0.36, 1] as const;
 
   return (
-    <div className="relative w-full overflow-hidden">
-      <img
-        src={data.backgroundImage}
+    <div className="relative w-full overflow-hidden h-[420px] sm:h-[500px] md:h-[600px]">
+      <Image
+        src={sanityImage(data.backgroundImage, 1920)}
         alt=""
-        className="
-          h-[420px]
-          w-full
-          object-cover
-
-          sm:h-[500px]
-
-          md:h-auto
-          md:min-h-full
-        "
+        fill
+        sizes="100vw"
+        className="object-cover"
       />
 
       {/* OVERLAY */}

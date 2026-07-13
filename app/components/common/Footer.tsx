@@ -56,7 +56,7 @@ export default function Footer({
         <div className="relative w-[200px] h-[60px] sm:w-[230px] lg:w-[250px] lg:-ml-3">
           <Image
             src={data.footerLogo}
-            alt="Davan Logo"
+            alt="DAVAN Digital Logo"
             fill
             sizes="250px"
             className="object-contain object-left"
@@ -90,9 +90,11 @@ export default function Footer({
                 "
               >
 
-                <img
+                <Image
                   src={item.icon}
                   alt=""
+                  width={14}
+                  height={14}
                   className="
                     w-[14px]
                     h-[14px]

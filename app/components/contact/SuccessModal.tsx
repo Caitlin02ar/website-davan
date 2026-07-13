@@ -1,10 +1,13 @@
 "use client";
 
+import Image from "next/image";
+import { sanityImage } from "@/lib/image";
+
 interface SuccessModalProps {
   open: boolean;
   onClose: () => void;
-  message:string;
-  icon:string;
+  message: string;
+  icon: string;
 }
 
 export default function SuccessModal({
@@ -106,9 +109,11 @@ export default function SuccessModal({
           "
         >
 
-          <img
-            src={icon}
+          <Image
+            src={sanityImage(icon, 120)}
             alt=""
+            width={60}
+            height={60}
             className="
               mb-6
 

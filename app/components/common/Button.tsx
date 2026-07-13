@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
 interface ButtonProps {
@@ -17,6 +18,8 @@ interface ButtonProps {
 
   onClick?: () => void;
 
+  href?: string;
+
   type?: "button" | "submit" | "reset";
 
   disabled?: boolean;
@@ -24,64 +27,47 @@ interface ButtonProps {
 
 export default function Button({
   children,
-
   theme = "light",
-
   className = "",
-
   icon = false,
-
   iconOnly = false,
-
   isOpen = false,
-
   onClick,
-
+  href,
   type = "button",
-
   disabled = false,
 }: ButtonProps) {
   const isLight = theme === "light";
 
-  // ICON ONLY BUTTON
-  if (iconOnly) {
+  const buttonClass = `
+    group relative flex items-center justify-center gap-2
+    rounded-full border px-8 py-3
+    transition-all duration-300
+    ${
+      isLight
+        ? "border-primary text-primary hover:bg-primary hover:text-[#0F0F11]"
+        : "border-[#0F0F11] text-[#0F0F11] hover:bg-[#0F0F11] hover:text-primary"
+    }
+    disabled:pointer-events-none
+    disabled:opacity-50
+    ${className}
+  `;
+
+  // Jika ada href, gunakan Link
+  if (href) {
     return (
-      <button
-        type={type}
-        suppressHydrationWarning
-        disabled={disabled}
-        onClick={onClick}
-        className={`
-          group relative flex items-center justify-center
-          rounded-lg border p-4
-          transition-all duration-300
+      <Link href={href} className={buttonClass}>
+        {children}
 
-          ${
-            isOpen
-              ? isLight
-                ? "border-primary bg-primary text-[#0F0F11]"
-                : "border-[#0F0F11] bg-[#0F0F11] text-primary"
-              : isLight
-              ? "border-primary text-primary hover:bg-primary hover:text-[#0F0F11]"
-              : "border-[#0F0F11] text-[#0F0F11] hover:bg-[#0F0F11] hover:text-primary"
-          }
-
-          disabled:pointer-events-none
-          disabled:opacity-50
-
-          ${className}
-        `}
-      >
         {icon && (
           <ChevronDown
             size={18}
-            className={`
-              transition-transform duration-300
-              ${isOpen ? "rotate-180" : "rotate-0"}
-            `}
+            className={`transition-transform duration-300 ${
+              isOpen ? "rotate-180" : "rotate-0"
+            }`}
           />
         )}
-      </button>
+      </Link>
     );
   }
 
@@ -91,32 +77,16 @@ export default function Button({
       disabled={disabled}
       onClick={onClick}
       suppressHydrationWarning
-      className={`
-        group relative flex items-center justify-center gap-2
-        rounded-full border px-8 py-3
-        transition-all duration-300
-
-        ${
-          isLight
-            ? "border-primary text-primary hover:bg-primary hover:text-[#0F0F11]"
-            : "border-[#0F0F11] text-[#0F0F11] hover:bg-[#0F0F11] hover:text-primary"
-        }
-
-        disabled:pointer-events-none
-        disabled:opacity-50
-
-        ${className}
-      `}
+      className={buttonClass}
     >
       {children}
 
       {icon && (
         <ChevronDown
           size={18}
-          className={`
-            transition-transform duration-300
-            ${isOpen ? "rotate-180" : "rotate-0"}
-          `}
+          className={`transition-transform duration-300 ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
         />
       )}
     </button>

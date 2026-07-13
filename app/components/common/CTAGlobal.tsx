@@ -107,7 +107,7 @@ export default function CTAGlobal({
             <>
               <Image
                 src={backgroundImage}
-                alt="CTA Background"
+                alt=""
                 fill
                 className="object-cover"
               />
@@ -118,7 +118,7 @@ export default function CTAGlobal({
 
           <Image
             src={logoImage}
-            alt="CTA Logo"
+            alt=""
             width={1200}
             height={1200}
             className="
@@ -247,7 +247,7 @@ export default function CTAGlobal({
           <>
             <Image
               src={backgroundImage}
-              alt="CTA Background"
+              alt=""
               fill
               className="object-cover"
             />
@@ -260,7 +260,7 @@ export default function CTAGlobal({
           <div className="relative w-full max-w-[380px]">
             <Image
               src={logoImage}
-              alt="CTA Logo"
+              alt=""
               width={1200}
               height={1200}
               className="w-full h-auto pointer-events-none"

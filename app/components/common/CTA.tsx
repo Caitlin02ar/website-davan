@@ -1,22 +1,28 @@
 "use client";
 
+import Image from "next/image";
 import Button from "./Button";
 
 export default function CTA() {
   return (
     <section className="h-[75vh]">
       <div className="relative h-full w-full">
-        <img
+        <Image
           src="/photos/cta-bg.webp"
-          alt="CTA Background"
+          alt=""
+          fill
+          sizes="100vw"
           className="h-full w-full object-cover"
         />
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-black/90 pointer-events-none" />
 
-        <img
+        <Image
           src="/photos/cta-logo.webp"
-          alt="CTA Logo"
+          alt=""
+          width={1200}
+          height={420}
+          sizes="80vw"
           className="absolute left-1/2 top-1/2 z-10 w-[80%] max-w-5xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"
         />
 

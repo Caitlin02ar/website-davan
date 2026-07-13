@@ -1,5 +1,8 @@
 "use client";
 
+import Image from "next/image";
+import { sanityImage } from "@/lib/image";
+
 interface HowCardProps {
   title: string;
   description: string;
@@ -25,10 +28,12 @@ export default function HowCard({
         ${className}
       `}
     >
-      <img
-        src={image}
+      <Image
+        src={sanityImage(image, 1000)}
         alt={title}
-        className="absolute inset-0 h-full w-full object-cover"
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        className="object-cover"
       />
 
       {/* Overlay */}

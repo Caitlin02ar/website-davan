@@ -41,7 +41,6 @@ export default function Why({
           lg:gap-20
         "
       >
-        {/* LEFT CONTENT */}
         <div
           className="
             left-content
@@ -57,7 +56,6 @@ export default function Why({
             lg:text-left
           "
         >
-          {/* HEADING */}
           <motion.h3
             initial={{
               opacity: 0,

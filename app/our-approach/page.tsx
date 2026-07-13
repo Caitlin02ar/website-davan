@@ -10,98 +10,79 @@ import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 
 export const metadata: Metadata = {
-  title:"Our Approach - DAVAN Digital",
-  description:"Discover DAVAN Digital's approach to delivering innovative solutions, our methodology, and how we engage with clients to achieve success.",
-}
+  title: "Our Approach - DAVAN Digital",
+  description:
+    "Discover DAVAN Digital's approach to delivering innovative solutions, our methodology, and how we engage with clients to achieve success.",
+};
 
-export default async function OurApproach() {
+const APPROACH_QUERY = `{
 
-  // HERO
-  const heroData = await client.fetch(`
-    *[
-      _type == "heroGlobal"
-      && page == "approach"
-    ][0]{
+  "hero": *[
+    _type == "heroGlobal"
+    && page == "approach"
+  ][0]{
+    title,
+    subheading,
+    "backgroundImage": backgroundImage.asset->url
+  },
+
+  "client": *[
+    _type == "clientSection"
+    && page == "approach"
+  ][0]{
+    title,
+
+    picture[]{
+      "src": asset->url
+    },
+
+    logos[]{
+      "src": image.asset->url,
+      clientName
+    }
+  },
+
+  "cta": *[
+    _type == "ctaGlobal"
+    && page == "approach"
+  ][0]{
+    heading,
+    buttonText,
+    titleColor,
+    "backgroundImage": backgroundImage.asset->url
+  },
+
+  "banner": *[
+    _type == "bannerSection"
+    && page == "approach"
+  ][0]{
+    heading,
+    highlightHeading,
+    description,
+    "backgroundImage": backgroundImage.asset->url
+  },
+
+  "description": *[
+    _type == "approachDescription"
+  ][0]{
+    tag,
+
+    contentDescription[]{
       title,
-      subheading,
-      "backgroundImage": backgroundImage.asset->url
-    }
-  `);
-
-  // CLIENT
-  const clientData = await client.fetch(`
-    *[
-      _type == "clientSection"
-      && page == "approach"
-    ][0]{
-
-      title,
-
-      picture[]{
-        "src": asset->url
-      },
-
-      logos[]{
-        "src": image.asset->url,
-        clientName
-      }
-
-    }
-  `);
-
-  // CTA
-  const ctaData = await client.fetch(`
-    *[
-      _type == "ctaGlobal"
-      && page == "approach"
-    ][0]{
-      heading,
-      buttonText,
-      titleColor,
-      "backgroundImage": backgroundImage.asset->url
-    }
-  `);
-
-  // BANNER
-  const bannerData = await client.fetch(`
-    *[
-      _type == "bannerSection"
-      && page == "approach"
-    ][0]{
-      heading,
-      highlightHeading,
+      highlightText,
       description,
-      "backgroundImage": backgroundImage.asset->url
-    }
-  `);
 
-  // DESCRIPTION CONTENT
-  const descriptionData = await client.fetch(`
-    *[
-      _type == "approachDescription"
-    ][0]{
-
-      tag,
-
-      contentDescription[]{
-        title,
-        highlightText,
-        description,
-
-        picture{
-          asset->{
-            url
-          }
+      picture{
+        asset->{
+          url
         }
       }
-
     }
-  `);
-  const methodData = await client.fetch(`
-  *[
+  },
+
+  "method": *[
     _type == "approachMethod"
   ][0]{
-
     tag,
     title,
     highlight,
@@ -111,9 +92,20 @@ export default async function OurApproach() {
       title,
       description
     }
-
   }
-`);
+
+}`;
+
+export default async function OurApproach() {
+
+  const data = await client.fetch(APPROACH_QUERY);
+
+  const heroData = data.hero;
+  const clientData = data.client;
+  const ctaData = data.cta;
+  const bannerData = data.banner;
+  const descriptionData = data.description;
+  const methodData = data.method;
 
   return (
     <section>
@@ -124,7 +116,7 @@ export default async function OurApproach() {
 
       <DescriptionBanner data={bannerData} />
 
-      <FourMethod data={methodData}/>
+      <FourMethod data={methodData} />
 
       <Clients data={clientData} />
 

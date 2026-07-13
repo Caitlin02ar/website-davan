@@ -83,7 +83,7 @@ export default function Navbar() {
         >
           <Image
             src="/photos/logo-1.webp"
-            alt="Davan Logo"
+            alt="DAVAN Digital Logo"
             width={180}
             height={60}
             priority

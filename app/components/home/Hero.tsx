@@ -37,9 +37,9 @@ export default function Hero({
 
       <Image
         src={urlFor(backgroundImage)
-          .width(1920)
-          .quality(80)
-          .auto("format")
+          .width(1600)
+          .quality(70)
+          .format("webp")
           .url()}
         alt=""
         fill

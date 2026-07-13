@@ -1,5 +1,8 @@
 "use client";
 
+import Image from "next/image";
+import { sanityImage } from "@/lib/image";
+
 interface PrinciplesCardProps {
   icon: string;
   title: string;
@@ -15,9 +18,11 @@ export default function PrincipleCard({
     <div className="flex items-start gap-5">
       {/* Icon */}
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary">
-        <img
-          src={icon}
+        <Image
+          src={sanityImage(icon, 40)}
           alt={title}
+          width={20}
+          height={20}
           className="h-5 w-5 object-contain"
         />
       </div>

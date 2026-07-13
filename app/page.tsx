@@ -1,4 +1,3 @@
-
 import Hero from "./components/home/Hero";
 import RunningText from "./components/home/RunningText";
 import FourPillars from "./components/home/FourPillars";
@@ -14,32 +13,27 @@ export const metadata: Metadata = {
 
 import { client } from "@/sanity/lib/client";
 
-export default async function Home() {
-  const heroData = await client.fetch(`
-    *[_type == "heroGlobal" && page == "home"][0]{
-      title,
-      highlightText,
-      description,
-      buttonText,
-      "backgroundImage": backgroundImage.asset->url
-    }
-  `);
+const HOME_QUERY = `{
+  "hero": *[_type == "heroGlobal" && page == "home"][0]{
+    title,
+    highlightText,
+    description,
+    buttonText,
+    "backgroundImage": backgroundImage.asset->url
+  },
 
-  const whyData = await client.fetch(`
-    *[_type == "why"][0]{
+  "why": *[_type == "why"][0]{
+    title,
+    highlight,
+    description,
+    cards[]{
+      tag,
       title,
-      highlight,
-      description,
-      cards[]{
-        tag,
-        title,
-        buttonText
-      }
+      buttonText
     }
-  `);
+  },
 
-  const fourPillarData = await client.fetch(`
-  *[_type == "fourpillar" && page == "home"][0]{
+  "fourPillar": *[_type == "fourpillar" && page == "home"][0]{
     tag,
     title,
     highlight,
@@ -49,14 +43,9 @@ export default async function Home() {
       description,
       "picture": picture.asset->url
     }
-  }
-`);
-const clientData = await client.fetch(`
-  *[
-    _type == "clientSection"
-    && page == "home"
-  ][0]{
+  },
 
+  "client": *[_type == "clientSection" && page == "home"][0]{
     title,
     description,
 
@@ -68,23 +57,26 @@ const clientData = await client.fetch(`
       "src": image.asset->url,
       clientName
     }
+  },
 
+  "cta": *[_type == "ctaGlobal" && page == "home"][0]{
+    heading,
+    subheadingTop,
+    subheadingBottom,
+    buttonText,
+    titleColor,
+    "backgroundImage": backgroundImage.asset->url
   }
-`);
+}`;
 
-const ctaData = await client.fetch(`
-  *[
-    _type == "ctaGlobal"
-    && page == "home"
-      ][0]{
-        heading,
-        subheadingTop,
-        subheadingBottom,
-        buttonText,
-        titleColor,
-        "backgroundImage": backgroundImage.asset->url
-      }
-  `)
+export default async function Home() {
+  const data = await client.fetch(HOME_QUERY);
+
+  const heroData = data.hero;
+  const whyData = data.why;
+  const fourPillarData = data.fourPillar;
+  const clientData = data.client;
+  const ctaData = data.cta;
 
   return (
     <main id="home">

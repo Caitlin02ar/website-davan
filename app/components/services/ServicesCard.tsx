@@ -51,6 +51,7 @@ export default function ServicesCard({
         src={backgroundImage}
         alt=""
         fill
+        sizes="(max-width: 1024px) 100vw, 45vw"
         className="object-cover object-center"
       />
 

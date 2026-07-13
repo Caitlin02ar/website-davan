@@ -50,7 +50,10 @@ export default function Card({
         {heading}
       </h2>
 
-      <Button className="text-sm mt-auto w-fit" theme="dark">
+      <Button
+        className="text-sm mt-auto w-fit"
+        theme="dark"
+        href="/contact-us">
         {button}
       </Button>
     </div>

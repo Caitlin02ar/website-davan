@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import Tag from "../common/Tag";
@@ -241,9 +242,12 @@ function DescriptionBlock({
           }
         `}
       >
-        <img
+        <Image
           src={item.image}
           alt=""
+          width={700}
+          height={700}
+          sizes="(min-width: 1024px) 700px, 500px"
           className={`
             h-[400px]
             w-[400px]

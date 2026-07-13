@@ -43,29 +43,32 @@ export default function FAQ({
       className="
         relative
         overflow-hidden
+
         min-h-screen
+
+        bg-black
       "
     >
-
-      {/* BACKGROUND LAYER
-          Dikunci ke dalam container absolute dengan tinggi tetap (min-h-screen).
-          Karena tidak lagi mengikuti tinggi <section> yang bertambah saat
-          dropdown dibuka, background tidak ikut memanjang / nge-zoom. */}
+    
       <div
         className="
           pointer-events-none
           absolute
-          inset-x-0
-          top-0
-          h-screen
+          inset-0
           overflow-hidden
+
+          bg-cover
+          bg-top
+          bg-no-repeat
         "
+        style={{backgroundImage:`url(${faqData.backgroundImage})`, backgroundSize:"100vw auto",}}
       >
         <Image
           src={faqData.backgroundImage}
           alt=""
           fill
           priority
+          sizes="100vw"
           className="
             object-cover
             object-top
@@ -75,11 +78,7 @@ export default function FAQ({
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
       </div>
 
-      {/* Fallback gelap untuk area di bawah background bila konten
-          (dropdown terbuka) melebihi tinggi layar. */}
-      <div className="absolute inset-0 -z-10 bg-black" />
-
-       <div
+      <div
         className="
           relative
           z-10
@@ -291,17 +290,18 @@ export default function FAQ({
           </div>
 
         </div>
-
       </div>
 
       {/* CTA */}
-      <CTAGlobal
-        title={ctaData.heading}
-        buttonText={ctaData.buttonText}
-        titleColor={ctaData.titleColor}
-        showBackground={false}
-        href="/contact-us"
-      />
+      <div className="relative z-10">
+        <CTAGlobal
+          title={ctaData.heading}
+          buttonText={ctaData.buttonText}
+          titleColor={ctaData.titleColor}
+          showBackground={false}
+          href="/contact-us"
+        />
+      </div>
 
     </section>
   );

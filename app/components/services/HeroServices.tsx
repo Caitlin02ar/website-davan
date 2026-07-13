@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { sanityImage } from "@/lib/image";
 
 interface HeroServicesProps {
   data: {
@@ -17,10 +19,13 @@ export default function HeroServices({
     <section className="relative min-h-screen overflow-hidden">
 
       {/* BACKGROUND */}
-      <img
-        src={data.backgroundImage}
+      <Image
+        src={sanityImage(data.backgroundImage, 1920)}
         alt="Services Page Background"
-        className="absolute inset-0 h-full w-full object-cover"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
       />
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
@@ -44,8 +49,9 @@ export default function HeroServices({
         "
       >
 
+        {/* LCP element — opacity dimulai dari 0.1, bukan 0. */}
         <motion.h1
-          initial={{ opacity: 0, y: -80 }}
+          initial={{ opacity: 0.1, y: -80 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 1,

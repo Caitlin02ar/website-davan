@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { renderHighlightedText } from "@/lib/highlightText";
+import { sanityImage } from "@/lib/image";
+import Image from "next/image";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -17,20 +19,15 @@ interface AboutSloganProps {
 export default function AboutSlogan({ data }: AboutSloganProps) {
   return (
     <section className="overflow-hidden overflow-x-hidden ">
-      <div className="relative w-full">
+      <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px]">
 
         {/* BACKGROUND IMAGE */}
-        <img
-          src={data.backgroundImage}
+        <Image
+          src={sanityImage(data.backgroundImage, 1920)}
           alt=""
-          className="
-            w-full
-            h-[420px]
-            object-cover
-
-            sm:h-[520px]
-            md:h-auto
-          "
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
 
         {/* OVERLAY CONTENT */}
@@ -48,7 +45,7 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
           "
         >
           {/* HEADING */}
-          <motion.h1
+          <motion.h2
             initial={{
               opacity: 0,
               y: -100,
@@ -76,7 +73,7 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
             "
           >
             {renderHighlightedText(data.heading, data.highlightHeading)}
-          </motion.h1>
+          </motion.h2>
 
           {/* DESCRIPTION */}
           <motion.p

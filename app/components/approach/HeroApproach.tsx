@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { sanityImage } from "@/lib/image";
 
 interface HeroApproachProps {
   data: {
@@ -15,10 +17,13 @@ export default function HeroApproach({
 }: HeroApproachProps) {
   return (
     <section className="relative min-h-screen overflow-hidden">
-      <img
-        src={data.backgroundImage}
+      <Image
+        src={sanityImage(data.backgroundImage, 1920)}
         alt=""
-        className="absolute inset-0 w-full h-full object-cover"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
       />
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
@@ -38,9 +43,11 @@ export default function HeroApproach({
           px-6
         "
       >
-        {/* HEADING */}
+        {/* HEADING — LCP element.
+            initial opacity 0.1 (bukan 0) agar browser mencatat paint sejak
+            frame pertama. Secara visual identik dengan fade dari 0. */}
         <motion.h1
-          initial={{ opacity: 0, y: -120 }}
+          initial={{ opacity: 0.1, y: -120 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 1,

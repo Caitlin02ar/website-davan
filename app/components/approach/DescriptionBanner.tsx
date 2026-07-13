@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { sanityImage } from "@/lib/image";
 
 interface AprroachBannerProps {
   data: {
@@ -16,20 +18,14 @@ export default function DescriptionBanner({
 }: AprroachBannerProps) {
   return (
     <section className="overflow-hidden">
-      <div className="relative w-full">
+      <div className="relative w-full h-[500px] sm:h-[620px] lg:h-[720px]">
         {/* BACKGROUND IMAGE */}
-        <img
-          src={data.backgroundImage}
+        <Image
+          src={sanityImage(data.backgroundImage, 1920)}
           alt=""
-          className="
-            w-full
-
-            h-[500px]
-            sm:h-[620px]
-            lg:h-auto
-
-            object-cover
-          "
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
 
         {/* OVERLAY */}

@@ -11,6 +11,7 @@ import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
 
 import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/lib/image";
 
 const sequel = localFont({
   src: "./fonts/Sequel100Black-75.ttf",
@@ -28,21 +29,34 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "DAVAN Digital | Digital Transformation & Integration Services",
-    template: "%s | DAVAN Digital",
-  },
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://website-davan.vercel.app";
 
+const SITE_SETTINGS_QUERY = `
+  *[_type == "siteSettings"][0]{
+    siteTitle,
+    titleTemplate,
+    siteName,
+    description,
+    keywords,
+    allowIndexing,
+    ogImage,
+    "ogImageAlt": ogImage.alt,
+    socialLinks[]{ platform, url },
+    organizationName,
+    organizationLogo,
+    organizationDescription,
+    areaServed
+  }
+`;
+
+// ── FALLBACKS ──
+const FALLBACK = {
+  siteTitle: "DAVAN Digital | Digital Transformation & Integration Services",
+  titleTemplate: "%s | DAVAN Digital",
+  siteName: "DAVAN Digital",
   description:
     "DAVAN Digital helps organisations close digital gaps through system integration, automation, and digital transformation services.",
-
-  metadataBase: new URL("https://website-davan.vercel.app"),
-
-  alternates: {
-    canonical: "/",
-  },
-
   keywords: [
     "digital transformation",
     "system integration",
@@ -51,74 +65,115 @@ export const metadata: Metadata = {
     "DAVAN Digital",
     "Perth",
   ],
-
-  robots: {
-    index: true,
-    follow: true,
-  },
-
-  openGraph: {
-    title: "DAVAN Digital | Digital Transformation & Integration Services",
-    description:
-      "DAVAN Digital helps organisations close digital gaps through system integration, automation, and digital transformation services.",
-    url: "https://website-davan.vercel.app",
-    siteName: "DAVAN Digital",
-    images: [
-      {
-        url: "/photos/davan-og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "DAVAN Digital",
-      },
-    ],
-    locale: "en_AU",
-    type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "DAVAN Digital | Digital Transformation & Integration Services",
-    description:
-      "DAVAN Digital helps organisations close digital gaps through system integration, automation, and digital transformation services.",
-    images: ["/photos/davan-og-image.png"],
-  },
+  ogImage: "/photos/davan-og-image.png",
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await client.fetch(SITE_SETTINGS_QUERY);
+
+  const title = settings?.siteTitle ?? FALLBACK.siteTitle;
+  const description = settings?.description ?? FALLBACK.description;
+  const siteName = settings?.siteName ?? FALLBACK.siteName;
+  const ogImageAlt = settings?.ogImageAlt ?? siteName;
+
+  const ogImageUrl = settings?.ogImage
+    ? urlFor(settings.ogImage).width(1200).height(630).fit("crop").url()
+    : FALLBACK.ogImage;
+
+  const shouldIndex = settings?.allowIndexing ?? true;
+
+  return {
+    title: {
+      default: title,
+      template: settings?.titleTemplate ?? FALLBACK.titleTemplate,
+    },
+
+    description,
+
+    metadataBase: new URL(SITE_URL),
+
+    alternates: {
+      canonical: "/",
+    },
+
+    keywords: settings?.keywords?.length ? settings.keywords : FALLBACK.keywords,
+
+    robots: {
+      index: shouldIndex,
+      follow: shouldIndex,
+    },
+
+    openGraph: {
+      title,
+      description,
+      url: SITE_URL,
+      siteName,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: ogImageAlt,
+        },
+      ],
+      locale: "en_AU",
+      type: "website",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImageUrl],
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [settings, footerData] = await Promise.all([
+    client.fetch(SITE_SETTINGS_QUERY),
+    client.fetch(`
+      *[
+        _type == "footerContent"
+        ][0]{
+          copyright,
+          "footerLogo": footerLogo.asset->url,
+          information[]{
+            "icon": icon.asset->url,
+            text
+          }
+        }
+    `),
+  ]);
+
+  const orgLogoUrl = settings?.organizationLogo
+    ? urlFor(settings.organizationLogo).width(512).url()
+    : `${SITE_URL}/images/logo.png`;
+
   const orgSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "DAVAN Digital",
-    url: "https://www.davan.digital",
-    logo: "https://www.davan.digital/images/logo.png",
+    name: settings?.organizationName ?? FALLBACK.siteName,
+    url: SITE_URL,
+    logo: orgLogoUrl,
     description:
-      "DAVAN Digital helps organisations close digital gaps through system integration, automation, and digital transformation services.",
-    areaServed: "AU",
-    sameAs: [
-      "https://www.instagram.com/davandigital/",
-    ],
+      settings?.organizationDescription ??
+      settings?.description ??
+      FALLBACK.description,
+    areaServed: settings?.areaServed ?? "AU",
+    sameAs:
+      settings?.socialLinks?.map((s: { url: string }) => s.url) ?? [
+        "https://www.instagram.com/davandigital/",
+      ],
   };
-
-  const footerData = await client.fetch(`
-    *[
-      _type == "footerContent"
-      ][0]{
-        copyright,
-        "footerLogo": footerLogo.asset->url,
-        information[]{
-          "icon": icon.asset->url,
-          text
-        }
-      }
-  `);
 
   return (
     <html
-      lang="en-AU"
+      lang="en-AU" data-scroll-behavior="smooth"
       className={`${sequel.variable} ${poppins.variable} ${sequelSubheading.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <script

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import FormCard from "./FormCard";
 
 interface FormProps {
@@ -28,13 +29,14 @@ export default function Form({
       "
     >
 
-      {/* BACKGROUND */}
       <div className="absolute inset-0 z-0">
 
-        <img
+        <Image
           src="/photos/hero-bg.webp"
           alt=""
-          className="h-full w-full object-cover"
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
 
         <div
