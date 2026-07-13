@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-
+import HashLink from "../common/HashLink";
 
 interface FooterProps {
   data: {
@@ -23,24 +23,24 @@ export default function Footer({
       title: "About Us",
       href: "/about-us",
       links: [
-        { name: "Four Anchors", href: "/about-us/#four-anchors" },
+        { name: "Four Anchors", href: "/about-us#four-anchors" },
       ],
     },
     {
       title: "Services",
       href: "/services",
       links: [
-        { name: "Four Pillars", href: "/services/#four-pillars" },
-        { name: "How We Work", href: "/services/#how-we-work" },
-        { name: "FAQ", href: "/services/#faq" },
+        { name: "Four Pillars", href: "/services#four-pillars" },
+        { name: "How We Work", href: "/services#how-we-work" },
+        { name: "FAQ", href: "/services#faq" },
       ],
     },
     {
       title: "Our Approach",
       href: "/our-approach",
       links: [
-        { name: "The Gap", href: "/our-approach/#the-gap" },
-        { name: "Our Clients", href: "/our-approach/#our-clients" },
+        { name: "The Gap", href: "/our-approach#the-gap" },
+        { name: "Our Clients", href: "/our-approach#our-clients" },
       ],
     },
   ];
@@ -153,7 +153,7 @@ export default function Footer({
 
                   <li key={link.name}>
 
-                    <a
+                    <HashLink
                       href={link.href}
                       className="
                         font-body
@@ -164,7 +164,7 @@ export default function Footer({
                       "
                     >
                       {link.name}
-                    </a>
+                    </HashLink>
                   </li>
                 ))}
               </ul>

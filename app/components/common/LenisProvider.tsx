@@ -4,6 +4,12 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 
+declare global {
+  interface Window {
+    __lenis?: Lenis;
+  }
+}
+
 export default function LenisProvider({
   children,
 }: {
@@ -21,6 +27,7 @@ export default function LenisProvider({
     });
 
     lenisRef.current = lenis;
+    window.__lenis = lenis;
 
     let rafId: number;
 
@@ -35,11 +42,32 @@ export default function LenisProvider({
       cancelAnimationFrame(rafId);
       lenis.destroy();
       lenisRef.current = null;
+      window.__lenis = undefined;
     };
   }, []);
 
   useEffect(() => {
-    lenisRef.current?.scrollTo(0, { immediate: true, force: true });
+    const lenis = lenisRef.current;
+    if (!lenis) return;
+
+    const hash = window.location.hash;
+
+    if (hash) {
+      const target = document.querySelector(hash);
+
+      if (target) {
+        requestAnimationFrame(() => {
+          lenis.scrollTo(target as HTMLElement, {
+            offset: -100,
+            immediate: true,
+            force: true,
+          });
+        });
+        return;
+      }
+    }
+
+    lenis.scrollTo(0, { immediate: true, force: true });
   }, [pathname]);
 
   return <>{children}</>;
