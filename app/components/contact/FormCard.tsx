@@ -171,17 +171,12 @@ export default function FormCard({
             >
 
               <Image
-                src={sanityImage(data.imageContent, 760, 1200)}
+                src={sanityImage(data.imageContent, 900)}
                 alt=""
                 fill
+                priority
                 sizes="(min-width: 768px) 380px, calc(100vw - 64px)"
-                className="
-                  absolute
-                  inset-0
-                 
-                  object-cover
-                 
-                "
+                className="absolute inset-0 object-cover"
               />
 
               <div

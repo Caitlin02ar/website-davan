@@ -21,9 +21,9 @@ export default function HeroServices({
       {/* BACKGROUND */}
       <Image
         src={sanityImage(data.backgroundImage, 1920)}
-        alt="Services Page Background"
+        alt=""
         fill
-        priority
+        fetchPriority="high"
         sizes="100vw"
         className="object-cover"
       />

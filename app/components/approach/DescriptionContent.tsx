@@ -53,7 +53,7 @@ export default function DescriptionContent({
     }));
 
   return (
-    <section className="overflow-hidden bg-background">
+    <section id="the-gap" className="overflow-hidden bg-background">
       {DescriptionContentItems.map(
         (item, index) => (
           <DescriptionBlock
