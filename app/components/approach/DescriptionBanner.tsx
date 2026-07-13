@@ -18,7 +18,7 @@ export default function DescriptionBanner({
 }: AprroachBannerProps) {
   return (
     <section className="overflow-hidden">
-      <div className="relative w-full h-[500px] sm:h-[620px] lg:h-[720px]">
+      <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[500px]">
         {/* BACKGROUND IMAGE */}
         <Image
           src={sanityImage(data.backgroundImage, 1920)}
@@ -28,10 +28,8 @@ export default function DescriptionBanner({
           className="object-cover"
         />
 
-        {/* OVERLAY */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/45 to-black/90" />
 
-        {/* CONTENT */}
         <div
           className="
             absolute
@@ -49,7 +47,6 @@ export default function DescriptionBanner({
             lg:px-6
           "
         >
-          {/* HEADING */}
           <motion.div
             initial={{
               opacity: 0,
@@ -73,7 +70,7 @@ export default function DescriptionBanner({
               items-center
             "
           >
-            <h1
+            <h2
               className="
                 font-heading
 
@@ -93,9 +90,9 @@ export default function DescriptionBanner({
                 data.highlightHeading,
                 ""
               )}
-            </h1>
+            </h2>
 
-            <h1
+            <span
               className="
                 font-heading
 
@@ -112,7 +109,7 @@ export default function DescriptionBanner({
               "
             >
               {data.highlightHeading}
-            </h1>
+            </span>
           </motion.div>
 
           {/* DESCRIPTION */}
@@ -137,7 +134,7 @@ export default function DescriptionBanner({
             className="
               font-body
 
-              text-white/85
+              text-white
 
               max-w-[95%]
               sm:max-w-xl

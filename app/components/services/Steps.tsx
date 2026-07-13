@@ -68,7 +68,7 @@ export default function Steps({
           }}
           className="flex flex-col items-center"
         >
-          <h1
+          <h2
             className="
               font-heading
               text-xl
@@ -81,9 +81,9 @@ export default function Steps({
             "
           >
             {data.heading}
-          </h1>
+          </h2>
 
-          <h1
+          <span
             className="
               font-heading
               text-xl
@@ -96,7 +96,7 @@ export default function Steps({
             "
           >
             {data.subheading}
-          </h1>
+          </span>
         </motion.div>
       </div>
 

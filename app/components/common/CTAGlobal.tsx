@@ -41,12 +41,6 @@ export default function CTAGlobal({
   titleColor = "primary",
 }: CTAGlobalProps) {
 
-  // Decide how to render the button:
-  // - Anchor on the same page (starts with "#") -> plain <a> for reliable smooth scroll
-  // - External URL (http/https) -> <a> with target/rel
-  // - Internal route -> Next.js <Link>
-  // - No href but onClick provided -> button with onClick
-  // - No href and no onClick -> fallback to the contact form anchor
   let ctaButton;
 
   if (href) {
@@ -79,7 +73,6 @@ export default function CTAGlobal({
       </Button>
     );
   } else {
-    // FALLBACK: no href and no onClick -> scroll to the contact form.
     ctaButton = (
       <a href="#form">
         <Button theme="dark">{buttonText}</Button>
@@ -87,17 +80,46 @@ export default function CTAGlobal({
     );
   }
 
+  const textBlock = (
+    <>
+      {topText && (
+        <h3 className="font-subheading text-white text-xl sm:text-2xl">
+          {topText}
+        </h3>
+      )}
+
+      <h3
+        className={`
+          font-heading
+          text-xl
+          sm:text-xl
+          lg:text-3xl
+          leading-tight
+          max-w-xl
+          mx-auto
+          ${titleColor === "primary" ? "text-primary" : "text-white"}
+        `}
+      >
+        {title}
+      </h3>
+
+      {bottomText && (
+        <h3 className="font-subheading text-white text-lg sm:text-2xl mx-auto">
+          {bottomText}
+        </h3>
+      )}
+    </>
+  );
+
   return (
     <>
+      {/* DESKTOP */}
       <section
         className={`
           hidden
           sm:block
-
           ${height}
-
           min-h-[680px]
-
           sm:min-h-auto
         `}
       >
@@ -110,137 +132,81 @@ export default function CTAGlobal({
                 alt=""
                 fill
                 className="object-cover"
+                sizes="100vw"
               />
-
               <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-black/90 pointer-events-none" />
             </>
           )}
 
-          <Image
-            src={logoImage}
-            alt=""
-            width={1200}
-            height={1200}
+          {/* LOGO WRAPPER = anchor for everything */}
+          <div
             className="
               absolute
               left-1/2
               top-1/2
               z-10
 
-              w-[170%]
-
-              sm:w-[95%]
-
+              w-[95%]
               lg:w-[80%]
-
               max-w-5xl
 
               -translate-x-1/2
               -translate-y-1/2
-
-              pointer-events-none
-            "
-          />
-
-          <div
-            className="
-              absolute
-              left-1/2
-              top-1/2
-              z-20
-
-              flex
-              flex-col
-
-              w-[92%]
-
-              sm:w-[90%]
-              sm:max-w-5xl
-
-              max-w-5xl
-
-              -translate-x-1/2
-              -translate-y-1/2
-
-              gap-8
-
-              sm:gap-18
-
-              text-center
-
-              mt-4
-              sm:mt-12
-
-              px-4
-              sm:px-0
             "
           >
+            <Image
+              src={logoImage}
+              alt=""
+              width={1200}
+              height={1200}
+              sizes="90vw"
+              className="w-full h-auto pointer-events-none"
+            />
 
-            <div className="flex flex-col gap-2 sm:gap-2">
+            {/* TEXT: centered in the inner "hole" of the pill (upper area) */}
+            <div
+              className="
+                absolute
+                inset-x-0
+                top-0
+                h-[95%]
 
-              {topText && (
-                <h3
-                  className="
-                    font-subheading
-                    text-white
+                z-20
 
-                    text-xl
-                    sm:text-2xl
-                  "
-                >
-                  {topText}
-                </h3>
-              )}
+                flex
+                flex-col
+                items-center
+                justify-center
 
-              <h3
-                className={`
-                  font-heading
-                  text-xl
-                  sm:text-xl
-                  lg:text-3xl
-                  leading-[0.9]
-                  sm:leading-normal
-                  max-w-[320px]
-                  sm:max-w-xl
-                  mx-auto
-                  ${
-                    titleColor === "primary"
-                      ? "text-primary"
-                      : "text-white"
-                  }
-                `}
-              >
-                {title}
-              </h3>
+                gap-2
 
-              {bottomText && (
-                <h3
-                  className="
-                    font-subheading
-                    text-white
-                    text-lg
-                    sm:text-2xl
-                    max-w-[280px]
-                    sm:max-w-none
-                    mx-auto
-                  "
-                >
-                  {bottomText}
-                </h3>
-              )}
-
+                px-[14%]
+                text-center
+              "
+            >
+              {textBlock}
             </div>
 
-            {/* BUTTON */}
-            <div className="flex flex-col items-center pt-2 sm:pt-0 -mt-4">
+            <div
+              className="
+                absolute
+                inset-x-0
+                bottom-[6%]
+
+                z-20
+
+                flex
+                justify-center
+              "
+            >
               {ctaButton}
             </div>
-
           </div>
 
         </div>
       </section>
 
+      {/* MOBILE */}
       <section className="sm:hidden relative overflow-hidden">
 
         {showBackground && (
@@ -250,6 +216,7 @@ export default function CTAGlobal({
               alt=""
               fill
               className="object-cover"
+              sizes="100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-black/90 pointer-events-none" />
           </>
@@ -264,13 +231,12 @@ export default function CTAGlobal({
               width={1200}
               height={1200}
               className="w-full h-auto pointer-events-none"
+              sizes="100vw"
             />
 
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-10 text-center">
+            <div className="absolute inset-x-0 top-0 h-[62%] flex flex-col items-center justify-center gap-1 px-10 text-center">
               {topText && (
-                <h3 className="font-heading text-white text-xs">
-                  {topText}
-                </h3>
+                <h3 className="font-heading text-white text-xs">{topText}</h3>
               )}
 
               <h3
@@ -292,11 +258,10 @@ export default function CTAGlobal({
                 </h3>
               )}
             </div>
-          </div>
 
-          
-          <div className="flex flex-col items-center scale-[0.5] -mt-11">
-            {ctaButton}
+            <div className="absolute inset-x-0 bottom-[11%] z-20 flex justify-center scale-[0.5]">
+              {ctaButton}
+            </div>
           </div>
 
         </div>

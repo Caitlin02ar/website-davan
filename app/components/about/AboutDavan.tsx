@@ -40,7 +40,6 @@ export default function AboutDavan({
             gap-10
           "
         >
-          {/* HEADING */}
           <motion.div
             initial={{
               opacity: 0,
@@ -59,7 +58,7 @@ export default function AboutDavan({
               amount: 0.4,
             }}
           >
-            <h1
+            <h2
               className="
                 font-heading
                 text-4xl
@@ -70,7 +69,7 @@ export default function AboutDavan({
               "
             >
               {renderHighlightedText(data.heading, data.highlightText)}
-            </h1>
+            </h2>
           </motion.div>
 
           {/* DESCRIPTION */}

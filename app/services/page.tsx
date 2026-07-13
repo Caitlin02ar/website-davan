@@ -1,11 +1,10 @@
 import HeroServices from "../components/services/HeroServices";
-import ServicesSection from "../components/services/ServicesSection";
 import Steps from "../components/services/Steps";
 import FAQ from "../components/services/FAQ";
 import ServicesSlogan from "../components/services/ServicesSlogan";
 import ServicesCardItems from "../components/services/ServicesCardItems";
-import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Services - DAVAN Digital",
@@ -26,11 +25,14 @@ const SERVICES_QUERY = `{
 
   "cta": *[
     _type == "ctaGlobal"
-    && page == "services"
+    && "services" in pages
   ][0]{
     heading,
-    buttonText,
-    titleColor
+    titleColor,
+    "button": buttons[page == "services"][0]{
+      buttonText,
+      href
+    }
   },
 
   "banner": *[
@@ -76,28 +78,28 @@ const SERVICES_QUERY = `{
 
   "servicesCard": *[
     _type == "fourpillar"
-    && page == "services"
+    && "services" in pages
   ][0]{
     card[]{
       tag,
       title,
       description,
       badgesItems,
+      "picture": picture.asset->url
     }
   }
 
 }`;
 
 export default async function Services() {
-
   const data = await client.fetch(SERVICES_QUERY);
 
-  const heroData = data.hero;
-  const ctaData = data.cta;
-  const bannerData = data.banner;
-  const faqData = data.faq;
-  const stepsData = data.steps;
-  const servicesCardData = data.servicesCard;
+  const heroData = data?.hero;
+  const ctaData = data?.cta;
+  const bannerData = data?.banner;
+  const faqData = data?.faq;
+  const stepsData = data?.steps;
+  const servicesCardData = data?.servicesCard;
 
   return (
     <main>
@@ -109,10 +111,7 @@ export default async function Services() {
 
       <Steps data={stepsData} />
 
-      <FAQ
-        faqData={faqData}
-        ctaData={ctaData}
-      />
+      <FAQ faqData={faqData} ctaData={ctaData} />
     </main>
   );
 }

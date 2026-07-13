@@ -101,6 +101,7 @@ export default function Footer({
                     object-contain
                     shrink-0
                   "
+                  sizes="100vw"
                 />
                 {item.text}
               </span>

@@ -12,9 +12,12 @@ interface FAQProps {
     heading: string;
     subheadingTop?: string;
     subheadingBottom?: string;
-    buttonText: string;
     titleColor: "primary" | "white";
-  };
+    button?: {
+      buttonText: string;
+      href: string;
+    };
+  } | null;
 }
 
 interface FAQDataProps {
@@ -37,6 +40,19 @@ export default function FAQ({
   faqData,
   ctaData,
 }: FAQProps) {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqData.faqContent.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <section
       id="faq"
@@ -49,7 +65,11 @@ export default function FAQ({
         bg-black
       "
     >
-    
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <div
         className="
           pointer-events-none
@@ -120,7 +140,7 @@ export default function FAQ({
 
             <Tag text={faqData.tag} />
 
-            <h1
+            <h2
               className="
                 text-3xl
                 sm:text-4xl
@@ -137,7 +157,7 @@ export default function FAQ({
                 faqData.title,
                 faqData.highlightText
               )}
-            </h1>
+            </h2>
 
           </div>
 
@@ -166,9 +186,9 @@ export default function FAQ({
             "
           >
 
-            <h1 className="font-bold text-xl mb-2 text-white">
+            <h3 className="font-bold text-xl mb-2 text-white">
               {faqData.headingCard}
-            </h1>
+            </h3>
 
             <p className="max-w-sm text-xs leading-relaxed text-white/70">
               {faqData.description}
@@ -234,7 +254,7 @@ export default function FAQ({
             "
           >
 
-            <h1
+            <h3
               className="
                 font-bold
                 text-lg
@@ -246,7 +266,7 @@ export default function FAQ({
               "
             >
               {faqData.headingCard}
-            </h1>
+            </h3>
 
             <p
               className="
@@ -293,15 +313,17 @@ export default function FAQ({
       </div>
 
       {/* CTA */}
-      <div className="relative z-10">
-        <CTAGlobal
-          title={ctaData.heading}
-          buttonText={ctaData.buttonText}
-          titleColor={ctaData.titleColor}
-          showBackground={false}
-          href="/contact-us"
-        />
-      </div>
+      {ctaData && (
+        <div className="relative z-10">
+          <CTAGlobal
+            title={ctaData.heading}
+            buttonText={ctaData.button?.buttonText ?? ""}
+            titleColor={ctaData.titleColor}
+            showBackground={false}
+            href={ctaData.button?.href ?? "/contact-us"}
+          />
+        </div>
+      )}
 
     </section>
   );

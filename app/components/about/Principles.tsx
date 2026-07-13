@@ -92,7 +92,7 @@ export default function Principles({
 
         <Tag text={data.tag} />
 
-        <h1
+        <h2
           className="
             mt-4
             max-w-sm
@@ -105,7 +105,7 @@ export default function Principles({
             data.heading,
             data.hightlightText
           )}
-        </h1>
+        </h2>
 
       </motion.div>
 

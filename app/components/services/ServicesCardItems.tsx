@@ -84,7 +84,7 @@ export default function ServicesCardItems({
           <motion.div
             key={i}
             initial={{
-              opacity: 0,
+              opacity: i === 0 ? 1 : 0,
               x: 120,
             }}
             whileInView={{
@@ -117,6 +117,7 @@ export default function ServicesCardItems({
             <ServicesCard
               {...item}
               width="w-full lg:w-[88%]"
+              priority={i === 0}
             />
 
           </motion.div>

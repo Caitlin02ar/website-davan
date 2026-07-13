@@ -177,6 +177,7 @@ export default function FormCard({
                 priority
                 sizes="(min-width: 768px) 380px, calc(100vw - 64px)"
                 className="absolute inset-0 object-cover"
+                
               />
 
               <div
@@ -365,9 +366,8 @@ export default function FormCard({
                                       required={field.required}
                                       type="radio"
                                       name="gap"
-                                      value={
-                                        option.reason
-                                      }
+                                      value={option.reason}
+                                      checked={formData["reason"] === option.reason}
                                       onChange={(e) =>
                                         handleChange(
                                           "reason",

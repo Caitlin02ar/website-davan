@@ -105,7 +105,7 @@ function MethodRow({
           delay: 0.35,
         }}
       >
-        <h1
+        <div
           className="
             font-subheading
             text-[4rem]
@@ -118,7 +118,7 @@ function MethodRow({
           "
         >
           {item.number}
-        </h1>
+        </div>
       </motion.div>
 
       {/* CONTENT */}

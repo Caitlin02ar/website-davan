@@ -112,7 +112,7 @@ export default function FourPillars({
             justify-center
           "
         >
-          <Tag text={data.tag} />
+          <Tag text={data.heading?.tag} />
         </motion.div>
 
         {/* HEADING */}
@@ -161,8 +161,8 @@ export default function FourPillars({
             "
           >
             {renderHighlightedText(
-              data.title,
-              data.highlight
+              data.heading?.title,
+              data.heading?.highlight
             )}
           </h3>
         </motion.div>

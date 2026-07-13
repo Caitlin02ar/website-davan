@@ -7,11 +7,16 @@ import CTAGlobal from "../components/common/CTAGlobal";
 import { Metadata } from "next";
 
 import { client } from "@/sanity/lib/client";
+import { pageOpenGraph } from "@/lib/seo";
+
+const TITLE = "About Us - DAVAN Digital";
+const DESCRIPTION =
+  "Learn more about DAVAN Digital, our mission, values, and how we work.";
 
 export const metadata: Metadata = {
-  title: "About Us - DAVAN Digital",
-  description:
-    "Learn more about DAVAN Digital, our mission, values, and how we work.",
+  title: TITLE,
+  description: DESCRIPTION,
+  ...pageOpenGraph({ title: TITLE, description: DESCRIPTION, path: "/about-us" }),
 };
 
 const ABOUT_QUERY = `{

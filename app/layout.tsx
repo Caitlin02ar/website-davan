@@ -12,6 +12,7 @@ import Footer from "./components/common/Footer";
 
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/lib/image";
+import { SITE_URL } from "@/lib/seo";
 
 const sequel = localFont({
   src: "./fonts/Sequel100Black-75.ttf",
@@ -28,9 +29,6 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-poppins",
 });
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://website-davan.vercel.app";
 
 const SITE_SETTINGS_QUERY = `
   *[_id == "siteSettings"][0]{

@@ -4,14 +4,14 @@ import FourPillars from "./components/home/FourPillars";
 import Client from "./components/home/Client";
 import Why from "./components/home/Why";
 import CTAGlobal from "./components/common/CTAGlobal";
+import { client } from "@/sanity/lib/client";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "DAVAN Digital | Digital Transformation Services",
-  description: "Welcome to DAVAN Digital, your trusted partner for innovative digital solutions. Explore our services, approach, and success stories.",
+  description:
+    "Welcome to DAVAN Digital, your trusted partner for innovative digital solutions. Explore our services, approach, and success stories.",
 };
-
-import { client } from "@/sanity/lib/client";
 
 const HOME_QUERY = `{
   "hero": *[_type == "heroGlobal" && page == "home"][0]{
@@ -33,10 +33,12 @@ const HOME_QUERY = `{
     }
   },
 
-  "fourPillar": *[_type == "fourpillar" && page == "home"][0]{
-    tag,
-    title,
-    highlight,
+  "fourPillar": *[_type == "fourpillar" && "home" in pages][0]{
+    "heading": headings[page == "home"][0]{
+      tag,
+      title,
+      highlight
+    },
     card[]{
       tag,
       title,
@@ -59,31 +61,33 @@ const HOME_QUERY = `{
     }
   },
 
-  "cta": *[_type == "ctaGlobal" && page == "home"][0]{
+  "cta": *[_type == "ctaGlobal" && "home" in pages][0]{
     heading,
     subheadingTop,
     subheadingBottom,
-    buttonText,
     titleColor,
-    "backgroundImage": backgroundImage.asset->url
+    "backgroundImage": backgroundImage.asset->url,
+    "button": buttons[page == "home"][0]{
+      buttonText,
+      href
+    }
   }
 }`;
 
 export default async function Home() {
   const data = await client.fetch(HOME_QUERY);
 
-  const heroData = data.hero;
-  const whyData = data.why;
-  const fourPillarData = data.fourPillar;
-  const clientData = data.client;
-  const ctaData = data.cta;
+  const heroData = data?.hero;
+  const whyData = data?.why;
+  const fourPillarData = data?.fourPillar;
+  const clientData = data?.client;
+  const ctaData = data?.cta;
 
   return (
     <main id="home">
-
       <Hero data={heroData} />
 
-      <RunningText  />
+      <RunningText />
 
       <Why data={whyData} />
 
@@ -92,15 +96,14 @@ export default async function Home() {
       <Client data={clientData} />
 
       <CTAGlobal
-        topText={ctaData.subheadingTop}
-        title={ctaData.heading}
-        bottomText={ctaData.subheadingBottom}
-        buttonText={ctaData.buttonText}
-        titleColor={ctaData.titleColor}
-        backgroundImage={ctaData.backgroundImage}
-        href="/contact-us"
+        topText={ctaData?.subheadingTop}
+        title={ctaData?.heading}
+        bottomText={ctaData?.subheadingBottom}
+        buttonText={ctaData?.button?.buttonText}
+        titleColor={ctaData?.titleColor}
+        backgroundImage={ctaData?.backgroundImage}
+        href={ctaData?.button?.href}
       />
-
     </main>
   );
 }

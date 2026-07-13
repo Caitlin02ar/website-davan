@@ -50,7 +50,7 @@ export default function ServicesSlogan({
         "
       >
         {/* HEADING */}
-        <motion.h1
+        <motion.h2
           initial={{
             opacity: 0,
             y: -120,
@@ -84,7 +84,7 @@ export default function ServicesSlogan({
             data.heading,
             data.highlightHeading
           )}
-        </motion.h1>
+        </motion.h2>
 
         {/* DESCRIPTION */}
         <motion.p

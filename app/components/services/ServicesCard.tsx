@@ -10,6 +10,7 @@ interface ServicesCardProps {
   backgroundImage: string;
 
   width?: string;
+  priority?: boolean;
 }
 
 export default function ServicesCard({
@@ -20,6 +21,7 @@ export default function ServicesCard({
   backgroundImage,
 
   width = "w-full lg:w-[75%]",
+  priority = false,
 }: ServicesCardProps) {
   return (
     <div
@@ -51,14 +53,13 @@ export default function ServicesCard({
         src={backgroundImage}
         alt=""
         fill
+        priority={priority}
         sizes="(max-width: 1024px) 100vw, 45vw"
         className="object-cover object-center"
       />
 
-      {/* CONTENT */}
       <div className="relative z-10 flex flex-col justify-center h-full">
 
-        {/* SUBTITLE */}
         <span
           className="
             text-xs

@@ -21,7 +21,7 @@ export default function Clients({
                     justify-center
                     p-16">
 
-                <h1
+                <h2
                     className="
                         font-heading
                         text-white
@@ -30,7 +30,7 @@ export default function Clients({
                     "
                 >
                     {data.title}
-                </h1>
+                </h2>
 
                 {data.description && (
 

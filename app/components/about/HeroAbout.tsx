@@ -86,12 +86,10 @@ export default function HeroAbout({
           {/* HEADING */}
           <motion.h1
             initial={{
-              opacity: 0,
               y: -140,
               filter: "blur(10px)",
             }}
             animate={{
-              opacity: 1,
               y: 0,
               filter: "blur(0px)",
             }}
@@ -114,11 +112,9 @@ export default function HeroAbout({
           {/* DESCRIPTION */}
           <motion.p
             initial={{
-              opacity: 0,
               y: -50,
             }}
             animate={{
-              opacity: 1,
               y: 0,
             }}
             transition={{
@@ -144,7 +140,7 @@ export default function HeroAbout({
 
         {/* SECOND SECTION */}
         <div className="min-h-screen flex items-center justify-center px-6">
-          <motion.h1
+          <motion.h2
             initial={{
               opacity: 0,
               y: -100,
@@ -177,7 +173,7 @@ export default function HeroAbout({
               data.aboutSlogan,
               data.highlightSlogan
             )}
-          </motion.h1>
+          </motion.h2>
         </div>
       </div>
     </section>

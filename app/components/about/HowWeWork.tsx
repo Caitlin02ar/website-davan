@@ -67,7 +67,7 @@ export default function HowWeWork({
         </motion.div>
 
         {/* HEADING */}
-        <motion.h1
+        <motion.h2
           className="
             font-heading
             leading-tight
@@ -102,7 +102,7 @@ export default function HowWeWork({
             data.heading,
             data.hightlightText
           )}
-        </motion.h1>
+        </motion.h2>
 
       </div>
 

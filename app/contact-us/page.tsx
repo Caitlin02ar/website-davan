@@ -1,7 +1,7 @@
 import Form from "../components/contact/Form";
 import Pillar from "../components/contact/Pillar";
-import { client } from "@/sanity/lib/client";
 import CTAGlobal from "../components/common/CTAGlobal";
+import { client } from "@/sanity/lib/client";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,16 +14,17 @@ const CONTACT_QUERY = `{
 
   "fourPillar": *[
     _type == "fourpillar"
-    && page == "contact"
+    && "contact" in pages
   ][0]{
-    tag,
-    title,
-    highlight,
-
+    "heading": headings[page == "contact"][0]{
+      tag,
+      title,
+      highlight
+    },
     card[]{
       tag,
       title,
-      description,
+      description
     }
   },
 
@@ -68,47 +69,43 @@ const CONTACT_QUERY = `{
 
   "cta": *[
     _type == "ctaGlobal"
-    && page == "contact"
+    && "contact" in pages
   ][0]{
     heading,
     subheadingTop,
     subheadingBottom,
-    buttonText,
     titleColor,
     "backgroundImage": backgroundImage.asset->url,
-    linkContact
+    "button": buttons[page == "contact"][0]{
+      buttonText,
+      href
+    }
   }
 
 }`;
 
-
-
 export default async function ContactUs() {
-
   const data = await client.fetch(CONTACT_QUERY);
 
-  const fourPillarData = data.fourPillar;
-  const contactData = data.contact;
-  const modalData = data.modal;
-  const ctaData = data.cta;
+  const fourPillarData = data?.fourPillar;
+  const contactData = data?.contact;
+  const modalData = data?.modal;
+  const ctaData = data?.cta;
 
   return (
     <main>
-      <Form
-        data={contactData}
-        modalData={modalData}
-      />
+      <Form data={contactData} modalData={modalData} />
 
       <Pillar data={fourPillarData} />
 
       <CTAGlobal
-        topText={ctaData.subheadingTop}
-        title={ctaData.heading}
-        bottomText={ctaData.subheadingBottom}
-        buttonText={ctaData.buttonText}
-        titleColor={ctaData.titleColor}
-        backgroundImage={ctaData.backgroundImage}
-        href={ctaData.linkContact}
+        topText={ctaData?.subheadingTop}
+        title={ctaData?.heading}
+        bottomText={ctaData?.subheadingBottom}
+        buttonText={ctaData?.button?.buttonText}
+        titleColor={ctaData?.titleColor}
+        backgroundImage={ctaData?.backgroundImage}
+        href={ctaData?.button?.href}
       />
     </main>
   );

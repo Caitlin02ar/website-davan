@@ -62,7 +62,7 @@ export default function FourMethod({
       >
         <Tag text={data.tag} />
 
-        <h1
+        <h2
           className="
             mt-4
             max-w-full
@@ -81,7 +81,7 @@ export default function FourMethod({
             data.title,
             data.highlight
           )}
-        </h1>
+        </h2>
       </motion.div>
 
       {/* METHOD ITEMS */}

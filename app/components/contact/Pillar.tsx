@@ -8,9 +8,11 @@ import { renderHighlightedText } from "@/lib/highlightText";
 
 interface PillarProps {
   data: {
-    tag: string;
-    title: string;
-    highlight: string;
+    heading: {
+      tag: string;
+      title: string;
+      highlight: string;
+    };
 
     card: {
       tag: string;
@@ -96,8 +98,8 @@ export default function Pillar({
           "
         >
           {renderHighlightedText(
-            data.title,
-            data.highlight
+            data.heading.title,
+            data.heading.highlight
           )}
         </h2>
       </div>

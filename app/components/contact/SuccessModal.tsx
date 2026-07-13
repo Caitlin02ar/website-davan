@@ -114,6 +114,7 @@ export default function SuccessModal({
             alt=""
             width={60}
             height={60}
+            sizes="100vw"
             className="
               mb-6
 
@@ -126,6 +127,7 @@ export default function SuccessModal({
 
               sm:h-[60px]
               sm:w-[60px]
+              
             "
           />
 

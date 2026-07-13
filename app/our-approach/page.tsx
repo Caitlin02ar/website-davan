@@ -8,11 +8,16 @@ import DescriptionContent from "../components/approach/DescriptionContent";
 import { Metadata } from "next";
 
 import { client } from "@/sanity/lib/client";
+import { pageOpenGraph } from "@/lib/seo";
+
+const TITLE = "Our Approach - DAVAN Digital";
+const DESCRIPTION =
+  "Discover DAVAN Digital's approach to delivering innovative solutions, our methodology, and how we engage with clients to achieve success.";
 
 export const metadata: Metadata = {
-  title: "Our Approach - DAVAN Digital",
-  description:
-    "Discover DAVAN Digital's approach to delivering innovative solutions, our methodology, and how we engage with clients to achieve success.",
+  title: TITLE,
+  description: DESCRIPTION,
+  ...pageOpenGraph({ title: TITLE, description: DESCRIPTION, path: "/our-approach" }),
 };
 
 const APPROACH_QUERY = `{
@@ -108,7 +113,7 @@ export default async function OurApproach() {
   const methodData = data.method;
 
   return (
-    <section>
+    <main>
 
       <HeroApproach data={heroData} />
 
@@ -128,6 +133,6 @@ export default async function OurApproach() {
         href="/contact-us"
       />
 
-    </section>
+    </main>
   );
 }

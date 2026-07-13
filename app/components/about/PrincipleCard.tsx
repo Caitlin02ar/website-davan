@@ -23,6 +23,7 @@ export default function PrincipleCard({
           alt={title}
           width={20}
           height={20}
+          sizes="100vw"
           className="h-5 w-5 object-contain"
         />
       </div>

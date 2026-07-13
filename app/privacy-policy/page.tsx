@@ -1,10 +1,15 @@
 import {Metadata} from "next";
 import { client } from "@/sanity/lib/client";
 import LegalPageContent from "../components/common/LegalPageContent";
+import { pageOpenGraph } from "@/lib/seo";
+
+const TITLE = "Privacy Policy - DAVAN Digital";
+const DESCRIPTION = "Read DAVAN Digital's privacy policy to understand how we collect, use, and protect your personal information.";
 
 export const metadata: Metadata = {
-    title: "Privacy Policy - DAVAN Digital",
-    description: "Read DAVAN Digital's privacy policy to understand how we collect, use, and protect your personal information.",
+    title: TITLE,
+    description: DESCRIPTION,
+    ...pageOpenGraph({ title: TITLE, description: DESCRIPTION, path: "/privacy-policy" }),
   };
 
 export default async function PrivacyPolicy(){

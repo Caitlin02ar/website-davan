@@ -86,6 +86,7 @@ export default function RunningTextClient({
           alt={data.altText || ""}
           fill
           priority
+          sizes="100vw"
           className="object-cover opacity-55"
         />
 
