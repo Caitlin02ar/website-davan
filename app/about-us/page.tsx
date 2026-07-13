@@ -29,7 +29,7 @@ const ABOUT_QUERY = `{
   },
 
   "banner": *[
-    _id == "bannerSection"
+    _type == "bannerSection"
     && page == "about"
   ][0]{
     heading,
