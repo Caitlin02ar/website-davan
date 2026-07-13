@@ -29,7 +29,7 @@ const ABOUT_QUERY = `{
   },
 
   "banner": *[
-    _type == "bannerSection"
+    _id == "bannerSection"
     && page == "about"
   ][0]{
     heading,
@@ -39,7 +39,7 @@ const ABOUT_QUERY = `{
   },
 
   "howWeWork": *[
-    _type == "HowWeWork"
+    _id == "HowWeWork"
   ][0]{
     tag,
     heading,
@@ -58,7 +58,7 @@ const ABOUT_QUERY = `{
   },
 
   "about": *[
-    _type == "aboutSlogan"
+    _id == "aboutSlogan"
   ][0]{
     heading,
     highlightText,
@@ -66,7 +66,7 @@ const ABOUT_QUERY = `{
   },
 
   "principles": *[
-    _type == "principlesAbout"
+    _id == "principlesAbout"
   ][0]{
     tag,
     heading,

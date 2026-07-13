@@ -44,7 +44,7 @@ const SERVICES_QUERY = `{
   },
 
   "faq": *[
-    _type == "faqSection"
+    _id == "faqSection"
   ][0]{
     tag,
     title,

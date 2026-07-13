@@ -63,7 +63,7 @@ const APPROACH_QUERY = `{
   },
 
   "description": *[
-    _type == "approachDescription"
+    _id == "approachDescription"
   ][0]{
     tag,
 
@@ -81,7 +81,7 @@ const APPROACH_QUERY = `{
   },
 
   "method": *[
-    _type == "approachMethod"
+    _id == "approachMethod"
   ][0]{
     tag,
     title,

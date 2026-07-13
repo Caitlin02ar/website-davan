@@ -33,7 +33,7 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://website-davan.vercel.app";
 
 const SITE_SETTINGS_QUERY = `
-  *[_type == "siteSettings"][0]{
+  *[_id == "siteSettings"][0]{
     siteTitle,
     titleTemplate,
     siteName,
