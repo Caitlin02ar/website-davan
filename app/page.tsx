@@ -7,7 +7,7 @@ import CTAGlobal from "./components/common/CTAGlobal";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home - DAVAN Digital",
+  title: "DAVAN Digital | Digital Transformation Services",
   description: "Welcome to DAVAN Digital, your trusted partner for innovative digital solutions. Explore our services, approach, and success stories.",
 };
 
