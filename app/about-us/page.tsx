@@ -132,9 +132,9 @@ export default async function About() {
       <CTAGlobal
         title={ctaData.heading}
         titleColor={ctaData.titleColor}
-        buttonText={ctaData.buttonText}
+        buttonText={ctaData.button?.buttonText}
         backgroundImage={ctaData.backgroundImage}
-        href="/contact-us"
+        href={ctaData.button?.href ?? "/contact-us"}
       />
     </main>
   );

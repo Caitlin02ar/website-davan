@@ -22,7 +22,6 @@ export default function HeroAbout({
 }: HeroAboutProps) {
   return (
     <section className="relative h-[180vh] overflow-hidden">
-      {/* Background */}
       <motion.div
         initial={{
           scale: 1.08,
@@ -109,17 +108,18 @@ export default function HeroAbout({
             {renderHighlightedText(data.title, data.highlightText)}
           </motion.h1>
 
-          {/* DESCRIPTION */}
           <motion.p
             initial={{
+              opacity: 0,
               y: -50,
             }}
             animate={{
+              opacity: 1,
               y: 0,
             }}
             transition={{
               duration: 0.9,
-              delay: 1.2,
+              delay: 1.3,
               ease,
             }}
             className="

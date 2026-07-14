@@ -37,7 +37,7 @@ export default function AboutDavan({
             lg:flex-row
             lg:justify-between
             lg:items-center
-            gap-10
+            gap-4
           "
         >
           <motion.div
