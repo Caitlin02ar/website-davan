@@ -4,12 +4,21 @@ import FAQ from "../components/services/FAQ";
 import ServicesSlogan from "../components/services/ServicesSlogan";
 import ServicesCardItems from "../components/services/ServicesCardItems";
 import { client } from "@/sanity/lib/client";
+import { pageOpenGraph } from "@/lib/seo";
 import { Metadata } from "next";
 
+const TITLE = "Services";
+const DESCRIPTION =
+  "Explore the range of services offered by DAVAN Digital, including digital marketing, web development, and more.";
+
 export const metadata: Metadata = {
-  title: "Services - DAVAN Digital",
-  description:
-    "Explore the range of services offered by DAVAN Digital, including digital marketing, web development, and more.",
+  title: TITLE,
+  description: DESCRIPTION,
+  ...pageOpenGraph({
+    title: TITLE,
+    description: DESCRIPTION,
+    path: "/services",
+  }),
 };
 
 const SERVICES_QUERY = `{

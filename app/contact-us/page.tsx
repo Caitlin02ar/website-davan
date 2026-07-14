@@ -2,12 +2,21 @@ import Form from "../components/contact/Form";
 import Pillar from "../components/contact/Pillar";
 import CTAGlobal from "../components/common/CTAGlobal";
 import { client } from "@/sanity/lib/client";
+import { pageOpenGraph } from "@/lib/seo";
 import { Metadata } from "next";
 
+const TITLE = "Contact Us";
+const DESCRIPTION =
+  "Get in touch with DAVAN Digital for inquiries, support, or collaboration opportunities.";
+
 export const metadata: Metadata = {
-  title: "Contact Us - DAVAN Digital",
-  description:
-    "Get in touch with DAVAN Digital for inquiries, support, or collaboration opportunities.",
+  title: TITLE,
+  description: DESCRIPTION,
+  ...pageOpenGraph({
+    title: TITLE,
+    description: DESCRIPTION,
+    path: "/contact-us",
+  }),
 };
 
 const CONTACT_QUERY = `{

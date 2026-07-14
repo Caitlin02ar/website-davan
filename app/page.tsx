@@ -5,12 +5,21 @@ import Client from "./components/home/Client";
 import Why from "./components/home/Why";
 import CTAGlobal from "./components/common/CTAGlobal";
 import { client } from "@/sanity/lib/client";
+import { pageOpenGraph } from "@/lib/seo";
 import { Metadata } from "next";
 
+const TITLE = "DAVAN Digital | Digital Transformation Services";
+const DESCRIPTION =
+  "Welcome to DAVAN Digital, your trusted partner for innovative digital solutions. Explore our services, approach, and success stories.";
+
 export const metadata: Metadata = {
-  title: "DAVAN Digital | Digital Transformation Services",
-  description:
-    "Welcome to DAVAN Digital, your trusted partner for innovative digital solutions. Explore our services, approach, and success stories.",
+  title: TITLE,
+  description: DESCRIPTION,
+  ...pageOpenGraph({
+    title: TITLE,
+    description: DESCRIPTION,
+    path: "/",
+  }),
 };
 
 const HOME_QUERY = `{
