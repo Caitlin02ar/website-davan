@@ -29,7 +29,7 @@ const SERVICES_QUERY = `{
   ][0]{
     title,
     subheading,
-    "backgroundImage": backgroundImage.asset->url
+    "backgroundImage": backgroundImage.asset->url 
   },
 
   "cta": *[

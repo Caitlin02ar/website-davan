@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { renderHighlightedText } from "@/lib/highlightText";
+import { urlFor } from "@/lib/image";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -38,7 +39,11 @@ export default function HeroAbout({
         className="absolute inset-0"
       >
         <Image
-          src={data.backgroundImage}
+          src={urlFor(data.backgroundImage)
+            .width(1600)
+            .quality(70)
+            .format("webp")
+            .url()}
           alt=""
           fill
           priority

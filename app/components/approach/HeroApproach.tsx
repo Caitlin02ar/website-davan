@@ -18,7 +18,7 @@ export default function HeroApproach({
   return (
     <section className="relative min-h-screen overflow-hidden">
       <Image
-        src={sanityImage(data.backgroundImage, 1920)}
+        src={sanityImage(data.backgroundImage, 1600)}
         alt=""
         fill
         priority

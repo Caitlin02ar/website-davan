@@ -20,7 +20,7 @@ export default function HeroServices({
 
       {/* BACKGROUND */}
       <Image
-        src={sanityImage(data.backgroundImage, 1920)}
+        src={sanityImage(data.backgroundImage, 1600)}
         alt=""
         fill
         fetchPriority="high"
