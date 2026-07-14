@@ -90,14 +90,19 @@ const ABOUT_QUERY = `{
   },
 
   "cta": *[
-    _type == "ctaGlobal"
-    && page == "about"
-  ][0]{
-    heading,
+  _type == "ctaGlobal"
+  && "about" in pages
+][0]{
+  heading,
+  subheadingTop,
+  subheadingBottom,
+  titleColor,
+  "backgroundImage": backgroundImage.asset->url,
+  "button": buttons[page == "about"][0]{
     buttonText,
-    titleColor,
-    "backgroundImage": backgroundImage.asset->url
+    href
   }
+}
 
 }`;
 
