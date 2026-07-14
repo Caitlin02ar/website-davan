@@ -129,11 +129,11 @@ export default async function OurApproach() {
       <Clients data={clientData} />
 
       <CTAGlobal
-        title={ctaData.heading}
-        titleColor={ctaData.titleColor}
-        buttonText={ctaData.buttonText}
-        backgroundImage={ctaData.backgroundImage}
-        href="/contact-us"
+        title={ctaData?.heading}
+        buttonText={ctaData?.button?.buttonText}
+        titleColor={ctaData?.titleColor}
+        backgroundImage={ctaData?.backgroundImage}
+        href={ctaData?.button?.href}
       />
 
     </main>
