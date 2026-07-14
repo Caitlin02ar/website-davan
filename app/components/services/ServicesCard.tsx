@@ -7,7 +7,7 @@ interface ServicesCardProps {
   title: string;
   description: string;
   tag: string[];
-  backgroundImage: string;
+  backgroundImage?: string;
 
   width?: string;
   priority?: boolean;
@@ -45,18 +45,22 @@ export default function ServicesCard({
         min-h-[420px]
 
         sm:min-h-[500px]
+
+        bg-dark
       `}
     >
 
       {/* BACKGROUND */}
-      <Image
-        src={backgroundImage}
-        alt=""
-        fill
-        priority={priority}
-        sizes="(max-width: 1024px) 100vw, 45vw"
-        className="object-cover object-center"
-      />
+      {backgroundImage && (
+        <Image
+          src={backgroundImage}
+          alt=""
+          fill
+          priority={priority}
+          sizes="(max-width: 640px) 90vw, (max-width: 1024px) 92vw, 41vw"
+          className="object-cover object-center"
+        />
+      )}
 
       <div className="relative z-10 flex flex-col justify-center h-full">
 

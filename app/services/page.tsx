@@ -94,7 +94,7 @@ const SERVICES_QUERY = `{
       title,
       description,
       badgesItems,
-      "picture": picture.asset->url
+      "picture": picture.asset->url + "?w=1200&fm=webp&q=80"
     }
   }
 

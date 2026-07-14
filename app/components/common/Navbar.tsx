@@ -159,7 +159,11 @@ export default function Navbar() {
         </ul>
 
         <button
+        id="mobile-navigation"
           onClick={() => setMobileMenu(!mobileMenu)}
+          aria-label={mobileMenu ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={mobileMenu}
+          aria-controls="mobile-navigation"
           className="
             flex
             items-center

@@ -10,6 +10,7 @@ interface ServicesCardItemsProps {
       title: string;
       description: string;
       badgesItems: string[];
+      picture?: string;
     }[];
   };
 }
@@ -18,22 +19,14 @@ export default function ServicesCardItems({
   data,
 }: ServicesCardItemsProps) {
 
-  // HARDCODE IMAGE ONLY
-  const images = [
-    "/photos/services-pillar-1.webp",
-    "/photos/services-pillar-2.webp",
-    "/photos/services-pillar-3.webp",
-    "/photos/services-pillar-4.webp",
-  ];
-
   const CardItems = data.card.map(
-    (item, index) => ({
+    (item) => ({
       subtitle: item.tag,
       title: item.title,
       description: item.description,
       tag: item.badgesItems,
 
-      backgroundImage: images[index],
+      backgroundImage: item.picture,
     })
   );
 
