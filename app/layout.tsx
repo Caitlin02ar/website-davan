@@ -9,10 +9,7 @@ import LenisProvider from "./components/common/LenisProvider";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
 
-const VoiceflowWidget = dynamic(
-  () => import("./components/common/VoiceflowWidget"),
-  { ssr: false }
-);
+import VoiceflowWidget from "./components/common/VoiceflowWidget";
 
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/lib/image";
