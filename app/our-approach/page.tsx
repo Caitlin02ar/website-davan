@@ -48,14 +48,17 @@ const APPROACH_QUERY = `{
   },
 
   "cta": *[
-    _type == "ctaGlobal"
-    && page == "approach"
-  ][0]{
-    heading,
+  _type == "ctaGlobal"
+  && "approach" in pages
+][0]{
+  heading,
+  titleColor,
+  "backgroundImage": backgroundImage.asset->url,
+  "button": buttons[page == "approach"][0]{
     buttonText,
-    titleColor,
-    "backgroundImage": backgroundImage.asset->url
-  },
+    href
+  }
+},
 
   "banner": *[
     _type == "bannerSection"
