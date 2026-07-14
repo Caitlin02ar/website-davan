@@ -36,6 +36,7 @@ export default function Form({
           alt=""
           fill
           sizes="100vw"
+          priority
           className="object-cover"
         />
 

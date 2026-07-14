@@ -1,14 +1,18 @@
 // app/layout.tsx
 
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Poppins } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import localFont from "next/font/local";
 import LenisProvider from "./components/common/LenisProvider";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
-import VoiceflowWidget from "./components/common/VoiceflowWidget";
+
+const VoiceflowWidget = dynamic(
+  () => import("./components/common/VoiceflowWidget"),
+  { ssr: false }
+);
 
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/lib/image";

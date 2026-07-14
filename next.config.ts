@@ -1,6 +1,7 @@
 const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     qualities: [75, 90],
     remotePatterns: [
       {
@@ -14,22 +15,10 @@ const nextConfig = {
       {
         source: "/:path*",
         headers: [
-          {
-            key: "Referrer-Policy",
-            value: "strict-origin-when-cross-origin",
-          },
-          {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
-          },
-          {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
-          },
-          {
-            key: "Content-Security-Policy",
-            value: "frame-ancestors 'self';",
-          },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Content-Security-Policy", value: "frame-ancestors 'self';" },
         ],
       },
     ];
