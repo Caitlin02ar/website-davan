@@ -234,7 +234,7 @@ export default function CTAGlobal({
               sizes="100vw"
             />
 
-            <div className="absolute inset-x-0 top-0 h-[62%] flex flex-col items-center justify-center gap-1 px-10 text-center">
+            <div className="absolute inset-x-0 top-0 h-[96%] flex flex-col items-center justify-center gap-1 px-10 text-center">
               {topText && (
                 <h3 className="font-heading text-white text-xs">{topText}</h3>
               )}
@@ -259,7 +259,7 @@ export default function CTAGlobal({
               )}
             </div>
 
-            <div className="absolute inset-x-0 bottom-[11%] z-20 flex justify-center scale-[0.5]">
+            <div className="absolute inset-x-0 top-[70%] z-20 flex justify-center scale-[0.5]">
               {ctaButton}
             </div>
           </div>

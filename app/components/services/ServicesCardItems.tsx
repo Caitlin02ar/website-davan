@@ -33,7 +33,9 @@ export default function ServicesCardItems({
   return (
     <div
       id="four-pillars"
+
       className="
+      overflow-hidden
         grid
         grid-cols-1
 
