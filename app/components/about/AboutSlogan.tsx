@@ -21,7 +21,6 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
     <section className="overflow-hidden overflow-x-hidden ">
       <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px]">
 
-        {/* BACKGROUND IMAGE */}
         <Image
           src={sanityImage(data.backgroundImage, 1920)}
           alt=""
@@ -30,7 +29,6 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
           className="object-cover"
         />
 
-        {/* OVERLAY CONTENT */}
         <div
           className="
             absolute inset-0
@@ -44,7 +42,6 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
             md:px-10
           "
         >
-          {/* HEADING */}
           <motion.h2
             initial={{
               opacity: 0,
@@ -75,7 +72,6 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
             {renderHighlightedText(data.heading, data.highlightHeading)}
           </motion.h2>
 
-          {/* DESCRIPTION */}
           <motion.p
             initial={{
               opacity: 0,

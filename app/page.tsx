@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   }),
 };
 
+export const revalidate = 60;
+
 const HOME_QUERY = `{
   "hero": *[_type == "heroGlobal" && page == "home"][0]{
     title,
