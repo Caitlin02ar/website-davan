@@ -14,10 +14,11 @@ export default function HashLink({
 }) {
   const pathname = usePathname();
 
-  const [path, hash] = href.split("#");
+  const hashIndex = href.indexOf("#");
+  const path = hashIndex === -1 ? href : href.slice(0, hashIndex);
+  const hash = hashIndex === -1 ? "" : href.slice(hashIndex + 1);
 
   const cleanPath = path.replace(/\/$/, "") || "/";
-
   const isSamePage = pathname === cleanPath;
 
   if (isSamePage && hash) {
@@ -32,11 +33,7 @@ export default function HashLink({
         duration: 1.4,
       });
 
-      window.history.replaceState(
-        window.history.state,
-        "",
-        `${cleanPath}#${hash}`
-      );
+      window.history.replaceState(window.history.state, "", `${cleanPath}#${hash}`);
     };
 
     return (

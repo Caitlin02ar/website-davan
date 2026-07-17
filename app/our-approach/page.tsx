@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   ...pageOpenGraph({ title: TITLE, description: DESCRIPTION, path: "/our-approach" }),
 };
 
+export const revalidate = 60;
+
 const APPROACH_QUERY = `{
 
   "hero": *[

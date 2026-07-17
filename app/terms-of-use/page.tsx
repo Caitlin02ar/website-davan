@@ -12,8 +12,9 @@ export const metadata: Metadata = {
     ...pageOpenGraph({ title: TITLE, description: DESCRIPTION, path: "/terms-of-use" }),
   };
 
+export const revalidate = 60;
+
 export default async function TermsOfUse(){
-    
     
     const legalData = await client.fetch(`
     *[

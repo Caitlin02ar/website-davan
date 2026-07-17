@@ -21,6 +21,8 @@ export const metadata: Metadata = {
   }),
 };
 
+export const revalidate = 60;
+
 const SERVICES_QUERY = `{
 
   "hero": *[

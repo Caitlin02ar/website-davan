@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     ...pageOpenGraph({ title: TITLE, description: DESCRIPTION, path: "/privacy-policy" }),
   };
+export const revalidate = 60;
 
 export default async function PrivacyPolicy(){
 
