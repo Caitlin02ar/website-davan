@@ -157,7 +157,12 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={handleNav(item.href)}
-                className="group relative w-fit text-lg text-white"
+                className="group relative w-fit text-lg text-white
+                outline-none
+                focus:outline-none
+                focus:ring-0
+                focus-visible:outline-none
+                focus-visible:ring-0"
               >
                 {item.label}
                 <span
