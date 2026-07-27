@@ -11,23 +11,22 @@ import { renderHighlightedText } from "@/lib/highlightText";
 
 interface FormCardProps {
   data: {
-    
-      title: string;
-      heading: string;
-      highlightText: string;
-      description: string;
-      imageContent:string;
+    title: string;
+    heading: string;
+    highlightText: string;
+    description: string;
+    imageContent: string;
 
-      formFields: {
-        fieldName: string;
-        fieldType: string;
-        required:boolean;
-      }[];
+    formFields: {
+      fieldName: string;
+      fieldType: string;
+      required: boolean;
+    }[];
 
     reasonField: {
-      required:boolean,
+      required: boolean;
       options: {
-        reason:string
+        reason: string;
       }[];
     };
 
@@ -130,7 +129,7 @@ export default function FormCard({
     }
   };
 
-  
+
   return (
     <>
       <section className="px-4 py-12 md:px-6 md:py-16">
@@ -177,7 +176,7 @@ export default function FormCard({
                 priority
                 sizes="(min-width: 768px) 380px, calc(100vw - 64px)"
                 className="absolute inset-0 object-cover"
-                
+
               />
 
               <div
@@ -272,10 +271,10 @@ export default function FormCard({
                 {data.formFields.map(
                   (field, index) => {
 
-                    const fieldKey =
-                      field.fieldName
-                        .toLowerCase()
-                        .replace(/\s+/g, "");
+                    // Pakai fieldName asli sebagai key.
+                    // Key ini yang tampil jadi label di email,
+                    // jadi biarkan apa adanya (dengan spasi & huruf besar).
+                    const fieldKey = field.fieldName;
 
                     // TEXTAREA
                     if (
@@ -287,7 +286,6 @@ export default function FormCard({
                         <div key={index}>
 
                           <label
-                            
                             className="
                               mb-3
                               block
@@ -367,10 +365,10 @@ export default function FormCard({
                                       type="radio"
                                       name="gap"
                                       value={option.reason}
-                                      checked={formData["reason"] === option.reason}
+                                      checked={formData["Reason"] === option.reason}
                                       onChange={(e) =>
                                         handleChange(
-                                          "reason",
+                                          "Reason",
                                           e.target.value
                                         )
                                       }
