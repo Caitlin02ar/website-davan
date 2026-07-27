@@ -138,7 +138,6 @@ export default function CTAGlobal({
             </>
           )}
 
-          {/* LOGO WRAPPER = anchor for everything */}
           <div
             className="
               absolute
@@ -163,7 +162,6 @@ export default function CTAGlobal({
               className="w-full h-auto pointer-events-none"
             />
 
-            {/* TEXT: centered in the inner "hole" of the pill (upper area) */}
             <div
               className="
                 absolute
@@ -192,9 +190,7 @@ export default function CTAGlobal({
                 absolute
                 inset-x-0
                 bottom-[6%]
-
                 z-20
-
                 flex
                 justify-center
               "
@@ -208,7 +204,6 @@ export default function CTAGlobal({
 
       {/* MOBILE */}
       <section className="sm:hidden relative overflow-hidden">
-
         {showBackground && (
           <>
             <Image
@@ -259,7 +254,7 @@ export default function CTAGlobal({
               )}
             </div>
 
-            <div className="absolute inset-x-0 top-[70%] z-20 flex justify-center scale-[0.5]">
+            <div className="absolute inset-x-0 top-[68%] z-20 flex justify-center scale-[0.5]">
               {ctaButton}
             </div>
           </div>

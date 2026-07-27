@@ -135,9 +135,7 @@ export default function Principles({
           shouldAnimate={inView}
           data={data.contentPrinciples}
         />
-
       </motion.div>
-
     </section>
   );
 }
