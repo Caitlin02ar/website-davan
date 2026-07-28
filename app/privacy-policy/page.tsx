@@ -1,16 +1,20 @@
 import {Metadata} from "next";
 import { client } from "@/sanity/lib/client";
 import LegalPageContent from "../components/common/LegalPageContent";
-import { pageOpenGraph } from "@/lib/seo";
+import { getPageMeta } from "@/lib/seo";
 
-const TITLE = "Privacy Policy - DAVAN Digital";
-const DESCRIPTION = "Read DAVAN Digital's privacy policy to understand how we collect, use, and protect your personal information.";
+const FALLBACK_TITLE = "Privacy Policy";
+const FALLBACK_DESCRIPTION = "Read DAVAN Digital's privacy policy to understand how we collect, use, and protect your personal information.";
 
-export const metadata: Metadata = {
-    title: TITLE,
-    description: DESCRIPTION,
-    ...pageOpenGraph({ title: TITLE, description: DESCRIPTION, path: "/privacy-policy" }),
-  };
+export async function generateMetadata(): Promise<Metadata>{
+  return getPageMeta({
+    page:"privacy-policy",
+    path:"/privacy-policy",
+    fallbackTitle:FALLBACK_TITLE,
+    fallbackDescription: FALLBACK_DESCRIPTION,
+  });
+}
+
 export const revalidate = 60;
 
 export default async function PrivacyPolicy(){

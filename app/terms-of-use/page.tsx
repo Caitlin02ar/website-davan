@@ -1,16 +1,19 @@
 import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import LegalPageContent from "../components/common/LegalPageContent";
-import { pageOpenGraph } from "@/lib/seo";
+import { getPageMeta } from "@/lib/seo";
 
-const TITLE = "Terms of Use - DAVAN Digital";
-const DESCRIPTION = "Read DAVAN Digital's terms of use to understand the rules and guidelines for using our website and services.";
+const FALLBACK_TITLE = "Terms of Use";
+const FALLBACK_DESCRIPTION = "Read DAVAN Digital's terms of use to understand the rules and guidelines for using our website and services.";
 
-export const metadata: Metadata = {
-    title: TITLE,
-    description: DESCRIPTION,
-    ...pageOpenGraph({ title: TITLE, description: DESCRIPTION, path: "/terms-of-use" }),
-  };
+export async function generateMetadata():Promise<Metadata>{
+    return getPageMeta({
+        page:"terms-of-use",
+        path:"/terms-of-use",
+        fallbackTitle: FALLBACK_TITLE,
+        fallbackDescription: FALLBACK_DESCRIPTION,
+    });
+}
 
 export const revalidate = 60;
 

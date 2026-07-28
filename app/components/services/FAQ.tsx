@@ -5,6 +5,7 @@ import Dropdown from "./Dropdown";
 import CTAGlobal from "../common/CTAGlobal";
 import { renderHighlightedText } from "@/lib/highlightText";
 import Image from "next/image";
+import Link from "next/link";
 
 interface FAQProps {
   faqData: FAQDataProps;
@@ -123,7 +124,6 @@ export default function FAQ({
         "
       >
 
-        {/* LEFT SIDE */}
         <div
           className="
             flex
@@ -160,10 +160,6 @@ export default function FAQ({
             </h2>
 
           </div>
-
-          {/* CARD DESKTOP ONLY
-              mt-auto mendorong card ke bawah kolom, sehingga bawah card
-              rata dengan bawah dropdown terakhir di kolom kanan. */}
           <div
             className="
               hidden
@@ -194,30 +190,26 @@ export default function FAQ({
               {faqData.description}
             </p>
 
-            <button
+            <Link
+              href="/contact-us"
               className="
                 mt-8
-
+                inline-block
                 border
                 border-primary
-
                 py-2.5
                 px-8
-
                 text-primary
-
                 rounded-full
                 text-xs
-
                 transition-all
                 duration-300
-
                 hover:bg-primary
                 hover:text-black
               "
             >
               {faqData.buttonText}
-            </button>
+            </Link>
 
           </div>
 
@@ -282,30 +274,26 @@ export default function FAQ({
               {faqData.description}
             </p>
 
-            <button
+            <Link
+              href="/contact-us"
               className="
                 mt-6
-
+                inline-block
                 border
                 border-primary
-
                 py-2.5
                 px-8
-
                 text-primary
-
                 rounded-full
                 text-xs
-
                 transition-all
                 duration-300
-
                 hover:bg-primary
                 hover:text-black
               "
             >
               {faqData.buttonText}
-            </button>
+            </Link>
 
           </div>
 

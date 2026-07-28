@@ -2,22 +2,21 @@ import Form from "../components/contact/Form";
 import Pillar from "../components/contact/Pillar";
 import CTAGlobal from "../components/common/CTAGlobal";
 import { client } from "@/sanity/lib/client";
-import { pageOpenGraph } from "@/lib/seo";
+import { getPageMeta } from "@/lib/seo";
 import { Metadata } from "next";
 
-const TITLE = "Contact Us";
-const DESCRIPTION =
+const FALLBACK_TITLE = "Contact Us";
+const FALLBACK_DESCRIPTION =
   "Get in touch with DAVAN Digital for inquiries, support, or collaboration opportunities.";
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  ...pageOpenGraph({
-    title: TITLE,
-    description: DESCRIPTION,
+ 
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMeta({
+    page: "contact",
     path: "/contact-us",
-  }),
-};
+    fallbackTitle: FALLBACK_TITLE,
+    fallbackDescription: FALLBACK_DESCRIPTION,
+  });
+}
 
 export const revalidate = 60;
 

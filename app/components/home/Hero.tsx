@@ -147,7 +147,7 @@ export default function Hero({
           }}
           className="mt-2 flex flex-col items-center"
         >
-          <Button theme="light">
+          <Button theme="light" href="/contact-us">
             {buttonText}
           </Button>
         </motion.div>

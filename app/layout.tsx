@@ -49,7 +49,6 @@ const SITE_SETTINGS_QUERY = `
   }
 `;
 
-// ── FALLBACKS ──
 const FALLBACK = {
   siteTitle: "DAVAN Digital | Digital Transformation & Integration Services",
   titleTemplate: "%s | DAVAN Digital",

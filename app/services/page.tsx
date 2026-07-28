@@ -4,22 +4,21 @@ import FAQ from "../components/services/FAQ";
 import ServicesSlogan from "../components/services/ServicesSlogan";
 import ServicesCardItems from "../components/services/ServicesCardItems";
 import { client } from "@/sanity/lib/client";
-import { pageOpenGraph } from "@/lib/seo";
+import { getPageMeta } from "@/lib/seo";
 import { Metadata } from "next";
 
-const TITLE = "Services";
-const DESCRIPTION =
+const FALLBACK_TITLE = "Services";
+const FALLBACK_DESCRIPTION =
   "Explore the range of services offered by DAVAN Digital, including digital marketing, web development, and more.";
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  ...pageOpenGraph({
-    title: TITLE,
-    description: DESCRIPTION,
+ 
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMeta({
+    page: "services",
     path: "/services",
-  }),
-};
+    fallbackTitle: FALLBACK_TITLE,
+    fallbackDescription: FALLBACK_DESCRIPTION,
+  });
+}
 
 export const revalidate = 60;
 

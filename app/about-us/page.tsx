@@ -7,17 +7,20 @@ import CTAGlobal from "../components/common/CTAGlobal";
 import { Metadata } from "next";
 
 import { client } from "@/sanity/lib/client";
-import { pageOpenGraph } from "@/lib/seo";
+import { getPageMeta } from "@/lib/seo";
 
-const TITLE = "About Us - DAVAN Digital";
-const DESCRIPTION =
+const FALLBACK_TITLE = "About Us";
+const FALLBACK_DESCRIPTION =
   "Learn more about DAVAN Digital, our mission, values, and how we work.";
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  ...pageOpenGraph({ title: TITLE, description: DESCRIPTION, path: "/about-us" }),
-};
+ 
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMeta({
+    page: "about",
+    path: "/about-us",
+    fallbackTitle: FALLBACK_TITLE,
+    fallbackDescription: FALLBACK_DESCRIPTION,
+  });
+}
 
 const ABOUT_QUERY = `{
 

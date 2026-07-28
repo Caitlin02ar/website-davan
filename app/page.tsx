@@ -5,22 +5,21 @@ import Client from "./components/home/Client";
 import Why from "./components/home/Why";
 import CTAGlobal from "./components/common/CTAGlobal";
 import { client } from "@/sanity/lib/client";
-import { pageOpenGraph } from "@/lib/seo";
+import { getPageMeta, pageOpenGraph } from "@/lib/seo";
 import { Metadata } from "next";
 
-const TITLE = "DAVAN Digital | Digital Transformation Services";
-const DESCRIPTION =
+const FALLBACK_TITLE = "DAVAN Digital | Digital Transformation Services";
+const FALLBACK_DESCRIPTION =
   "Welcome to DAVAN Digital, your trusted partner for innovative digital solutions. Explore our services, approach, and success stories.";
 
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  ...pageOpenGraph({
-    title: TITLE,
-    description: DESCRIPTION,
-    path: "/",
-  }),
-};
+export async function generateMetadata(): Promise<Metadata>{
+  return getPageMeta({
+    page:"home",
+    path:"/",
+    fallbackTitle: FALLBACK_TITLE,
+    fallbackDescription: FALLBACK_DESCRIPTION,
+  });
+}
 
 export const revalidate = 60;
 

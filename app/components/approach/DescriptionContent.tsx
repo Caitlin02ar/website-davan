@@ -28,7 +28,6 @@ export default function DescriptionContent({
   data,
 }: DescriptionContentProps) {
 
-  // CMS CONTENT + HARDCODE LAYOUT LOGIC
   const DescriptionContentItems =
     data.contentDescription.map((item, index) => ({
       title: item.title,
@@ -37,7 +36,6 @@ export default function DescriptionContent({
 
       image: item.picture.asset.url,
 
-      // HARD CODE VISUAL LAYOUT
       imagePosition:
         index % 2 === 0
           ? ("right" as const)
@@ -53,7 +51,7 @@ export default function DescriptionContent({
     }));
 
   return (
-    <section id="the-gap" className="overflow-hidden bg-background">
+    <section id="the-gap" className="overflow-hidden bg-background pt-8">
       {DescriptionContentItems.map(
         (item, index) => (
           <DescriptionBlock
