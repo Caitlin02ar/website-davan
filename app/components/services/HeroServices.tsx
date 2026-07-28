@@ -18,7 +18,6 @@ export default function HeroServices({
   return (
     <section className="relative min-h-screen overflow-hidden">
 
-      {/* BACKGROUND */}
       <Image
         src={sanityImage(data.backgroundImage, 1600)}
         alt=""
@@ -49,7 +48,6 @@ export default function HeroServices({
         "
       >
 
-        {/* LCP element — opacity dimulai dari 0.1, bukan 0. */}
         <motion.h1
           initial={{ opacity: 0.1, y: -80 }}
           animate={{ opacity: 1, y: 0 }}

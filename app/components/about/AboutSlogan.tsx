@@ -18,9 +18,8 @@ interface AboutSloganProps {
 
 export default function AboutSlogan({ data }: AboutSloganProps) {
   return (
-    <section className="overflow-hidden overflow-x-hidden ">
+    <section className="overflow-hidden overflow-x-hidden">
       <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px]">
-
         <Image
           src={sanityImage(data.backgroundImage, 1920)}
           alt=""
@@ -45,7 +44,7 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
           <motion.h2
             initial={{
               opacity: 0,
-              y: -100,
+              y: -30,
             }}
             whileInView={{
               opacity: 1,
@@ -57,7 +56,7 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
             }}
             viewport={{
               once: true,
-              amount: 1,
+              amount: 0.1,
             }}
             className="
               font-heading
@@ -75,7 +74,7 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
           <motion.p
             initial={{
               opacity: 0,
-              y: -60,
+              y: -20,
             }}
             whileInView={{
               opacity: 1,
@@ -83,12 +82,12 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
             }}
             transition={{
               duration: 0.9,
-              delay: 0.9,
+              delay: 0.3, 
               ease,
             }}
             viewport={{
               once: true,
-              amount: 0.5,
+              amount: 0.1,
             }}
             className="
               font-body
@@ -103,7 +102,6 @@ export default function AboutSlogan({ data }: AboutSloganProps) {
               sm:text-sm
 
               md:max-w-2xl
-              
             "
           >
             {data.description}

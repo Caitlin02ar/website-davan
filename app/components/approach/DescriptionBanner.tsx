@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { sanityImage } from "@/lib/image";
 
-interface AprroachBannerProps {
+interface ApproachBannerProps {
   data: {
     heading: string;
     highlightHeading: string;
@@ -15,11 +15,10 @@ interface AprroachBannerProps {
 
 export default function DescriptionBanner({
   data,
-}: AprroachBannerProps) {
+}: ApproachBannerProps) {
   return (
     <section className="overflow-hidden">
       <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[500px]">
-        {/* BACKGROUND IMAGE */}
         <Image
           src={sanityImage(data.backgroundImage, 1920)}
           alt=""
@@ -50,7 +49,7 @@ export default function DescriptionBanner({
           <motion.div
             initial={{
               opacity: 0,
-              y: -120,
+              y: -40,
             }}
             whileInView={{
               opacity: 1,
@@ -58,7 +57,7 @@ export default function DescriptionBanner({
             }}
             viewport={{
               once: true,
-              amount: 0.4,
+              amount: 0.1,
             }}
             transition={{
               duration: 1.3,
@@ -76,13 +75,13 @@ export default function DescriptionBanner({
 
                 text-white
 
-                text-[2.2rem]
-                sm:text-[3.5rem]
+                text-2xl
+                sm:text-4xl
                 md:text-5xl
 
-                leading-[0.95]
+                leading-tight
 
-                max-w-[95%]
+                max-w-lg
                 sm:max-w-3xl
               "
             >
@@ -98,11 +97,11 @@ export default function DescriptionBanner({
 
                 text-primary
 
-                text-[2.2rem]
-                sm:text-[3.5rem]
+                text-2xl
+                sm:text-4xl
                 md:text-5xl
 
-                leading-[0.95]
+                leading-tight
 
                 max-w-[95%]
                 sm:max-w-3xl
@@ -112,11 +111,10 @@ export default function DescriptionBanner({
             </span>
           </motion.div>
 
-          {/* DESCRIPTION */}
           <motion.p
             initial={{
               opacity: 0,
-              y: -80,
+              y: -20,
             }}
             whileInView={{
               opacity: 1,
@@ -124,7 +122,7 @@ export default function DescriptionBanner({
             }}
             viewport={{
               once: true,
-              amount: 0.4,
+              amount: 0.1,
             }}
             transition={{
               duration: 1.1,
@@ -137,14 +135,16 @@ export default function DescriptionBanner({
               text-white
 
               max-w-[95%]
-              sm:max-w-xl
-              lg:max-w-lg
+              sm:max-w-2xl
+              md:max-w-3xl
 
               mt-5
               sm:mt-6
 
-              text-[13px]
-              sm:text-[15px]
+              text-xs
+              sm:text-sm
+
+              md:text-md
 
               leading-relaxed
             "

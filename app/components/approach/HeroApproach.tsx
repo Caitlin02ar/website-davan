@@ -43,9 +43,7 @@ export default function HeroApproach({
           px-6
         "
       >
-        {/* HEADING — LCP element.
-            initial opacity 0.1 (bukan 0) agar browser mencatat paint sejak
-            frame pertama. Secara visual identik dengan fade dari 0. */}
+        
         <motion.h1
           initial={{ opacity: 0.1, y: -120 }}
           animate={{ opacity: 1, y: 0 }}
@@ -77,9 +75,9 @@ export default function HeroApproach({
           className="
             font-subheading
             text-primary
-            text-md
-            sm:text-md
-            md:text-md
+            text-xs
+            sm:text-base
+            md:text-base
             lg:text-md
           "
         >

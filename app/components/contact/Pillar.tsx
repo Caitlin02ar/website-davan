@@ -22,30 +22,17 @@ interface PillarProps {
   };
 }
 
-export default function Pillar({
-  data,
-}: PillarProps) {
+export default function Pillar({ data }: PillarProps) {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const headingRef =
-    useRef<HTMLHeadingElement>(null);
-
-  const sectionRef =
-    useRef<HTMLElement>(null);
-
-  const isInView = useInView(
-    sectionRef,
-    {
-      once: true,
-      margin: "-100px",
-    }
-  );
+  const isInView = useInView(sectionRef, {
+    once: true,
+    margin: "-100px",
+  });
 
   useEffect(() => {
-
-    if (
-      !isInView ||
-      !headingRef.current
-    ) return;
+    if (!isInView || !headingRef.current) return;
 
     animate(
       headingRef.current,
@@ -58,7 +45,6 @@ export default function Pillar({
         ease: "easeOut",
       }
     );
-
   }, [isInView]);
 
   return (
@@ -67,49 +53,44 @@ export default function Pillar({
       className="
         px-6
         py-16
-
         md:px-12
         md:py-32
+        w-full
+        flex
+        flex-col
+        items-center
       "
     >
+      <div className="w-full max-w-[320px] md:max-w-5xl flex flex-col items-center">
+        
+        <div className="w-full text-center ">
+          <h2
+            ref={headingRef}
+            style={{
+              opacity: 0,
+            }}
+            className="
+              w-full
+              font-heading
+              text-xl
+              md:text-3xl
+              leading-tight
+              text-white
+            "
+          >
+            {renderHighlightedText(
+              data.heading.title,
+              data.heading.highlight
+            )}
+          </h2>
+        </div>
 
-      {/* HEADING */}
-      <div
-        className="
-          flex
-          flex-col
-          items-center
-          text-center
-        "
-      >
-
-        <h2
-          ref={headingRef}
-          style={{
-            opacity: 0,
-          }}
-          className="
-            max-w-3xl
-            font-heading
-            md:text-3xl
-            leading-tight
-            text-white
-            text-2xl
-          "
-        >
-          {renderHighlightedText(
-            data.heading.title,
-            data.heading.highlight
-          )}
-        </h2>
+        {/* ITEMS */}
+        <div className="w-full flex justify-center">
+          <PillarItems data={data.card} startDelay={0.8} />
+        </div>
+        
       </div>
-
-      {/* ITEMS */}
-      <PillarItems
-        data={data.card}
-        startDelay={0.8}
-      />
-
     </section>
   );
 }
