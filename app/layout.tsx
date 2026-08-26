@@ -10,6 +10,7 @@ import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
 
 import VoiceflowWidget from "./components/common/VoiceflowWidget";
+import Script from "next/script";
 
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/lib/image";
@@ -172,6 +173,16 @@ export default async function RootLayout({
       className={`${sequel.variable} ${poppins.variable} ${sequelSubheading.variable} h-full antialiased`}>
       <head>
         <link rel="preconnect" href="https://cdn.voiceflow.com" />
+
+        <Script src="https://www.googletagmanager.com/gtag/js?id=AW-18411391809" strategy="afterInteractive"/>
+        <Script id="google-ads-tag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18411391809');
+          `}
+        </Script>
       </head>
       <body className="min-h-full flex flex-col">
         <script
