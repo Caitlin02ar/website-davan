@@ -12,8 +12,7 @@ export default function ChatBox({
   description,
 }: ChatBoxProps) {
   return (
-    <div className="relative mx-5 mt-16 w-auto max-w-6xl rounded-[28px] bg-[#5b6064] px-6 py-8 md:mx-auto md:w-full md:rounded-[36px] md:px-12 md:py-12 lg:px-16 lg:py-14">
-
+    <div className="relative mx-5 mt-16 w-auto rounded-[28px] bg-[#5b6064] px-6 py-8 md:mx-16 md:rounded-[36px] md:px-12 md:py-12 lg:mx-24 lg:px-16 lg:py-14 xl:mx-32">
 
       <div
         className="
@@ -39,7 +38,7 @@ export default function ChatBox({
           </p>
         </div>
 
-        <div className="flex flex-col gap-6 border-white md:border-l md:pl-10 lg:pl-16">
+        <div className="flex flex-col gap-6 border-t border-white pt-8 md:border-t-0 md:border-l md:pt-0 md:pl-10 lg:pl-16">
           <h3 className="font-heading text-md text-white md:text-md">
             {subtitle}
           </h3>

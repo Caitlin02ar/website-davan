@@ -46,7 +46,7 @@ export default function GlassCard(){
                         </div>
                     ))}
                 </div>
-                <div className="p-4 border border-primary/20 bg-primary/10 shadow-primary/10 backdrop-blur-md rounded-full">
+                <div className="p-4 border border-primary/20 bg-primary/10 shadow-primary/10 backdrop-blur-md md:rounded-full rounded-2xl">
                     <p className="text-xs text-center">{opportunity.outsideCard}</p>
                 </div>
             </div>

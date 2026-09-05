@@ -20,12 +20,12 @@ export default function BannerSection(){
                 width={24}
                 height={24}/>
                 <div className="max-w-5xl flex flex-col items-center justify-center gap-8">
-                    <TextSlideIn className="text-center text-3xl">
+                    <TextSlideIn className="text-center md:text-3xl text-2xl">
                         {renderHighlightedText(bannerData.bannerHeading, bannerData.bannerHeadingHighlight)}
                     </TextSlideIn>
                     <TextStagger text={bannerData.bannerDescription}
                         delay={0.3}
-                        staggerSpeed={0.025} className="text-sm"/>
+                        staggerSpeed={0.025} className="text-sm text-center"/>
                 </div>
             </div>
             <div className="absolute inset-0 bg-dark/10"/>
