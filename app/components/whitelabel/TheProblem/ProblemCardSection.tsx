@@ -1,8 +1,9 @@
+import FlipCard from "./FlipCard";
 
 export default function ProblemCardSection(){
     return(
-        <div>
-            
+        <div className="w-full px-8 md:px-16 lg:px-24 xl:px-32">
+            <FlipCard/>
         </div>
     )
 }

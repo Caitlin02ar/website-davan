@@ -8,6 +8,7 @@ import localFont from "next/font/local";
 import LenisProvider from "./components/common/LenisProvider";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
+import MainLayoutWrapper from "./components/common/MainLayoutWrapper";
 
 import VoiceflowWidget from "./components/common/VoiceflowWidget";
 import Script from "next/script";
@@ -190,11 +191,10 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
         />
         <LenisProvider>
-          <Navbar />
-          {children}
-          <Footer data={footerData} />
+          <MainLayoutWrapper footerData={footerData}>
+            {children}
+          </MainLayoutWrapper>
         </LenisProvider>
-        <VoiceflowWidget/>
       </body>
     </html>
   );
