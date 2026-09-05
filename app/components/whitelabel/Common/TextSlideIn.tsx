@@ -21,7 +21,7 @@ export default function TextSlideIn({
   const xInitial = direction === "left" ? -100 : 100;
 
   return (
-    <div className="overflow-hidden py-2 font-heading text-[clamp(1.75rem,8vw,2.25rem)] leading-[1.12] tracking-[0.015em] uppercase sm:text-[38px] sm:tracking-wide md:text-[42px] md:leading-normal">
+    <div className="overflow-hidden py-2 font-heading text-[clamp(1.75rem,8vw,2.25rem)] leading-[1.12] tracking-[0.015em] uppercase text-[24px] sm:tracking-wide md:text-[42px] md:leading-normal">
       <motion.div
         initial={{ opacity: 0, x: xInitial }}
         whileInView={{ opacity: 1, x: 0 }}
