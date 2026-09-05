@@ -1,17 +1,13 @@
 // app/layout.tsx
 
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
 import LenisProvider from "./components/common/LenisProvider";
-import Navbar from "./components/common/Navbar";
-import Footer from "./components/common/Footer";
 import MainLayoutWrapper from "./components/common/MainLayoutWrapper";
-
 import VoiceflowWidget from "./components/common/VoiceflowWidget";
-import Script from "next/script";
+import GoogleAds from "./components/common/GoogleAds";
 
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/lib/image";
@@ -92,8 +88,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
     metadataBase: new URL(SITE_URL),
 
-
-    keywords: settings?.keywords?.length ? settings.keywords : FALLBACK.keywords,
+    keywords: settings?.keywords?.length
+      ? settings.keywords
+      : FALLBACK.keywords,
 
     robots: {
       index: shouldIndex,
@@ -170,26 +167,24 @@ export default async function RootLayout({
 
   return (
     <html
-      lang="en-AU" data-scroll-behavior="smooth"
-      className={`${sequel.variable} ${poppins.variable} ${sequelSubheading.variable} h-full antialiased`}>
+      lang="en-AU"
+      data-scroll-behavior="smooth"
+      className={`${sequel.variable} ${poppins.variable} ${sequelSubheading.variable} h-full antialiased`}
+    >
       <head>
         <link rel="preconnect" href="https://cdn.voiceflow.com" />
-
-        <Script src="https://www.googletagmanager.com/gtag/js?id=AW-18411391809" strategy="afterInteractive"/>
-        <Script id="google-ads-tag" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-18411391809');
-          `}
-        </Script>
       </head>
+
       <body className="min-h-full flex flex-col">
+        <GoogleAds />
+
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(orgSchema),
+          }}
         />
+
         <LenisProvider>
           <MainLayoutWrapper footerData={footerData}>
             {children}

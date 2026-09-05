@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import VoiceflowWidget from "./VoiceflowWidget";
 
+
 export default function MainLayoutWrapper({
   children,
   footerData,
