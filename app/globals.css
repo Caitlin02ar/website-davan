@@ -36,6 +36,7 @@
 
 html {
   scroll-behavior: smooth !important;
+  scroll-padding-top: 120px;
 }
 
 body {
@@ -60,3 +61,4 @@ html.lenis body {
 .lenis {
   overflow-x: hidden;
 }
+
