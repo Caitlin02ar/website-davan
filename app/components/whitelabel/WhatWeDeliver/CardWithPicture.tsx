@@ -8,6 +8,12 @@ import { renderMultiHighlight } from "@/lib/renderMultiHighlight";
 export default function CardWithPicture() {
   const [hoveredIndex, setHoveredIndex] = useState<string | null>(null);
 
+  const toggleCardOnTouch = (index: string) => {
+    if (window.matchMedia("(hover: none)").matches) {
+      setHoveredIndex((current) => (current === index ? null : index));
+    }
+  };
+
   const cardData = [
     {
       index: "1",
@@ -85,9 +91,12 @@ export default function CardWithPicture() {
         return (
           <div
             key={card.index}
-            className="group relative flex h-full w-full flex-col overflow-hidden rounded-3xl"
+            className="group relative flex min-h-[320px] w-full flex-col overflow-hidden rounded-3xl"
+            onMouseEnter={() => setHoveredIndex(card.index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+            onClick={() => toggleCardOnTouch(card.index)}
           >
-            {/* IMAGE */}
+
             <Image
               src={card.image}
               alt={card.title}
@@ -95,10 +104,10 @@ export default function CardWithPicture() {
               className="object-cover"
             />
 
-            {/* DEFAULT OVERLAY */}
+
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/30 to-dark/70" />
 
-            {/* EXTRA DARK OVERLAY ON HOVER */}
+
             <motion.div
               className="pointer-events-none absolute inset-0 bg-dark/30"
               initial={false}
@@ -112,7 +121,7 @@ export default function CardWithPicture() {
             />
 
             <div className="relative z-10 flex h-full flex-col p-6 pb-16">
-              {/* TITLE + SUBTITLE */}
+
               <div className="shrink-0">
                 <h3 className="font-heading text-xl leading-snug">
                   {renderMultiHighlight(
@@ -126,7 +135,7 @@ export default function CardWithPicture() {
                 </p>
               </div>
 
-              {/* DESCRIPTION */}
+
               <motion.ul
                 initial={false}
                 animate={{
@@ -163,15 +172,9 @@ export default function CardWithPicture() {
                 ))}
               </motion.ul>
 
-              {/* READ MORE */}
+
               <div
                 className="absolute inset-x-0 bottom-5 flex justify-center"
-                onMouseEnter={() =>
-                  setHoveredIndex(card.index)
-                }
-                onMouseLeave={() =>
-                  setHoveredIndex(null)
-                }
               >
                 <motion.span
                   animate={{

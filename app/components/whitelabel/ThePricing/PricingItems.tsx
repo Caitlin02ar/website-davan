@@ -35,19 +35,23 @@ export default function PricingItems() {
           <div
             key={item.index}
             className={`
-                flex flex-col justify-start
-                ${index !== 0 ? "md:border-l md:border-primary md:pl-8" : ""}
-                ${index !== 0 ? "border-t border-primary md:border-t-0" : ""}
+              flex flex-col justify-start gap-4
+              ${index !== 0 ? "md:border-l md:border-primary md:pl-8" : ""}
+              ${
+                index !== 0
+                  ? "border-t border-primary/30 pt-8 md:border-t-0 md:pt-2"
+                  : ""
+              }
             `}
-            >
-            <h3 className="font-heading text-sm leading-relaxed tracking-wide text-white md:text-sm">
-                {item.title}
+          >
+            <h3 className="font-heading text-md leading-snug tracking-wide tracking-tight text-white md:text-md">
+              {item.title}
             </h3>
 
-            <p className="mt-4 text-xs font-normal leading-relaxed text-white md:text-xs">
-                {item.description}
+            <p className="mt-4 text-xs font-normal leading-relaxed text-white md:text-sm">
+              {item.description}
             </p>
-            </div>
+          </div>
         ))}
       </div>
     </section>

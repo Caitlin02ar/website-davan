@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { CircleArrowDown } from "lucide-react";
+import { CircleChevronDown } from "lucide-react";
 
 type DropdownVariant = "confidentiality" | "questions";
 
@@ -25,9 +25,6 @@ export default function Dropdown({
 }: {
   variant: DropdownVariant;
 }) {
-  /* =====================================================
-     DATA — CONFIDENTIALITY
-  ===================================================== */
 
   const dropDownDataConfidentiality: {
     data: ConfidentialityItem[];
@@ -78,9 +75,7 @@ export default function Dropdown({
     ],
   };
 
-  /* =====================================================
-     DATA — QUESTIONS / FAQ
-  ===================================================== */
+
 
   const dropDownQuestions: {
     data: QuestionItem[];
@@ -143,9 +138,7 @@ export default function Dropdown({
     ],
   };
 
-  /* =====================================================
-     STATE
-  ===================================================== */
+
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
@@ -153,9 +146,6 @@ export default function Dropdown({
     setActiveIndex((current) => (current === index ? null : index));
   };
 
-  /* =====================================================
-     MODEL 1 — CONFIDENTIALITY
-  ===================================================== */
 
   if (variant === "confidentiality") {
     return (
@@ -185,7 +175,6 @@ export default function Dropdown({
                   isActive ? "p-8" : "px-6 py-4"
                 }`}
               >
-                {/* TOP HEADER ROW */}
                 <div className="flex w-full items-center justify-between">
                   <div className="relative h-6 w-6 shrink-0 md:h-7 md:w-7">
                     <Image
@@ -198,7 +187,7 @@ export default function Dropdown({
                     />
                   </div>
 
-                  <CircleArrowDown
+                  <CircleChevronDown
                     size={22}
                     strokeWidth={2}
                     className={`shrink-0 text-[#DFFF00] transition-transform duration-500 ease-out ${
@@ -207,7 +196,6 @@ export default function Dropdown({
                   />
                 </div>
 
-                {/* CONTENT AREA */}
                 <AnimatePresence initial={false} mode="wait">
                   {isActive ? (
                     <motion.div
@@ -251,9 +239,7 @@ export default function Dropdown({
     );
   }
 
-  /* =====================================================
-     MODEL 2 — QUESTIONS / FAQ
-  ===================================================== */
+
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -262,7 +248,7 @@ export default function Dropdown({
 
         return (
           <div key={item.number} className="w-full">
-            {/* HEADER */}
+
             <motion.button
               type="button"
               onClick={() => handleToggle(index)}
@@ -277,7 +263,7 @@ export default function Dropdown({
                 {item.question}
               </span>
 
-              <CircleArrowDown
+              <CircleChevronDown
                 size={20}
                 strokeWidth={2}
                 className={`ml-auto shrink-0 transition-all duration-300 ${
@@ -288,7 +274,7 @@ export default function Dropdown({
               />
             </motion.button>
 
-            {/* ANSWER */}
+
             <AnimatePresence initial={false}>
               {isActive && (
                 <motion.div

@@ -6,15 +6,15 @@ interface TitleLineModelProps {
 export default function TitleLineModel({ label, rightText }: TitleLineModelProps){
 
     return(
-        <div className="flex w-full items-center gap-4 mb-4">
-            <span className="shrink-0 whitespace-nowrap text-xs uppercase tracking-widest text-primary">
+        <div className="mb-4 flex w-full flex-wrap items-center gap-x-4 gap-y-2">
+            <span className="shrink-0 text-xs uppercase tracking-widest text-primary">
                 {label}
             </span>
 
-            <div className="h-px w-full flex-1 bg-primary" />
+            <div className="hidden h-px flex-1 bg-primary md:block" />
 
             {rightText && (
-                <span className="shrink-0 whitespace-nowrap text-sm text-white/50">
+                <span className="text-xs text-white/50 sm:text-sm">
                     {rightText}
                 </span>
             )}

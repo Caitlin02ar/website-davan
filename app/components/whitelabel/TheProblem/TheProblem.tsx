@@ -35,11 +35,11 @@ export default function TheProblemSection() {
       <div className="absolute inset-0 bg-dark/10" />
 
       <div className="relative z-10 flex w-full items-center">
-        <div className="w-full px-8 md:px-16 md:pt-24 lg:px-24 xl:px-32">
+        <div className="w-full px-5 py-16 md:px-16 md:py-0 md:pt-24 lg:px-24 xl:px-32">
 
           <div className="w-full">
             <div className="flex w-full flex-col gap-4 items-center justify-center">
-              
+
               <BubbleTag
                 variant={problems.title.variant}
                 number={problems.title.number}
@@ -65,7 +65,7 @@ export default function TheProblemSection() {
               highlightClassName="text-primary font-bold"
               delay={0.3}
               staggerSpeed={0.03}
-              className="max-w-2xl text-sm md:text-sm leading-relaxed text-center whitespace-nowrap"
+              className="max-w-2xl text-center text-sm leading-relaxed md:whitespace-nowrap"
             />
             </div>
           </div>

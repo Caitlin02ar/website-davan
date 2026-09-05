@@ -24,7 +24,7 @@ export default function TheOpportunitySection(){
         description:"Not a subcontractor you have to manage. A production layer that sits under your brand and moves at the speed your pipeline needs."
     }
     return(
-        <section 
+        <section
             id="the-opportunity"
             className="relative min-h-screen w-full overflow-hidden"
         >
@@ -34,11 +34,11 @@ export default function TheOpportunitySection(){
                 width={theOpportunityData.image.width}
                 height={theOpportunityData.image.height}
                 priority
-                className="absolute inset-0 h-full w-full object-fill"
+                className="absolute inset-0 h-full w-full object-cover object-[68%_center] md:object-center"
             />
             <div className="absolute inset-0 bg-black/10"/>
             <div className="relative z-10 flex items-start">
-                <div className="w-full px-8 md:px-16 md:pt-24 lg:px-24 xl:px-32">
+                <div className="w-full px-5 py-16 md:px-16 md:py-0 md:pt-24 lg:px-24 xl:px-32">
                     <div className="">
                         <div className="flex flex-col gap-4 w-full">
                             <BubbleTag
@@ -50,7 +50,7 @@ export default function TheOpportunitySection(){
                                 }
                             ]}/>
 
-                            <div className="flex justify-between items-end">
+                            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                                 <TextSlideIn>
                                     <h1>{renderHighlightedText(theOpportunityData.heading, theOpportunityData.hightlightText)}</h1>
                                 </TextSlideIn>

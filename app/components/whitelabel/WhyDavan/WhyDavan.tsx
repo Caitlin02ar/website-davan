@@ -39,11 +39,11 @@ export default function WhyDavanSection(){
             width={whyData.image.width}
             height={whyData.image.height}
             priority
-            className="absolute inset-0 h-full w-full object-cover "
+            className="absolute inset-0 h-full w-full object-cover object-[40%_center] md:object-center"
             />
             <div className="absolute inset-0 bg-dark/10"/>
 
-            <div className="relative z-10 w-full px-8 md:px-16 lg:px-24 xl:px-32">
+            <div className="relative z-10 w-full px-5 md:px-16 lg:px-24 xl:px-32">
                 <div className="flex flex-col gap-4">
                     <BubbleTag
                     variant={whyData.title.variant}

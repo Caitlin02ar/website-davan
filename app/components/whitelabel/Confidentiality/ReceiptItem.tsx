@@ -7,28 +7,27 @@ export default function ReceiptItem() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative w-full max-w-sm mx-auto select-none">
-      {/* PRINTER SLOT */}
-      <div className="relative z-20 w-full">
-        <div className=" border border-white/20 bg-gradient-to-b from-neutral-300 via-neutral-500 to-neutral-700 p-[3px] shadow-[0_4px_14px_rgba(0,0,0,0.55)]">
-          <div className="h-2.5 w-full bg-gradient-to-r from-black via-neutral-800 to-black" />
-        </div>
+    <div className="relative mx-auto w-full max-w-sm select-none">
+      {/* PRINTER SLOT COVER (Z-30 ON TOP) */}
+      <div className="relative z-30 w-full rounded-t-sm border border-white/30 bg-gradient-to-r from-[#111111] via-[#777777] to-[#f2f2f2] p-[3px] shadow-[0_4px_14px_rgba(0,0,0,0.55)]">
+        <div className="h-2.5 w-full bg-gradient-to-r from-black via-[#454545] to-[#e6e6e6] shadow-[inset_0_1px_2px_rgba(0,0,0,0.8)]" />
+        <div className="pointer-events-none absolute inset-x-3 bottom-0 h-px bg-white/40" />
       </div>
 
+      {/* RECEIPT PAPER CONTAINER (Z-20 UNDERNEATH SLOT COVER) */}
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="relative z-10 -mt-px flex w-full justify-center text-left focus:outline-none cursor-pointer"
+        aria-expanded={isOpen}
+        className="relative z-20 -mt-2 flex w-full cursor-pointer justify-center text-left focus:outline-none"
       >
         <motion.div
           layout
           transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 28,
-            mass: 0.9,
+            duration: 0.6,
+            ease: [0.16, 1, 0.3, 1], // Smooth motorized printer feed
           }}
-          className="relative w-[92%] bg-[#aeb2b3] text-black shadow-[0_10px_25px_rgba(0,0,0,0.5)] overflow-hidden"
+          className="relative w-[92%] origin-top overflow-hidden bg-[#aeb2b3] text-black shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
           style={{
             maskImage:
               "radial-gradient(circle 8px at 12px 100%, transparent 100%, black 100%)",
@@ -40,118 +39,70 @@ export default function ReceiptItem() {
             WebkitMaskRepeat: "repeat-x",
           }}
         >
-          <div className="absolute inset-x-0 top-0 h-4 bg-gradient-to-b from-black/25 to-transparent pointer-events-none" />
+          {/* PRINTER SLOT SHADOW CAST ON PAPER */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-6 bg-gradient-to-b from-black/35 via-black/15 to-transparent" />
 
-          <div className="relative px-6 pb-8 pt-8 md:px-8 md:pb-9 md:pt-9 z-10">
-            <AnimatePresence mode="wait" initial={false}>
-              {!isOpen ? (
+          {/* PRINTED PAPER CONTENT */}
+          <div className="relative z-10 px-6 pb-8 pt-7 md:px-8 md:pb-9 md:pt-8">
+            {/* NEW PRINTED LINES (FEEDS DOWNWARD FROM PRINTER SLOT ON OPEN) */}
+            <AnimatePresence initial={false}>
+              {isOpen && (
                 <motion.div
-                  key="collapsed"
-                  initial={{ opacity: 0, y: -4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 4 }}
-                  transition={{ duration: 0.2 }}
+                  initial={{ height: 0, opacity: 0, y: -15 }}
+                  animate={{ height: "auto", opacity: 1, y: 0 }}
+                  exit={{ height: 0, opacity: 0, y: -15 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="overflow-hidden"
                 >
-                  <div className="flex items-start justify-between">
-                    <span className="text-xs md:text-sm">
-                      Client
-                    </span>
-                    <span className="font-body font-bold text-sm text-primary md:text-base">
-                      Your Client
-                    </span>
+                  <div className="flex items-center justify-between pb-2 text-xs text-black/60 md:text-sm">
+                    <span>Project credit</span>
+                    <span>As your client sees it</span>
                   </div>
-
-                  <div className="mt-6 flex items-start justify-between">
-                    <span className="text-xs md:text-sm">
-                      Design and build
-                    </span>
-                    <span className="font-body font-bold text-sm text-primary md:text-base">
-                      Your Studio
-                    </span>
-                  </div>
-
-                  <div className="mt-8 grid grid-cols-2 gap-4 items-end">
-                    <div>
-                      <p className="text-[10px] font-medium text-primary md:text-xs">
-                        &quot;Click the receipt.&quot;
-                      </p>
-                      <p className="mt-1 text-xs leading-relaxed md:text-xs opacity-80 font-body">
-                        That is the only place our name appears, and your client
-                        never sees this page.
-                      </p>
-                    </div>
-                    <div className="flex justify-end">
-                      <Barcode />
-                    </div>
-                  </div>
-                </motion.div>
-              ) : (
-                /* STATE 2: CLICKED / EXPANDED */
-                <motion.div
-                  key="expanded"
-                  initial={{ opacity: 0, y: -4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 4 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-black/60 md:text-sm">
-                      Project credit
-                    </span>
-                    <span className="text-xs text-black/60 md:text-sm">
-                      As your client sees it
-                    </span>
-                  </div>
-
-                  <div className="mt-2 mb-6 space-y-1">
+                  <div className="mb-4 space-y-1">
                     <div className="h-px bg-black/40" />
                     <div className="h-px bg-black/40" />
                   </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm md:text-base">
-                      Delivered by
-                    </span>
+                  <div className="mb-5 flex items-center justify-between">
+                    <span className="text-sm md:text-base">Delivered by</span>
                     <span className="font-heading text-base font-bold text-[#595959] md:text-lg">
                       DAVAN Digital
                     </span>
                   </div>
-
-                  <div className="mt-5 flex items-center justify-between">
-                    <span className="text-sm md:text-base">
-                      Client
-                    </span>
-                    <span className="font-body text-base font-bold text-primary md:text-lg">
-                      Your Client
-                    </span>
-                  </div>
-
-                  <div className="mt-5 flex items-center justify-between">
-                    <span className="text-sm md:text-base">
-                      Design and build
-                    </span>
-                    <span className="font-body text-base font-bold text-primary md:text-lg">
-                      Your Studio
-                    </span>
-                  </div>
-
-                  <div className="mt-8 grid grid-cols-2 gap-4 items-end">
-                    <div>
-                      <p className="text-[8px] text-primary md:text-sm">
-                        &quot;Click the receipt.&quot;
-                      </p>
-                      <p className="mt-1 text-xs leading-relaxed md:text-sm opacity-80">
-                        That is the only place our name appears, and your client
-                        never sees this page.
-                      </p>
-                    </div>
-                    <div className="flex justify-end">
-                      <Barcode />
-                    </div>
-                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
+
+            {/* BASE RECEIPT INFO */}
+            <div className="flex items-center justify-between">
+              <span className="text-xs md:text-sm">Client</span>
+              <span className="font-body text-sm font-bold text-primary md:text-base">
+                Your Client
+              </span>
+            </div>
+
+            <div className="mt-5 flex items-center justify-between">
+              <span className="text-xs md:text-sm">Design and build</span>
+              <span className="font-body text-sm font-bold text-primary md:text-base">
+                Your Studio
+              </span>
+            </div>
+
+            {/* BARCODE & INSTRUCTIONS */}
+            <div className="mt-8 grid grid-cols-2 items-end gap-4">
+              <div>
+                <p className="text-[10px] font-medium text-primary md:text-xs">
+                  &quot;Click the receipt.&quot;
+                </p>
+
+                <p className="font-body mt-1 text-xs leading-relaxed opacity-80">
+                  That is the only place our name appears, and your client never
+                  sees this page.
+                </p>
+              </div>
+              <div className="flex justify-end">
+                <Barcode />
+              </div>
+            </div>
           </div>
         </motion.div>
       </button>

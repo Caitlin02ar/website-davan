@@ -20,8 +20,6 @@ export default function TextStagger({
   ...props
 }: TextStaggerProps) {
   const words = text.split(" ");
-
-  // Hitung rentang karakter (start & end index) untuk highlightText jika ada
   let highlightStart = -1;
   let highlightEnd = -1;
 

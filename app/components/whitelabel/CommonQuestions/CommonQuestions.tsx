@@ -15,7 +15,7 @@ export default function CommonQuestionsSection(){
         <section id="common-questions" className="relative min-h-screen w-full overflow-hidden">
             <div className="absolute inset-0 bg-dark/10"/>
             <div className="relative z-10 flex flex-col min-h-screen items-start">
-                <div className="w-full px-8 md:px-16 md:pt-24 lg:px-24 xl:px-32">
+                <div className="w-full px-5 py-16 md:px-16 md:py-0 md:pt-24 lg:px-24 xl:px-32">
                     <div>
                         <div className="flex flex-col gap-4">
                             <BubbleTag
@@ -26,7 +26,7 @@ export default function CommonQuestionsSection(){
                                     text:commonQuestionData.title.text
                                 }
                             ]}/>
-                            <div className="flex items-start justify-between">
+                            <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
                                 <TextSlideIn>
                                     {commonQuestionData.heading}
                                 </TextSlideIn>

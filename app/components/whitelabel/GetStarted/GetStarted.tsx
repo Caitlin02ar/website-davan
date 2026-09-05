@@ -46,13 +46,13 @@ export default function GetStarted(){
                 width={getStartedData.image.width}
                 height={getStartedData.image.height}
                 priority
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover object-[55%_center] md:object-center"
             />
             <div className="absolute inset-0 bg-dark/40"/>
 
             <div className="relative z-10 flex min-h-screen flex-col justify-between">
-                <div className="w-full px-8 pt-16 md:px-16 md:pt-24 lg:px-24 xl:px-32">
-                    <div className="flex flex-row items-end justify-between gap-12">
+                <div className="w-full px-5 pt-16 md:px-16 md:pt-24 lg:px-24 xl:px-32">
+                    <div className="flex flex-col gap-12 md:flex-row md:items-end md:justify-between">
 
                         <div className="flex flex-col gap-8 max-w-xl">
                             <BubbleTag
@@ -69,16 +69,16 @@ export default function GetStarted(){
                                     {renderHighlightedText(getStartedData.heading, getStartedData.headingHighlight)}
 
                                 </TextSlideIn>
-                                
-                                <TextStagger 
+
+                                <TextStagger
                                     text={getStartedData.subheading}
                                     delay={0.3}
                                     staggerSpeed={0.025}
                                 />
                             </div>
-                            <div className="flex flex-row items-center gap-4">
+                            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                                 <WhiteLabelButton variant="outline" animated={true} href={getStartedData.button.href}>
-                                    {getStartedData.textButtonOutline} 
+                                    {getStartedData.textButtonOutline}
                                 </WhiteLabelButton>
                                 <WhiteLabelButton variant="primary" animated={true} href={getStartedData.button.href}>
                                     {getStartedData.textButtonPrimary}
@@ -86,29 +86,29 @@ export default function GetStarted(){
                             </div>
                         </div>
 
-                        <div className="hidden md:flex flex-col items-end gap-3 shrink-0">
-                            <span className="font-body text-primary text-sm font-semibold">
+                        <div className="flex shrink-0 flex-col items-start gap-3 border-t border-white/20 pt-6 md:items-end md:border-t-0 md:pt-0">
+                            <span className="font-body text-sm font-semibold text-primary">
                                 {getStartedData.contact.titleInformation}
                             </span>
                             <div className="flex items-center gap-3">
-                                <span className="font-body text-sm">{getStartedData.contact.location}</span>
-                                <MapPin className="text-primary" size={18} strokeWidth={2} />
+                                <MapPin className="order-1 text-primary md:order-2" size={18} strokeWidth={2} />
+                                <span className="order-2 font-body text-sm md:order-1">{getStartedData.contact.location}</span>
                             </div>
                             <div className="flex items-center gap-3">
-                                <span className="font-body text-sm">{getStartedData.contact.email}</span>
-                                <Mail className="text-primary" size={18} strokeWidth={2} />
+                                <Mail className="order-1 text-primary md:order-2" size={18} strokeWidth={2} />
+                                <span className="order-2 font-body text-sm md:order-1">{getStartedData.contact.email}</span>
                             </div>
                             <div className="flex items-center gap-3">
-                                <span className="font-body text-sm">{getStartedData.contact.telephone}</span>
-                                <Phone className="text-primary" size={18} strokeWidth={2} />
+                                <Phone className="order-1 text-primary md:order-2" size={18} strokeWidth={2} />
+                                <span className="order-2 font-body text-sm md:order-1">{getStartedData.contact.telephone}</span>
                             </div>
                         </div>
 
                     </div>
                 </div>
 
-                <div className="w-full px-8 pb-8 md:px-16 lg:px-24 xl:px-32">
-                    <p className="font-body text-xs text-white text-right max-w-md ml-auto">
+                <div className="w-full px-5 pb-8 md:px-16 lg:px-24 xl:px-32">
+                    <p className="max-w-md text-left font-body text-xs text-white md:ml-auto md:text-right">
                         {getStartedData.additionalInformation} © {currentYear} DAVAN Digital. All rights reserved.
                     </p>
                 </div>

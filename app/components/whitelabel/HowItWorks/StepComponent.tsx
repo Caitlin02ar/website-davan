@@ -8,7 +8,7 @@ type StepComponentProps = {
 export default function StepComponent({
   progress,
 }: StepComponentProps) {
-  
+
   return (
     <div
       className="

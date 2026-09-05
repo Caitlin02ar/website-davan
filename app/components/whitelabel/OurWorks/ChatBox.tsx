@@ -12,9 +12,9 @@ export default function ChatBox({
   description,
 }: ChatBoxProps) {
   return (
-    <div className="relative mx-auto mt-16 w-full max-w-6xl rounded-[36px] bg-[#5b6064] px-8 py-10 md:px-12 md:py-12 lg:px-16 lg:py-14">
+    <div className="relative mx-5 mt-16 w-auto max-w-6xl rounded-[28px] bg-[#5b6064] px-6 py-8 md:mx-auto md:w-full md:rounded-[36px] md:px-12 md:py-12 lg:px-16 lg:py-14">
 
-      {/* Decorative notch */}
+
       <div
         className="
           absolute right-20 top-0

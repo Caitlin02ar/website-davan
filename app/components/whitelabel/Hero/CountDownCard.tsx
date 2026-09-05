@@ -50,7 +50,7 @@ export default function CountDownCard() {
           />
         </div>
 
-        {/* CARDS 2 & 3: CONTAINER */}
+
         <div className="flex flex-1 flex-col items-center rounded-3xl border border-white/20 bg-[#161618] px-6 py-6 md:flex-[2] md:flex-row md:pl-10 md:pr-8">
           <div className="w-full flex-1">
             <CountCard
@@ -61,7 +61,7 @@ export default function CountDownCard() {
             />
           </div>
 
-          {/* VERTICAL DIVIDER */}
+
           <div className="my-4 h-px w-full bg-white/20 md:mx-6 md:my-0 md:h-[84px] md:w-px md:shrink-0" />
 
           <div className="w-full flex-1">
@@ -99,18 +99,14 @@ function CountCard({
 
   useEffect(() => {
     if (!isInView) return;
-
-    // Card 3 static 0
     if (item.start === item.number) {
       setCount(item.number);
       return;
     }
 
     setCount(item.start);
-
-    // Wait until card entrance transition finishes before counting
     const startDelay = isFirst ? 200 : 350;
-    const duration = 1400; // Duration of the number count up
+    const duration = 1400;
 
     let animationFrameId: number;
 
@@ -120,8 +116,6 @@ function CountCard({
       const animateCount = (currentTime: number) => {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-
-        // Smooth easeOut curve
         const easedProgress = 1 - Math.pow(1 - progress, 2);
 
         const currentValue = Math.floor(

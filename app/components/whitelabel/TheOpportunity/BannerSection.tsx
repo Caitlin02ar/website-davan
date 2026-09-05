@@ -23,7 +23,7 @@ export default function BannerSection(){
                     <TextSlideIn className="text-center text-3xl">
                         {renderHighlightedText(bannerData.bannerHeading, bannerData.bannerHeadingHighlight)}
                     </TextSlideIn>
-                    <TextStagger text={bannerData.bannerDescription} 
+                    <TextStagger text={bannerData.bannerDescription}
                         delay={0.3}
                         staggerSpeed={0.025} className="text-sm"/>
                 </div>

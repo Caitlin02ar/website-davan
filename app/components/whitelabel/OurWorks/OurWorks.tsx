@@ -39,13 +39,13 @@ export default function OurWorksSection() {
   return (
     <section
       id="our-works"
-      className="relative min-h-screen w-full overflow-hidden mb-24"
+      className="relative mb-0 min-h-screen w-full overflow-hidden"
     >
       <div className="absolute inset-0 bg-dark/10" />
 
       <div className="relative z-10 w-full">
 
-        <div className="w-full px-8 pt-16 md:px-16 md:pt-24 lg:px-24 xl:px-32">
+        <div className="w-full px-5 pt-16 md:px-16 md:pt-24 lg:px-24 xl:px-32">
           <div className="flex flex-col gap-4">
             <BubbleTag
               variant={worksSectionData.title.variant}
@@ -65,13 +65,13 @@ export default function OurWorksSection() {
                 )}
               </TextSlideIn>
 
-              {/* <p className="max-w-3xl font-body text-sm"> */}
-                
-              {/* </p> */}
+
+
+
               <TextStagger text={worksSectionData.subheading}
               delay={0.3}
               staggerSpeed={0.025}
-              className="max-w-3xl text-[12px] whitespace-nowrap"
+              className="max-w-3xl text-[12px] md:whitespace-nowrap"
               />
             </div>
           </div>
@@ -80,7 +80,7 @@ export default function OurWorksSection() {
         <PortofolioAnimate
           src={worksSectionData.portfolio.src}
         />
-        <ChatBox 
+        <ChatBox
         title={worksSectionData.chatBox.title}
         subheading={worksSectionData.chatBox.subheading}
         subtitle={worksSectionData.chatBox.subtitle}

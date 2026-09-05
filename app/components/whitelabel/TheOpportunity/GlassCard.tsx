@@ -31,7 +31,7 @@ export default function GlassCard(){
             <div className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
                     {opportunity.glassCardData.map((card) => (
-                        <div 
+                        <div
                         key={card.index}
                         className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg rounded-[32px] overflow-hidden flex flex-col p-8 gap-4">
                             <Image

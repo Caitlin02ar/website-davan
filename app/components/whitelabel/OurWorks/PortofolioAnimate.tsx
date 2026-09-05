@@ -8,12 +8,11 @@ type PortofolioAnimateProps = {
 };
 
 const NORMAL_DURATION = 90;
-const HOVER_DURATION = 420; // jauh lebih lambat saat di-hover, kesan mau berhenti
+const HOVER_DURATION = 420;
 
 export default function PortofolioAnimate({
   src,
 }: PortofolioAnimateProps) {
-  // motion value angka murni (0 sampai -50), bukan string "%"
   const x = useMotionValue(0);
   const xPercent = useTransform(x, (v) => `${v}%`);
 
@@ -24,16 +23,14 @@ export default function PortofolioAnimate({
     animationRef.current?.stop();
 
     const current = x.get();
-    // hitung sisa jarak dari posisi sekarang menuju -50,
-    // supaya kecepatan baru proporsional, gak lompat balik ke 0
-    const remainingRatio = (0 - current) / 50; // 0 -> 1
+    const remainingRatio = (0 - current) / 50;
     const remainingDuration = Math.max(duration * (1 - remainingRatio), 0.5);
 
     animationRef.current = animate(x, -50, {
       duration: remainingDuration,
       ease: "linear",
       onComplete: () => {
-        x.set(0); // loop: reset instan ke 0 cuma pas siklus penuh selesai (gak ada visual gap karena logo di-duplikat 2x)
+        x.set(0);
         play(durationRef.current);
       },
     });
@@ -44,7 +41,6 @@ export default function PortofolioAnimate({
     return () => {
       animationRef.current?.stop();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleMouseEnter = () => {
@@ -63,10 +59,10 @@ export default function PortofolioAnimate({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* LEFT FADE */}
+
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-dark to-transparent md:w-40" />
 
-      {/* RIGHT FADE */}
+
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-dark to-transparent md:w-40" />
 
       <motion.div className="flex w-max" style={{ x: xPercent }}>
