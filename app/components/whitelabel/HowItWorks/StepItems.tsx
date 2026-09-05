@@ -45,24 +45,22 @@ export default function StepItems({ progress }: StepItemsProps) {
     },
   ];
 
-  // Animasi baru mulai setelah scroll 40% (dari sebelumnya 25%),
-  // kasih jeda lebih panjang biar user sempat baca semua konten dulu
-  // sebelum line/dot mulai bergerak
+
   const startOffset = 0.25;
   const endOffset = 0.95;
 
   const circlePoints = [
-    startOffset, // Circle 1
-    startOffset + (endOffset - startOffset) * 0.25, // Circle 2
-    startOffset + (endOffset - startOffset) * 0.5, // Circle 3
-    startOffset + (endOffset - startOffset) * 0.75, // Circle 4
+    startOffset,
+    startOffset + (endOffset - startOffset) * 0.25,
+    startOffset + (endOffset - startOffset) * 0.5,
+    startOffset + (endOffset - startOffset) * 0.75,
   ];
 
   const lineWidth = useTransform(progress, [startOffset, endOffset], ["0%", "100%"]);
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 pb-12">
-      <div className="relative mb-4">
+    <div className="mx-auto w-full max-w-7xl px-5 pb-12 md:px-4">
+      <div className="relative mb-4 hidden md:block">
         <div className="pointer-events-none absolute left-0 right-0 top-1/2 h-px w-full -translate-y-1/2">
           <div className="absolute inset-0 h-px bg-white/20" />
 
@@ -147,7 +145,11 @@ function StepItem({
   );
 
   return (
-    <div className="flex flex-col items-start">
+    <div className="relative flex flex-col items-start border-l border-white/20 pb-8 pl-6 last:pb-0 md:border-l-0 md:pb-0 md:pl-0">
+      <motion.div
+        style={{ backgroundColor: activeColor }}
+        className="absolute -left-[7px] top-1 h-3.5 w-3.5 rounded-full border border-white/40 md:hidden"
+      />
       <motion.span
         style={{ color: activeColor }}
         className="font-heading text-4xl md:text-4xl"

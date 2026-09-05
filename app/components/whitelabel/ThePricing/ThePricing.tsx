@@ -31,32 +31,32 @@ export default function ThePricingSection() {
       id="the-pricing"
       className="relative min-h-screen w-full overflow-hidden"
     >
-      {/* Background */}
+
       <Image
         src={pricingData.image.src}
         alt={pricingData.image.alt}
         width={pricingData.image.width}
         height={pricingData.image.height}
         priority
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover object-[72%_center] md:object-center"
       />
 
-      {/* Overlay */}
+
       <div className="absolute inset-0 bg-dark/60" />
 
-      {/* Content */}
+
       <div className="relative z-10 flex min-h-screen items-center">
-        <div className="w-full px-8 md:px-16 lg:px-24 xl:px-32">
+        <div className="w-full px-5 py-16 md:px-16 md:py-0 lg:px-24 xl:px-32">
 
           <div className="flex flex-col gap-8">
 
-            {/* TOP CONTENT */}
+
             <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_380px] lg:gap-12">
 
-              {/* LEFT CONTENT */}
+
               <div className="flex flex-col gap-8">
 
-                {/* Section Title */}
+
                 <BubbleTag
                   variant={pricingData.title.variant}
                   number={pricingData.title.number}
@@ -67,7 +67,6 @@ export default function ThePricingSection() {
                   ]}
                 />
 
-                {/* Heading */}
                 <TextSlideIn className="max-w-2xl">
                   {renderHighlightedText(
                     pricingData.heading,
@@ -77,14 +76,12 @@ export default function ThePricingSection() {
 
               </div>
 
-              {/* RIGHT CONTENT */}
-              <div className="flex w-full max-w-[380px] shrink-0 items-start justify-center">
+              <div className="flex w-full max-w-[380px] items-start justify-center lg:shrink-0">
                 <PricingGlassCard />
               </div>
 
             </div>
 
-            {/* PRICING ITEMS */}
             <PricingItemsSection />
 
           </div>

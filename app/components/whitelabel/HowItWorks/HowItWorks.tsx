@@ -38,9 +38,9 @@ export default function HowItWorksSection() {
     <section
       ref={sectionRef}
       id="how-it-works"
-      className="relative min-h-[600vh] w-full"
+      className="relative min-h-0 w-full md:min-h-[600vh]"
     >
-      <div className="sticky top-0 min-h-screen w-full flex flex-col justify-between">
+      <div className="top-0 flex w-full flex-col justify-between md:sticky md:min-h-screen">
         <div className="absolute inset-0 -z-10">
           <Image
             src={howItWorksData.image.src}
@@ -48,14 +48,14 @@ export default function HowItWorksSection() {
             width={howItWorksData.image.width}
             height={howItWorksData.image.height}
             priority
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-[60%_center] md:object-center"
           />
 
           <div className="absolute inset-0 bg-dark/10" />
         </div>
 
-        <div className="relative z-10 grid min-h-screen grid-rows-[auto_1fr]">
-          <div className="flex flex-col items-center px-8 pt-16 md:pt-20 md:px-16 lg:px-24 xl:px-32">
+        <div className="relative z-10 grid grid-rows-[auto_1fr] md:min-h-screen">
+          <div className="flex flex-col items-center px-5 pt-16 md:px-16 md:pt-20 lg:px-24 xl:px-32">
             <div className="flex flex-col items-center gap-3">
               <BubbleTag
                 variant={howItWorksData.title.variant}

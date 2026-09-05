@@ -22,12 +22,13 @@ export default function BubbleTag({
         <div
           className="
             relative z-10
-            flex h-[52px] w-[52px] shrink-0
+            flex h-11 min-w-[58px] shrink-0
             items-center justify-center
             rounded-full
             bg-primary
+            px-4
             font-heading
-            text-xl
+            text-base
             font-bold
             text-black
           "
@@ -38,19 +39,19 @@ export default function BubbleTag({
 
       <div
         className={`
+          flex h-11 items-center
           ${
             isTitle
-              ? "-ml-1 pl-6 pr-6"
+              ? "pl-6 pr-5"
               : "px-5"
           }
           rounded-full
           border border-white/30
           bg-white/10
-          py-2.5
           backdrop-blur-md
         `}
       >
-        <span className="font-medium">
+        <span className="font-body text-sm">
           {items.map((item, index) => {
             const textColor = isTitle
               ? "text-primary"

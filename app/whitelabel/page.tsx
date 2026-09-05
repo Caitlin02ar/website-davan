@@ -14,9 +14,9 @@ import GetStarted from "../components/whitelabel/GetStarted/GetStarted";
 
 export default function whiteLabelPage(){
     return(
-        <div className="flex flex-col items-center justify-center min-h-screen">
+        <div className="flex min-h-screen flex-col items-center justify-center gap-12 md:gap-16">
               <NavbarWhiteLabel/>
-              
+
               <HeroSection/>
               <TheProblemSection/>
               <TheOpportunitySection/>

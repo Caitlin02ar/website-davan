@@ -39,7 +39,6 @@ export default function RunningLogo({ src }: RunningLogoProps) {
     return () => {
       animationRef.current?.stop();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleMouseEnter = () => {
@@ -58,10 +57,10 @@ export default function RunningLogo({ src }: RunningLogoProps) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* LEFT FADE */}
+
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-dark to-transparent md:w-40" />
 
-      {/* RIGHT FADE */}
+
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-dark to-transparent md:w-40" />
 
       <motion.div className="flex w-max items-center" style={{ x: xPercent }}>

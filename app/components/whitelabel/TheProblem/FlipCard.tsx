@@ -1,8 +1,19 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { renderHighlightedText } from "@/lib/highlightText";
 import { MoveRight } from "lucide-react";
 
 export default function FlipCard() {
+  const [flippedIndex, setFlippedIndex] = useState<string | null>(null);
+
+  const toggleCardOnMobile = (index: string) => {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      setFlippedIndex((current) => (current === index ? null : index));
+    }
+  };
+
   const flipCardData = [
     {
       index: "1",
@@ -41,9 +52,20 @@ export default function FlipCard() {
           <div
             key={card.index}
             className="group h-[320px] [perspective:1000px]"
+            role="button"
+            tabIndex={0}
+            aria-label={`Show details for ${card.title}`}
+            aria-pressed={flippedIndex === card.index}
+            onClick={() => toggleCardOnMobile(card.index)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                toggleCardOnMobile(card.index);
+              }
+            }}
           >
             <div
-              className="
+              className={`
                 relative
                 h-full
                 w-full
@@ -52,7 +74,8 @@ export default function FlipCard() {
                 ease-[cubic-bezier(0.76,0,0.24,1)]
                 [transform-style:preserve-3d]
                 group-hover:[transform:rotateY(180deg)]
-              "
+                ${flippedIndex === card.index ? "[transform:rotateY(180deg)]" : ""}
+              `}
             >
               <div
                 className="

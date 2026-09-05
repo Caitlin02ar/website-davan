@@ -65,7 +65,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero-section"
-      className="relative mt-32 min-h-screen w-full overflow-hidden bg-dark"
+      className="relative mt-24 min-h-screen w-full overflow-hidden bg-dark md:mt-32"
     >
       <Image
         src={heroData.image.src}
@@ -73,7 +73,7 @@ export default function HeroSection() {
         width={heroData.image.width}
         height={heroData.image.height}
         priority
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover object-[75%_center] md:object-center"
       />
 
       <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-dark via-black/60 to-transparent md:h-96" />
@@ -81,7 +81,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-dark/30" />
 
       <div className="relative z-10 flex min-h-screen items-center">
-        <div className="w-full px-8 pt-0 md:px-16 lg:px-24 xl:px-32">
+        <div className="w-full px-5 py-12 md:px-16 md:py-0 lg:px-24 xl:px-32">
           <div className="max-w-3xl">
 
             <motion.div
