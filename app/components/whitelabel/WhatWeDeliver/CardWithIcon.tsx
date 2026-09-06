@@ -59,13 +59,13 @@ export default function CardWithIcon() {
         <div key={card.index} className="relative h-full">
           <div
             style={notchStyle}
-            className="relative flex h-full flex-col rounded-[2.5rem] bg-[#52585C] p-8 pr-20"
+            className="relative flex h-full flex-col rounded-[2.5rem] bg-[#52585C] p-8 pr-16"
           >
             <h3 className="font-heading text-2xl leading-snug text-primary">
               {card.title}
             </h3>
 
-            <p className="mt-4 text-sm leading-relaxed text-white">
+            <p className="mt-4 text-xs leading-relaxed text-white">
               {card.description}
             </p>
 
@@ -73,8 +73,8 @@ export default function CardWithIcon() {
               {card.items.map((item) => (
                 <li
                   key={item.no}
-                  className="text-sm leading-relaxed text-white"
-                >
+                  className="text-xs leading-relaxed text-white"
+>
                   {item.text}
                 </li>
               ))}

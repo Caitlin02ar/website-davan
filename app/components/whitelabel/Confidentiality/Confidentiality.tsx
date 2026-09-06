@@ -45,7 +45,7 @@ export default function ConfidentialitySection() {
               text={sectionData.subheading}
               delay={0.3}
               staggerSpeed={0.025}
-              className=""
+              className="text-sm"
             />
 
             <div className="mt-6 w-full">

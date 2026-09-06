@@ -28,7 +28,7 @@ export default function BannerSection(){
                         staggerSpeed={0.025} className="text-sm text-center"/>
                 </div>
             </div>
-            <div className="absolute inset-0 bg-dark/10"/>
+            {/* <div className="absolute inset-0 bg-dark/10"/> */}
         </section>
     )
 }

@@ -38,7 +38,7 @@ export default function CardWithPicture() {
       title: "Brand and identity",
       titleHighlights: [
         { text: "Brand", className: "text-primary" },
-        { text: "identity", className: "text-white" },
+        { text: "identity", className: "text-primary" },
       ],
       subtitle: "Overflow capacity, never a replacement",
       image: "/photos/whitelabel/card-2.png",
@@ -70,7 +70,7 @@ export default function CardWithPicture() {
       title: "Video and creative production",
       titleHighlights: [
         { text: "Video", className: "text-primary" },
-        { text: "production", className: "text-primary" },
+        { text: "creative production", className: "text-primary" },
       ],
       subtitle: "Rarely available at boutique scale",
       image: "/photos/whitelabel/card-4.png",
@@ -103,9 +103,6 @@ export default function CardWithPicture() {
               fill
               className="object-cover"
             />
-
-
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/30 to-dark/70" />
 
 
             <motion.div

@@ -168,7 +168,7 @@ export default function Dropdown({
                 backgroundColor: { duration: 0.3 },
                 borderRadius: { duration: 0.3 },
               }}
-              className="group relative w-full overflow-hidden text-left cursor-pointer border border-white/5"
+              className="group relative w-full overflow-hidden text-left cursor-pointer border border-white/5 outline-none focus:outline-none"
             >
               <div
                 className={`flex w-full flex-col transition-all duration-300 ${
@@ -190,7 +190,7 @@ export default function Dropdown({
                   <CircleChevronDown
                     size={22}
                     strokeWidth={2}
-                    className={`shrink-0 text-[#DFFF00] transition-transform duration-500 ease-out ${
+                    className={`shrink-0 text-primary transition-transform duration-500 ease-out ${
                       isActive ? "rotate-180" : "rotate-0 group-hover:text-white"
                     }`}
                   />
@@ -209,10 +209,10 @@ export default function Dropdown({
                       }}
                       className="overflow-hidden"
                     >
-                      <h3 className="mt-8 font-semibold text-[#DFFF00] text-xl md:text-2xl leading-snug">
+                      <h3 className="mt-8 text-primary text-xl md:text-xl leading-snug" style={{fontFamily: "var(--font-sequel)"}}>
                         {item.title}
                       </h3>
-                      <p className="mt-4 text-sm md:text-base leading-relaxed text-white/90 max-w-[90%]">
+                      <p className="mt-4 text-sm md:text-base leading-relaxed text-white max-w-[90%]">
                         {item.description}
                       </p>
                     </motion.div>
@@ -225,7 +225,7 @@ export default function Dropdown({
                       transition={{ duration: 0.15 }}
                       className="absolute left-16 top-1/2 -translate-y-1/2 pr-12"
                     >
-                      <span className="font-semibold text-sm md:text-base text-[#DFFF00] group-hover:text-white transition-colors duration-300">
+                      <span className="text-xs md:text-sm text-primary group-hover:text-white transition-colors duration-300" style={{fontFamily: "var(--font-sequel)"}}>
                         {item.title}
                       </span>
                     </motion.div>
@@ -239,8 +239,6 @@ export default function Dropdown({
     );
   }
 
-
-
   return (
     <div className="flex w-full flex-col gap-2">
       {dropDownQuestions.data.map((item, index) => {
@@ -253,12 +251,12 @@ export default function Dropdown({
               type="button"
               onClick={() => handleToggle(index)}
               whileTap={{ scale: 0.995 }}
-              className="group flex min-h-[42px] w-full items-center rounded-full bg-[#363636] px-7 text-left transition-colors duration-300 cursor-pointer"
+              className="group flex min-h-[42px] w-full items-center rounded-2xl bg-[#363636] px-7 text-left transition-colors duration-300 cursor-pointer border border-white/20 outline-none focus:outline-none"
             >
               <span
-                className={`text-[14px] font-semibold leading-none transition-colors duration-300 ${
-                  isActive ? "text-[#DFFF00]" : "text-white group-hover:text-[#DFFF00]"
-                }`}
+                className={`text-sm leading-none tracking-wide transition-colors duration-300 ${
+                  isActive ? "text-primary" : "text-white group-hover:text-primary"
+                }`} style={{fontFamily: "var(--font-sequel)"}}
               >
                 {item.question}
               </span>
@@ -268,12 +266,11 @@ export default function Dropdown({
                 strokeWidth={2}
                 className={`ml-auto shrink-0 transition-all duration-300 ${
                   isActive
-                    ? "rotate-180 text-[#DFFF00]"
-                    : "rotate-0 text-white group-hover:text-[#DFFF00]"
+                    ? "rotate-180 text-primary"
+                    : "rotate-0 text-white group-hover:text-primary"
                 }`}
               />
             </motion.button>
-
 
             <AnimatePresence initial={false}>
               {isActive && (
@@ -287,11 +284,11 @@ export default function Dropdown({
                   }}
                   className="overflow-hidden"
                 >
-                  <div className="mt-1 rounded-[16px] bg-[#555B5F] px-7 py-6">
+                  <div className="mt-1 rounded-[16px] bg-[#52585C] px-7 py-6">
                     {item.answer.split("/br").map((paragraph, paragraphIndex) => (
                       <p
                         key={paragraphIndex}
-                        className="mb-4 text-[12px] leading-[1.45] text-white/90 last:mb-0"
+                        className="mb-4 text-[12px] leading-[1.45] text-white last:mb-0"
                       >
                         {paragraph.trim()}
                       </p>

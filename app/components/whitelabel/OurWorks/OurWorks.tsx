@@ -64,10 +64,6 @@ export default function OurWorksSection() {
                   worksSectionData.headingHiglightText
                 )}
               </TextSlideIn>
-
-
-
-
               <TextStagger text={worksSectionData.subheading}
               delay={0.3}
               staggerSpeed={0.025}
