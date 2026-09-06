@@ -45,7 +45,6 @@ export default function StepItems({ progress }: StepItemsProps) {
     },
   ];
 
-
   const startOffset = 0.25;
   const endOffset = 0.95;
 
@@ -56,7 +55,11 @@ export default function StepItems({ progress }: StepItemsProps) {
     startOffset + (endOffset - startOffset) * 0.75,
   ];
 
-  const lineWidth = useTransform(progress, [startOffset, endOffset], ["0%", "100%"]);
+  const lineWidth = useTransform(
+    progress,
+    [startOffset, endOffset],
+    ["0%", "100%"]
+  );
 
   return (
     <div className="mx-auto w-full max-w-7xl px-5 pb-12 md:px-4">
@@ -95,7 +98,10 @@ export default function StepItems({ progress }: StepItemsProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-6 lg:gap-10">
+      <div className="relative grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-6 lg:gap-10">
+        {/* Mobile vertical line */}
+        <div className="pointer-events-none absolute bottom-0 left-[6px] top-0 w-px bg-white/20 md:hidden" />
+
         {stepsItemData.map((step, index) => (
           <StepItem
             key={step.number}
@@ -145,11 +151,12 @@ function StepItem({
   );
 
   return (
-    <div className="relative flex flex-col items-start border-l border-white/20 pb-8 pl-6 last:pb-0 md:border-l-0 md:pb-0 md:pl-0">
+    <div className="relative flex flex-col items-start pb-8 pl-6 last:pb-0 md:pb-0 md:pl-0">
       <motion.div
         style={{ backgroundColor: activeColor }}
-        className="absolute -left-[7px] top-1 h-3.5 w-3.5 rounded-full border border-white/40 md:hidden"
+        className="absolute left-[6px] top-1 h-3.5 w-3.5 -translate-x-1/2 rounded-full border border-white/40 md:hidden"
       />
+
       <motion.span
         style={{ color: activeColor }}
         className="font-heading text-4xl md:text-4xl"
