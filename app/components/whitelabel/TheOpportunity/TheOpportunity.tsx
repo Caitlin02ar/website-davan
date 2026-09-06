@@ -36,7 +36,7 @@ export default function TheOpportunitySection(){
                 priority
                 className="absolute inset-0 h-full w-full object-cover object-[68%_center] md:object-center"
             />
-            <div className="absolute inset-0 bg-black/10"/>
+            {/* <div className="absolute inset-0 bg-black/10"/> */}
             <div className="relative z-10 flex items-start">
                 <div className="w-full px-5 py-16 md:px-16 md:py-0 md:pt-24 lg:px-24 xl:px-32">
                     <div className="">
@@ -58,7 +58,7 @@ export default function TheOpportunitySection(){
                                     text={theOpportunityData.description}
                                     delay={0.3}
                                     staggerSpeed={0.025}
-                                    className="max-w-md text-sm text-white leading-relaxed"
+                                    className="max-w-md text-sm text-white leading-relaxed mb-4"
                                 />
                             </div>
 

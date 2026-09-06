@@ -35,7 +35,7 @@ export default function WhatWeDeliverSection(){
                                 ]}
                             />
                             <div className="flex flex-col gap-6">
-                                <TextSlideIn className="max-w-4xl">
+                                <TextSlideIn className="max-w-6xl">
                                     {renderHighlightedText(deliverData.heading, deliverData.headingHighlightText)}
                                 </TextSlideIn>
                                 <TextStagger

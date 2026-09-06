@@ -181,7 +181,7 @@ function StepItem({
         {step.title}
       </motion.h3>
 
-      <p className="mt-4 max-w-xl text-xs leading-relaxed text-white/80">
+      <p className="mt-4 max-w-xl text-xs leading-relaxed text-white">
         {step.description}
       </p>
     </div>

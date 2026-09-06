@@ -45,7 +45,7 @@ export default function CardWithNumber(){
                         {item.title}
                     </h3>
 
-                    <p className="mt-3 max-w-[85%] text-sm leading-relaxed text-white">
+                    <p className="mt-3 max-w-[90%] text-sm font-light leading-relaxed text-white">
                         {item.description}
                     </p>
 
