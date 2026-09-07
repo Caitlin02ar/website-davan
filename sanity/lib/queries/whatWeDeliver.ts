@@ -1,0 +1,29 @@
+export const whatWeDeliverQuery = `
+    *[_type == "whatWeDeliverSection"][0]{
+        _id,
+        tag,
+        heading,
+        headingHighlight,
+        description,
+        firstcardSection[]{
+            "backgroundImage":backgroundImage.asset->url,
+            title,
+            subtitle,
+            cardItems[]{
+                title,
+                titleHighlightText,
+                subtitle,
+                description
+            }
+        },
+        secondCardSection[]{
+            title,
+            subtitle,
+            cardItems[]{
+                heading,
+                subheading,
+                description
+            }
+        }
+    }
+`

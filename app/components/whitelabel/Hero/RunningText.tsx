@@ -2,37 +2,45 @@
 
 import { motion } from "framer-motion";
 
-export default function RunningText() {
-  const runningTextData = [
-    {
-      id: "1",
-      parts: [
-        { text: "UNDER ", highlight: false },
-        { text: "YOUR NAME", highlight: true },
-      ],
-    },
-    {
-      id: "2",
-      parts: [
-        { text: "ZERO DAVAN ", highlight: false },
-        { text: "FOOTPRINT", highlight: true },
-      ],
-    },
-    {
-      id: "3",
-      parts: [
-        { text: "INVISIBLE ", highlight: true },
-        { text: "BY DESIGN", highlight: false },
-      ],
-    },
-    {
-      id: "4",
-      parts: [
-        { text: "DELIVERED BY ", highlight: false },
-        { text: "DAVAN", highlight: true },
-      ],
-    },
-  ];
+type RunningTextItem = {
+  textBefore?: string;
+  highlightText: string;
+  textAfter?: string;
+};
+
+export default function RunningText({
+  items,
+}: {
+  items: RunningTextItem[];
+}) {
+  const runningTextData = items.map((item, index) => ({
+    id: String(index),
+
+    parts: [
+      ...(item.textBefore
+        ? [
+            {
+              text: item.textBefore,
+              highlight: false,
+            },
+          ]
+        : []),
+
+      {
+        text: item.highlightText,
+        highlight: true,
+      },
+
+      ...(item.textAfter
+        ? [
+            {
+              text: item.textAfter,
+              highlight: false,
+            },
+          ]
+        : []),
+    ],
+  }));
 
   return (
     <section
@@ -42,7 +50,6 @@ export default function RunningText() {
         -translate-x-1/2
         overflow-hidden
         py-8
-
       "
     >
       <motion.div
