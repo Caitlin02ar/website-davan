@@ -1,9 +1,13 @@
 "use client";
 
-import { motion, MotionValue, useTransform } from "framer-motion";
+import {
+  motion,
+  MotionValue,
+  useTransform,
+} from "framer-motion";
 
 type StepItemData = {
-  number: string;
+  number: number;
   tag: string;
   title: string;
   description: string;
@@ -11,40 +15,13 @@ type StepItemData = {
 
 type StepItemsProps = {
   progress: MotionValue<number>;
+  steps: StepItemData[];
 };
 
-export default function StepItems({ progress }: StepItemsProps) {
-  const stepsItemData: StepItemData[] = [
-    {
-      number: "01",
-      tag: "Your Studio",
-      title: "You win the brief",
-      description:
-        "You lead acquisition, discovery, and creative direction. The client relationship stays entirely yours. They know you, they trust you, they pay you. We are not visible at this stage at all.",
-    },
-    {
-      number: "02",
-      tag: "Together",
-      title: "We scope it together",
-      description:
-        "Send the brief, the brand assets, and any direction already locked in. You get scope, timeline, and an effort estimate in writing, in a form you can price and put straight in front of your client.",
-    },
-    {
-      number: "03",
-      tag: "DAVAN",
-      title: "We build inside your standards",
-      description:
-        "Your style guides, your brand rules, your review rhythm. Progress shared in Figma, on staging links, or however you already work. Revisions handled, deadlines respected.",
-    },
-    {
-      number: "04",
-      tag: "Your Studio",
-      title: "You deliver, we disappear",
-      description:
-        "You present under your name. Source files, code, CMS credentials, and assets transfer to you clean. We stay on quietly as your delivery layer, or hand over fully. Your call.",
-    },
-  ];
-
+export default function StepItems({
+  progress,
+  steps,
+}: StepItemsProps) {
   const startOffset = 0.25;
   const endOffset = 0.95;
 
@@ -74,20 +51,35 @@ export default function StepItems({ progress }: StepItemsProps) {
         </div>
 
         <div className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-6 lg:gap-10">
-          {stepsItemData.map((_, index) => {
+          {steps.map((_, index) => {
             const point = circlePoints[index];
-            const triggerStart = Math.max(0, point - 0.04);
+
+            const triggerStart = Math.max(
+              0,
+              point - 0.04
+            );
 
             const circleBg = useTransform(
               progress,
-              index === 0 ? [0, startOffset] : [triggerStart, point],
               index === 0
-                ? ["rgba(255,255,255,0.35)", "#dfff00"]
-                : ["rgba(255,255,255,0.35)", "#dfff00"]
+                ? [0, startOffset]
+                : [triggerStart, point],
+              index === 0
+                ? [
+                    "rgba(255,255,255,0.35)",
+                    "#dfff00",
+                  ]
+                : [
+                    "rgba(255,255,255,0.35)",
+                    "#dfff00",
+                  ]
             );
 
             return (
-              <div key={index} className="flex items-center">
+              <div
+                key={index}
+                className="flex items-center"
+              >
                 <motion.div
                   style={{ backgroundColor: circleBg }}
                   className="h-3.5 w-3.5 shrink-0 rounded-full border border-white/40"
@@ -102,7 +94,7 @@ export default function StepItems({ progress }: StepItemsProps) {
         {/* Mobile vertical line */}
         <div className="pointer-events-none absolute bottom-0 left-[6px] top-0 w-px bg-white/20 md:hidden" />
 
-        {stepsItemData.map((step, index) => (
+        {steps.map((step, index) => (
           <StepItem
             key={step.number}
             step={step}
@@ -130,24 +122,42 @@ function StepItem({
   point: number;
   startOffset: number;
 }) {
-  const triggerStart = Math.max(0, point - 0.04);
+  const triggerStart = Math.max(
+    0,
+    point - 0.04
+  );
 
   const activeColor = useTransform(
     progress,
-    index === 0 ? [0, startOffset] : [triggerStart, point],
-    ["rgba(255,255,255,0.35)", "#dfff00"]
+    index === 0
+      ? [0, startOffset]
+      : [triggerStart, point],
+    [
+      "rgba(255,255,255,0.35)",
+      "#dfff00",
+    ]
   );
 
   const tagBg = useTransform(
     progress,
-    index === 0 ? [0, startOffset] : [triggerStart, point],
-    ["rgba(255,255,255,0.05)", "#dfff00"]
+    index === 0
+      ? [0, startOffset]
+      : [triggerStart, point],
+    [
+      "rgba(255,255,255,0.05)",
+      "#dfff00",
+    ]
   );
 
   const tagText = useTransform(
     progress,
-    index === 0 ? [0, startOffset] : [triggerStart, point],
-    ["rgba(255,255,255,0.4)", "#000000"]
+    index === 0
+      ? [0, startOffset]
+      : [triggerStart, point],
+    [
+      "rgba(255,255,255,0.4)",
+      "#000000",
+    ]
   );
 
   return (
@@ -161,7 +171,7 @@ function StepItem({
         style={{ color: activeColor }}
         className="font-heading text-4xl md:text-4xl"
       >
-        {step.number}
+        {String(step.number).padStart(2, "0")}
       </motion.span>
 
       <motion.div

@@ -8,26 +8,31 @@ import BubbleTag from "../Common/BubbleTag";
 import StepComponent from "./StepComponent";
 import TextSlideIn from "../Common/TextSlideIn";
 
-export default function HowItWorksSection() {
+type HowItWorksData = {
+  heading: string;
+  headingHighlightText: string;
+  stepItems: {
+    number: number;
+    tag: string;
+    title: string;
+    description: string;
+  }[];
+  tag: {
+    variant: "title" | "tag";
+    number: string;
+    text: string;
+    highlightTextBoolean?: boolean;
+  }[];
+};
+
+type HowItWorksSectionProps = {
+  howItWorksData: HowItWorksData;
+};
+
+export default function HowItWorksSection({
+  howItWorksData,
+}: HowItWorksSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
-
-  const howItWorksData = {
-    image: {
-      src: "/photos/whitelabel/how-it-works-bg.png",
-      alt: "",
-      width: 1920,
-      height: 1080,
-    },
-
-    heading: "Four Steps. You Stay In Front The Whole Way",
-    headingHighlightText: "Four Steps.",
-
-    title: {
-      variant: "title" as const,
-      number: "05",
-      text: "How it Works",
-    },
-  };
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -43,10 +48,10 @@ export default function HowItWorksSection() {
       <div className="top-0 flex w-full flex-col justify-between md:sticky md:min-h-screen">
         <div className="absolute inset-0 -z-10">
           <Image
-            src={howItWorksData.image.src}
-            alt={howItWorksData.image.alt}
-            width={howItWorksData.image.width}
-            height={howItWorksData.image.height}
+            src="/photos/whitelabel/how-it-works-bg.png"
+            alt=""
+            width={1920}
+            height={1080}
             priority
             className="h-full w-full object-cover object-[60%_center] md:object-center"
           />
@@ -58,11 +63,11 @@ export default function HowItWorksSection() {
           <div className="flex flex-col items-center px-5 pt-16 md:px-16 md:pt-20 lg:px-24 xl:px-32">
             <div className="flex flex-col items-center gap-3">
               <BubbleTag
-                variant={howItWorksData.title.variant}
-                number={howItWorksData.title.number}
+                variant={howItWorksData.tag[0]?.variant}
+                number={howItWorksData.tag[0]?.number}
                 items={[
                   {
-                    text: howItWorksData.title.text,
+                    text: howItWorksData.tag[0]?.text ?? "",
                   },
                 ]}
               />
@@ -78,7 +83,10 @@ export default function HowItWorksSection() {
             </div>
           </div>
 
-          <StepComponent progress={scrollYProgress} />
+          <StepComponent
+            progress={scrollYProgress}
+            steps={howItWorksData.stepItems}
+          />
         </div>
       </div>
     </section>

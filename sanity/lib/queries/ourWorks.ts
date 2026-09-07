@@ -6,10 +6,12 @@ export const ourWorksQuery = `
         headingHighlightText,
         description,
         "logoCredentials":logoCredentials.asset->url,
-        "portfolioImage":portfolioImage.asset->url,
-        chatBox[]{
+        "portfolioItems": portfolioItems[]{
+        "image": asset->url
+        },        
+        chatBox{
             heading,
-            subHeading,
+            subheading,
             title,
             description
         }

@@ -57,10 +57,6 @@ export default function HeroSection({
 }) {
   const descriptionWords = heroData.description.split(" ");
 
-  // =========================
-  // TAG
-  // =========================
-
   const cmsTag = heroData.tag?.[0];
 
   const tagItems = cmsTag
@@ -112,10 +108,6 @@ export default function HeroSection({
     variant: cmsTag?.variant || "tag",
     items: tagItems,
   };
-
-  // =========================
-  // HEADING
-  // =========================
 
   const headingText = heroData.heading
     .map((item) => item.text)
@@ -255,7 +247,6 @@ const countdownItems = heroData.countdownItems.map((item, index) => ({
           </div>
 
           <CountDownCard items={countdownItems} />
-
           <RunningText items={runningTextItems} />
         </div>
       </div>

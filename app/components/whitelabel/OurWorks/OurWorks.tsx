@@ -1,41 +1,46 @@
 import { renderHighlightedText } from "@/lib/highlightText";
+
 import BubbleTag from "../Common/BubbleTag";
+
 import RunningLogo from "./RunningLogo";
+
 import PortofolioAnimate from "./PortofolioAnimate";
+
 import ChatBox from "./ChatBox";
+
 import TextSlideIn from "../Common/TextSlideIn";
+
 import TextStagger from "../Common/TextStagger";
 
-export default function OurWorksSection() {
-  const worksSectionData = {
-    title: {
-      variant: "title" as const,
-      number: "07",
-      text: "Our Works",
-    },
-
-    heading: "The Experience Behind The Partnership",
-    headingHiglightText: "The Experience",
-
-    subheading:
-      "Our team and production partners have delivered brand, digital, and content work for organisations across Australia, Asia, Europe, and North America.",
-
-    logo: {
-      src: "/photos/whitelabel/logo-credentials-1.png",
-    },
-
-    portfolio: {
-      src: "/photos/whitelabel/portfolio.png",
-    },
-
-     chatBox:{
-        title:"We are already the delivery layer behind a Perth studio, across brand and web.",
-        subheading:"We will not name them here, which is rather the point. A reference call can be arranged with their permission once we have met.",
-        subtitle:"On attribution",
-        description:"The work above represents projects delivered by DAVAN, by our production partners, and by members of our team in prior roles. We will tell you exactly which is which, project by project, and put you in touch with references on request. Case studies with full scope and timesline are shared under NDA rather than published. We would rather be precise than impressive."
-    }
+type OurWorksData = {
+  heading: string;
+  headingHighlightText: string;
+  description: string;
+  logoCredentials: string;
+  portfolioItems: {
+    image: string;
+  }[];
+  tag: {
+    variant: "title" | "tag";
+    number: string;
+    text: string;
+    highlightTextBoolean?: boolean;
+  }[];
+  chatBox: {
+    heading: string;
+    subheading: string;
+    title: string;
+    description: string;
   };
+};
 
+type OurWorksSectionProps = {
+  worksSectionData: OurWorksData;
+};
+
+export default function OurWorksSection({
+  worksSectionData,
+}: OurWorksSectionProps) {
   return (
     <section
       id="our-works"
@@ -44,15 +49,14 @@ export default function OurWorksSection() {
       <div className="absolute inset-0 bg-dark/10" />
 
       <div className="relative z-10 w-full">
-
         <div className="w-full px-5 pt-16 md:px-16 md:pt-24 lg:px-24 xl:px-32">
           <div className="flex flex-col gap-4">
             <BubbleTag
-              variant={worksSectionData.title.variant}
-              number={worksSectionData.title.number}
+              variant={worksSectionData.tag[0].variant}
+              number={worksSectionData.tag[0].number}
               items={[
                 {
-                  text: worksSectionData.title.text,
+                  text: worksSectionData.tag[0].text,
                 },
               ]}
             />
@@ -61,26 +65,32 @@ export default function OurWorksSection() {
               <TextSlideIn>
                 {renderHighlightedText(
                   worksSectionData.heading,
-                  worksSectionData.headingHiglightText
+                  worksSectionData.headingHighlightText
                 )}
               </TextSlideIn>
-              <TextStagger text={worksSectionData.subheading}
-              delay={0.3}
-              staggerSpeed={0.025}
-              className="max-w-3xl text-[12px] md:whitespace-nowrap"
+
+              <TextStagger
+                text={worksSectionData.description}
+                delay={0.3}
+                staggerSpeed={0.025}
+                className="max-w-3xl text-[12px] md:whitespace-nowrap"
               />
             </div>
           </div>
         </div>
-        <RunningLogo src={worksSectionData.logo.src} />
+
+        <RunningLogo src={worksSectionData.logoCredentials} />
+
         <PortofolioAnimate
-          src={worksSectionData.portfolio.src}
+          items={worksSectionData.portfolioItems}
         />
+
         <ChatBox
-        title={worksSectionData.chatBox.title}
-        subheading={worksSectionData.chatBox.subheading}
-        subtitle={worksSectionData.chatBox.subtitle}
-        description={worksSectionData.chatBox.description}/>
+          title={worksSectionData.chatBox.heading}
+          subheading={worksSectionData.chatBox.subheading}
+          subtitle={worksSectionData.chatBox.title}
+          description={worksSectionData.chatBox.description}
+        />
       </div>
     </section>
   );

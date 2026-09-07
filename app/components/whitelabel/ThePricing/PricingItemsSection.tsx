@@ -1,9 +1,20 @@
 import PricingItems from "./PricingItems";
 
-export default function PricingItemsSection(){
-    return(
-        <div>
-            <PricingItems/>
-        </div>
-    )
+type PricingItem = {
+  title: string;
+  description: string;
+};
+
+type PricingItemsSectionProps = {
+  items: PricingItem[];
+};
+
+export default function PricingItemsSection({
+  items,
+}: PricingItemsSectionProps) {
+  return (
+    <div>
+      <PricingItems items={items} />
+    </div>
+  );
 }

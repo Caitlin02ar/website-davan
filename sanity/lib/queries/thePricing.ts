@@ -5,7 +5,7 @@ export const thePricingQuery = `
         heading,
         headingHighlightText,
         glassCardItem[]{
-            icon,
+            "icon":icon.asset->url,
             title,
             description,
             buttons
