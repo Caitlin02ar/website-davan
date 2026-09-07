@@ -16,7 +16,7 @@ export default function TextStagger({
   highlightClassName = "text-[#DFFF00]",
   delay = 0.5,
   staggerSpeed = 0.035,
-  className = "font-light text-sm",
+  className = "font-light",
   ...props
 }: TextStaggerProps) {
   const words = text.split(" ");

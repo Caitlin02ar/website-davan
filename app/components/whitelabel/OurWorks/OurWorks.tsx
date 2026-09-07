@@ -21,7 +21,7 @@ export default function OurWorksSection() {
       "Our team and production partners have delivered brand, digital, and content work for organisations across Australia, Asia, Europe, and North America.",
 
     logo: {
-      src: "/photos/whitelabel/logo-credentials.png",
+      src: "/photos/whitelabel/logo-credentials-1.png",
     },
 
     portfolio: {

@@ -11,13 +11,28 @@ import ThePricingSection from "../components/whitelabel/ThePricing/ThePricing";
 import CommonQuestionsSection from "../components/whitelabel/CommonQuestions/CommonQuestions";
 import GetStarted from "../components/whitelabel/GetStarted/GetStarted";
 
+import { client } from "@/sanity/lib/client";
+import { heroQuery } from "@/sanity/lib/queries/hero";
+import { problemQuery } from "@/sanity/lib/queries/theProblem";
+import { opportunityQuery } from "@/sanity/lib/queries/theOpportunity";
+import { confidentialityQuery } from "@/sanity/lib/queries/confidentiality";
 
-export default function whiteLabelPage(){
+
+export default async function whiteLabelPage(){
+    const hero = await client.fetch(heroQuery);
+    const problem = await client.fetch(problemQuery);
+    const opportunity = await client.fetch(opportunityQuery);
+    const confidentiality = await client.fetch(confidentialityQuery);
+
+    console.log("Hero", hero);
+    console.log("Problem", problem);
+    console.log("Opportunity", opportunity);
+    console.log("Confidentiality", confidentiality);
     return(
         <div className="flex min-h-screen flex-col items-center justify-center gap-12 md:gap-16">
               <NavbarWhiteLabel/>
 
-              <HeroSection/>
+              <HeroSection heroData={hero}/>
               <TheProblemSection/>
               <TheOpportunitySection/>
               <WhatWeDeliverSection/>
