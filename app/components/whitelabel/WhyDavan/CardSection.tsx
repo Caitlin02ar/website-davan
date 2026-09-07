@@ -1,9 +1,19 @@
 import CardWithNumber from "./CardWithNumber";
 
-export default function CardSection(){
-    return(
-        <div>
-            <CardWithNumber/>
-        </div>
-    )
+type CardSectionProps = {
+  cards: {
+    numberCard: string;
+    titleCard: string;
+    descriptionCard: string;
+  }[];
+};
+
+export default function CardSection({
+  cards,
+}: CardSectionProps) {
+  return (
+    <div>
+      <CardWithNumber cards={cards} />
+    </div>
+  );
 }

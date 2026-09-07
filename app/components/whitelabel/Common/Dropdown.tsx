@@ -8,7 +8,7 @@ import { CircleChevronDown } from "lucide-react";
 type DropdownVariant = "confidentiality" | "questions";
 
 type ConfidentialityItem = {
-  number: string;
+  number?: string;
   icon: string;
   title: string;
   description: string;
@@ -22,61 +22,11 @@ type QuestionItem = {
 
 export default function Dropdown({
   variant,
+  items,
 }: {
   variant: DropdownVariant;
+  items?: ConfidentialityItem[];
 }) {
-
-  const dropDownDataConfidentiality: {
-    data: ConfidentialityItem[];
-  } = {
-    data: [
-      {
-        number: "1",
-        icon: "/assets/whitelabel/eyes-off.svg",
-        title: "No DAVAN branding on anything",
-        description:
-          "Files, repositories, CMS credentials, and documentation are handed over clean, with no trace of us inside them.",
-      },
-      {
-        number: "2",
-        icon: "/assets/whitelabel/call-off.svg",
-        title: "We do not contact your client",
-        description:
-          "Not during the project and not after it. You decide whether we are ever in the room, and most of the time we are not.",
-      },
-      {
-        number: "3",
-        icon: "/assets/whitelabel/pict-off.svg",
-        title: "Your work stays off our channels",
-        description:
-          "No case studies, no social posts, no portfolio entries, no awards submissions. If we cannot name it, nobody can trace it back to you.",
-      },
-      {
-        number: "4",
-        icon: "/assets/whitelabel/doc-lock.svg",
-        title: "NDA before the first brief",
-        description:
-          "Confidentiality is the starting position. We will sign yours as it stands, or supply ours if you would rather not draft one.",
-      },
-      {
-        number: "5",
-        icon: "/assets/whitelabel/shield.svg",
-        title: "Three year non solicit, in writing",
-        description:
-          "We will not approach, pitch, or accept direct work from your clients for the life of the partnership and for three years after it ends. It is a clause in the agreement, not a promise.",
-      },
-      {
-        number: "6",
-        icon: "/assets/whitelabel/key.svg",
-        title: "Your list, your IP, your relationships",
-        description:
-          "Ownership transfers to you in full at handover. Nothing is licensed back to us and nothing is held in reserve.",
-      },
-    ],
-  };
-
-
-
   const dropDownQuestions: {
     data: QuestionItem[];
   } = {
@@ -138,24 +88,21 @@ export default function Dropdown({
     ],
   };
 
-
-
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const handleToggle = (index: number) => {
     setActiveIndex((current) => (current === index ? null : index));
   };
 
-
   if (variant === "confidentiality") {
     return (
       <div className="flex w-full flex-col gap-3">
-        {dropDownDataConfidentiality.data.map((item, index) => {
+        {items?.map((item, index) => {
           const isActive = activeIndex === index;
 
           return (
             <motion.div
-              key={item.number}
+              key={`${item.title}-${index}`}
               layout
               onClick={() => handleToggle(index)}
               initial={false}
@@ -164,9 +111,16 @@ export default function Dropdown({
                 borderRadius: isActive ? "28px" : "24px",
               }}
               transition={{
-                layout: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
-                backgroundColor: { duration: 0.3 },
-                borderRadius: { duration: 0.3 },
+                layout: {
+                  duration: 0.4,
+                  ease: [0.16, 1, 0.3, 1],
+                },
+                backgroundColor: {
+                  duration: 0.3,
+                },
+                borderRadius: {
+                  duration: 0.3,
+                },
               }}
               className="group relative w-full overflow-hidden text-left cursor-pointer border border-white/5 outline-none focus:outline-none"
             >
@@ -182,7 +136,9 @@ export default function Dropdown({
                       alt=""
                       fill
                       className={`object-contain transition-[filter] duration-300 ${
-                        !isActive ? "group-hover:brightness-0 group-hover:invert" : ""
+                        !isActive
+                          ? "group-hover:brightness-0 group-hover:invert"
+                          : ""
                       }`}
                     />
                   </div>
@@ -191,7 +147,9 @@ export default function Dropdown({
                     size={22}
                     strokeWidth={2}
                     className={`shrink-0 text-primary transition-transform duration-500 ease-out ${
-                      isActive ? "rotate-180" : "rotate-0 group-hover:text-white"
+                      isActive
+                        ? "rotate-180"
+                        : "rotate-0 group-hover:text-white"
                     }`}
                   />
                 </div>
@@ -204,14 +162,26 @@ export default function Dropdown({
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{
-                        height: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
-                        opacity: { duration: 0.2, delay: 0.1 },
+                        height: {
+                          duration: 0.35,
+                          ease: [0.16, 1, 0.3, 1],
+                        },
+                        opacity: {
+                          duration: 0.2,
+                          delay: 0.1,
+                        },
                       }}
                       className="overflow-hidden"
                     >
-                      <h3 className="mt-8 text-primary text-xl md:text-xl leading-snug" style={{fontFamily: "var(--font-sequel)"}}>
+                      <h3
+                        className="mt-8 text-primary text-xl md:text-xl leading-snug"
+                        style={{
+                          fontFamily: "var(--font-sequel)",
+                        }}
+                      >
                         {item.title}
                       </h3>
+
                       <p className="mt-4 text-sm md:text-base leading-relaxed text-white max-w-[90%]">
                         {item.description}
                       </p>
@@ -225,7 +195,12 @@ export default function Dropdown({
                       transition={{ duration: 0.15 }}
                       className="absolute left-16 top-1/2 -translate-y-1/2 pr-12"
                     >
-                      <span className="text-xs md:text-sm text-primary group-hover:text-white transition-colors duration-300" style={{fontFamily: "var(--font-sequel)"}}>
+                      <span
+                        className="text-xs md:text-sm text-primary group-hover:text-white transition-colors duration-300"
+                        style={{
+                          fontFamily: "var(--font-sequel)",
+                        }}
+                      >
                         {item.title}
                       </span>
                     </motion.div>
@@ -246,7 +221,6 @@ export default function Dropdown({
 
         return (
           <div key={item.number} className="w-full">
-
             <motion.button
               type="button"
               onClick={() => handleToggle(index)}
@@ -255,8 +229,13 @@ export default function Dropdown({
             >
               <span
                 className={`text-sm leading-none tracking-wide transition-colors duration-300 ${
-                  isActive ? "text-primary" : "text-white group-hover:text-primary"
-                }`} style={{fontFamily: "var(--font-sequel)"}}
+                  isActive
+                    ? "text-primary"
+                    : "text-white group-hover:text-primary"
+                }`}
+                style={{
+                  fontFamily: "var(--font-sequel)",
+                }}
               >
                 {item.question}
               </span>
@@ -279,20 +258,27 @@ export default function Dropdown({
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{
-                    height: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
-                    opacity: { duration: 0.2 },
+                    height: {
+                      duration: 0.35,
+                      ease: [0.16, 1, 0.3, 1],
+                    },
+                    opacity: {
+                      duration: 0.2,
+                    },
                   }}
                   className="overflow-hidden"
                 >
                   <div className="mt-1 rounded-[16px] bg-[#52585C] px-7 py-6">
-                    {item.answer.split("/br").map((paragraph, paragraphIndex) => (
-                      <p
-                        key={paragraphIndex}
-                        className="mb-4 text-[12px] leading-[1.45] text-white last:mb-0"
-                      >
-                        {paragraph.trim()}
-                      </p>
-                    ))}
+                    {item.answer
+                      .split("/br")
+                      .map((paragraph, paragraphIndex) => (
+                        <p
+                          key={paragraphIndex}
+                          className="mb-4 text-[12px] leading-[1.45] text-white last:mb-0"
+                        >
+                          {paragraph.trim()}
+                        </p>
+                      ))}
                   </div>
                 </motion.div>
               )}

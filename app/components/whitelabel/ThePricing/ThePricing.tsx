@@ -1,68 +1,75 @@
 import { renderHighlightedText } from "@/lib/highlightText";
 import Image from "next/image";
+
 import BubbleTag from "../Common/BubbleTag";
 import PricingGlassCard from "./PricingGlassCard";
 import PricingItemsSection from "./PricingItemsSection";
 import TextSlideIn from "../Common/TextSlideIn";
 
-export default function ThePricingSection() {
-  const pricingData = {
-    title: {
-      variant: "title" as const,
-      number: "08",
-      text: "The Pricing",
-    },
+type PricingData = {
+  heading: string;
+  headingHighlightText: string;
 
-    heading:
-      "Wholesale pricing, and nothing to buy into.",
+  tag: {
+    variant: "title" | "tag";
+    number: string;
+    text: string;
+    highlightTextBoolean?: boolean;
+  }[];
 
-    headingHighlightText: "Wholesale pricing,",
+  glassCardItem: {
+    icon: string;
+    title: string;
+    description: string;
+    buttons: {
+      variant: "primary" | "outline";
+      animated?: boolean;
+      buttonText?: string;
+      text?: string;
+      href: string;
+    }[];
+  }[];
 
-    image: {
-      src: "/photos/whitelabel/the-pricing-bg.png",
-      alt: "",
-      width: 1920,
-      height: 1080,
-    },
-  };
+  listItems: {
+    title: string;
+    description: string;
+  }[];
+};
 
+type ThePricingSectionProps = {
+  pricingData: PricingData;
+};
+
+export default function ThePricingSection({
+  pricingData,
+}: ThePricingSectionProps) {
   return (
     <section
       id="the-pricing"
       className="relative min-h-screen w-full overflow-hidden"
     >
-
       <Image
-        src={pricingData.image.src}
-        alt={pricingData.image.alt}
-        width={pricingData.image.width}
-        height={pricingData.image.height}
+        src="/photos/whitelabel/the-pricing-bg.png"
+        alt=""
+        width={1920}
+        height={1080}
         priority
         className="absolute inset-0 h-full w-full object-cover object-[72%_center] md:object-center"
       />
 
-
       <div className="absolute inset-0 bg-dark/60" />
-
 
       <div className="relative z-10 flex min-h-screen items-center">
         <div className="w-full px-5 py-16 md:px-16 md:py-0 lg:px-24 xl:px-32">
-
           <div className="flex flex-col gap-8">
-
-
             <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_380px] lg:gap-12">
-
-
               <div className="flex flex-col gap-8">
-
-
                 <BubbleTag
-                  variant={pricingData.title.variant}
-                  number={pricingData.title.number}
+                  variant={pricingData.tag[0].variant}
+                  number={pricingData.tag[0].number}
                   items={[
                     {
-                      text: pricingData.title.text,
+                      text: pricingData.tag[0].text,
                     },
                   ]}
                 />
@@ -73,19 +80,17 @@ export default function ThePricingSection() {
                     pricingData.headingHighlightText
                   )}
                 </TextSlideIn>
-
               </div>
 
               <div className="flex w-full max-w-[380px] items-start justify-center lg:shrink-0">
-                <PricingGlassCard />
+                <PricingGlassCard
+                  data={pricingData.glassCardItem[0]}
+                />
               </div>
-
             </div>
 
-            <PricingItemsSection />
-
+            <PricingItemsSection items={pricingData.listItems} />
           </div>
-
         </div>
       </div>
     </section>

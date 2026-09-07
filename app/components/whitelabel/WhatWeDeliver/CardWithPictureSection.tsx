@@ -1,15 +1,30 @@
 import CardWithPicture from "./CardWithPicture";
 import TitleLineModel from "./TitleLineModel";
 
-export default function CardWithPictureSection(){
-    const titleLine = {
-        label:"Core Delivery",
-        rightText:"Priced per project on the wholesale card"
-    }
-    return(
+type CardWithPictureSectionProps = {
+    data: {
+        title: string;
+        subtitle: string;
+        cardItems: {
+            title: string;
+            titleHighlightText: string[];
+            subtitle: string;
+            description: string[];
+        }[];
+    };
+};
+
+export default function CardWithPictureSection({
+    data,
+}: CardWithPictureSectionProps) {
+    return (
         <div>
-            <TitleLineModel label={titleLine.label} rightText={titleLine.rightText}/>
-            <CardWithPicture/>
+            <TitleLineModel
+                label={data.title}
+                rightText={data.subtitle}
+            />
+
+            <CardWithPicture cards={data.cardItems} />
         </div>
-    )
+    );
 }

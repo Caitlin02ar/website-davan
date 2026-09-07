@@ -4,7 +4,7 @@ export const howItWorksQuery = `
         tag,
         heading,
         headingHighlightText,
-        stepsItems[]{
+        stepItems[]{
             number,
             tag,
             title,

@@ -1,14 +1,29 @@
 import CardWithIcon from "./CardWithIcon";
 import TitleLineModel from "./TitleLineModel";
-export default function AddOnsCardSection(){
-    const titleLine = {
-        label:"Add Ons",
-        rightText:"Attach to any pillar, quoted on top of core scope"
-    }
-    return(
+
+type AddOnsCardSectionProps = {
+    data: {
+        title: string;
+        subtitle: string;
+        cardItems: {
+            heading: string;
+            subheading: string;
+            description: string[];
+        }[];
+    };
+};
+
+export default function AddOnsCardSection({
+    data,
+}: AddOnsCardSectionProps) {
+    return (
         <div>
-            <TitleLineModel label={titleLine.label} rightText={titleLine.rightText}/>
-            <CardWithIcon/>
+            <TitleLineModel
+                label={data.title}
+                rightText={data.subtitle}
+            />
+
+            <CardWithIcon cards={data.cardItems} />
         </div>
-    )
+    );
 }

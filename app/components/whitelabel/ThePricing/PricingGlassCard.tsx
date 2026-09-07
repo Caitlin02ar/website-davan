@@ -3,23 +3,32 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+
 import WhiteLabelButton from "../Common/Button";
 
-export default function PricingGlassCard() {
+type PricingGlassCardData = {
+  icon: string;
+  title: string;
+  description: string;
+  buttons: {
+    variant: "primary" | "outline";
+    animated?: boolean;
+    buttonText?: string;
+    text?: string;
+    href: string;
+  }[];
+};
+
+type PricingGlassCardProps = {
+  data: PricingGlassCardData;
+};
+
+export default function PricingGlassCard({
+  data,
+}: PricingGlassCardProps) {
   const [hoverCount, setHoverCount] = useState(0);
 
-  const dataGlassCard = {
-    icon: "/assets/whitelabel/lock.svg",
-    title: "The rate card, on request.",
-    description:
-      "We do not publish wholesale pricing on a page anyone could forward. Ask and we will send the current card, plus an indicative scope for whatever you have sitting on your desk right now.",
-    button: {
-      variant: "primary" as const,
-      animated: true,
-      buttonText: "Request the rate card",
-      href: "mailto:david@davan.digital",
-    },
-  };
+  const button = data.buttons[0];
 
   const handleMouseEnter = () => {
     setHoverCount((prev) => prev + 1);
@@ -92,28 +101,28 @@ export default function PricingGlassCard() {
 
         <div className="relative z-10 mx-auto flex max-w-xl flex-col items-center justify-center gap-4">
           <Image
-            src={dataGlassCard.icon}
+            src={data.icon}
             alt=""
             width={68}
             height={68}
           />
 
           <span className="text-center font-heading text-primary">
-            {dataGlassCard.title}
+            {data.title}
           </span>
 
           <p className="text-center text-sm leading-relaxed text-white/80">
-            {dataGlassCard.description}
+            {data.description}
           </p>
         </div>
 
         <div className="relative z-30 flex justify-center">
           <WhiteLabelButton
-            variant={dataGlassCard.button.variant}
-            animated={dataGlassCard.button.animated}
-            href={dataGlassCard.button.href}
+            variant={button.variant}
+            animated={button.animated ?? true}
+            href={button.href}
           >
-            {dataGlassCard.button.buttonText}
+            {button.text ?? button.buttonText ?? ""}
           </WhiteLabelButton>
         </div>
       </div>

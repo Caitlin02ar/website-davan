@@ -3,12 +3,18 @@ import StepItems from "./StepItems";
 
 type StepComponentProps = {
   progress: MotionValue<number>;
+  steps: {
+    number: number;
+    tag: string;
+    title: string;
+    description: string;
+  }[];
 };
 
 export default function StepComponent({
   progress,
+  steps,
 }: StepComponentProps) {
-
   return (
     <div
       className="
@@ -25,7 +31,10 @@ export default function StepComponent({
         xl:px-32
       "
     >
-      <StepItems progress={progress} />
+      <StepItems
+        progress={progress}
+        steps={steps}
+      />
     </div>
   );
 }

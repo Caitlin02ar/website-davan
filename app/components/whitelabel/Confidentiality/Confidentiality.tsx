@@ -1,63 +1,103 @@
 import { renderHighlightedText } from "@/lib/highlightText";
+
 import BubbleTag from "../Common/BubbleTag";
+
 import Dropdown from "../Common/Dropdown";
+
 import ReceiptItem from "./ReceiptItem";
+
 import TextSlideIn from "../Common/TextSlideIn";
+
 import TextStagger from "../Common/TextStagger";
 
-export default function ConfidentialitySection() {
-  const sectionData = {
-    title: {
-      variant: "title" as const,
-      number: "04",
-      text: "Confidentiality",
-    },
-    heading: "Invisible By Default",
-    headingHightlightText: "Invisible",
-    subheading:
-      "Everything here is how we operate as standard. None of it is an upgrade you have to ask for, and none of it depends on us being nice about it.",
-  };
+type ConfidentialityData = {
+    heading: string;
+    headingHighlightText: string;
+    description: string;
 
-  return (
-    <section id="confidentiality" className="relative w-full py-24">
-      <div className="pointer-events-none absolute inset-0 bg-dark/10" />
+    tag: {
+        variant: "title" | "tag";
+        number: string;
+        text: string;
+        highlightTextBoolean?: boolean;
+    }[];
 
-      <div className="relative z-10 w-full px-5 md:px-16 lg:px-24 xl:px-32">
+    receipt: {
+        leftTopText: string;
+        rightTopText: string;
+        receiptItems: {
+            label: string;
+            value: string;
+        }[];
+        note: {
+            title: string;
+            description: string;
+        };
+    };
 
-        <div className="grid grid-cols-1 items-start justify-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="flex flex-col gap-4">
-            <BubbleTag
-              variant={sectionData.title.variant}
-              number={sectionData.title.number}
-              items={[
-                {
-                  text: sectionData.title.text,
-                },
-              ]}
-            />
-            <TextSlideIn>
-              {renderHighlightedText(
-                sectionData.heading,
-                sectionData.headingHightlightText
-              )}
-            </TextSlideIn>
-            <TextStagger
-              text={sectionData.subheading}
-              delay={0.3}
-              staggerSpeed={0.025}
-              className="text-sm"
-            />
+    dropdownItems: {
+        title: string;
+        description: string;
+        icon: string;
+    }[];
+};
 
-            <div className="mt-6 w-full">
-              <ReceiptItem />
+type ConfidentialitySectionProps = {
+    confidentialityData: ConfidentialityData;
+};
+
+export default function ConfidentialitySection({
+    confidentialityData,
+}: ConfidentialitySectionProps) {
+    return (
+        <section
+            id="confidentiality"
+            className="relative w-full py-24"
+        >
+            <div className="pointer-events-none absolute inset-0 bg-dark/10" />
+
+            <div className="relative z-10 w-full px-5 md:px-16 lg:px-24 xl:px-32">
+                <div className="grid grid-cols-1 items-start justify-center gap-12 lg:grid-cols-2 lg:gap-16">
+                    <div className="flex flex-col gap-4">
+                        <BubbleTag
+                            variant={confidentialityData.tag[0].variant}
+                            number={confidentialityData.tag[0].number}
+                            items={[
+                                {
+                                    text: confidentialityData.tag[0].text,
+                                },
+                            ]}
+                        />
+
+                        <TextSlideIn>
+                            {renderHighlightedText(
+                                confidentialityData.heading,
+                                confidentialityData.headingHighlightText
+                            )}
+                        </TextSlideIn>
+
+                        <TextStagger
+                            text={confidentialityData.description}
+                            delay={0.3}
+                            staggerSpeed={0.025}
+                            className="text-sm"
+                        />
+
+                        <div className="mt-6 w-full">
+                            <ReceiptItem
+                                receipt={confidentialityData.receipt}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="w-full">
+                        <Dropdown
+                            variant="confidentiality"
+                            items={confidentialityData.dropdownItems}
+                        />
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div className="w-full">
-            <Dropdown variant="confidentiality" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+        </section>
+    );
 }

@@ -1,30 +1,50 @@
 import Image from "next/image";
+
 import BubbleTag from "../Common/BubbleTag";
+
 import { renderHighlightedText } from "@/lib/highlightText";
+
 import GlassCardSection from "./GlassCardSection";
+
 import BannerSection from "./BannerSection";
+
 import TextSlideIn from "../Common/TextSlideIn";
+
 import TextStagger from "../Common/TextStagger";
 
-export default function TheOpportunitySection() {
-    const theOpportunityData = {
-        image: {
-            src: "/photos/whitelabel/the-opportunity.png",
-            alt: "",
-            width: 1920,
-            height: 1080,
-        },
-        title: {
-            variant: "title" as const,
-            number: "02",
-            text: "The Opportunity",
-        },
-        heading: "What A Delivery Partner Behind You Actually Buys",
-        hightlightText: "Delivery Partner",
-        description:
-            "Not a subcontractor you have to manage. A production layer that sits under your brand and moves at the speed your pipeline needs.",
-    };
+type TheOpportunityData = {
+    backgroundImage: string;
+    heading: string;
+    headingHighlight: string;
+    description: string;
 
+    tag: {
+        variant: "title" | "tag";
+        number: string;
+        text: string;
+        highlightTextBoolean?: boolean;
+    }[];
+
+    cardItems: {
+        title: string;
+        description: string;
+        icon: string;
+    }[];
+
+    externalCard: string;
+
+    bannerTitle: string;
+    bannerHightlightText: string;
+    bannerSubheading: string;
+};
+
+type TheOpportunitySectionProps = {
+    opportunityData: TheOpportunityData;
+};
+
+export default function TheOpportunitySection({
+    opportunityData,
+}: TheOpportunitySectionProps) {
     return (
         <section
             id="the-opportunity"
@@ -32,11 +52,11 @@ export default function TheOpportunitySection() {
         >
             {/* Background */}
             <Image
-                src={theOpportunityData.image.src}
-                alt={theOpportunityData.image.alt}
-                width={theOpportunityData.image.width}
-                height={theOpportunityData.image.height}
+                src={opportunityData.backgroundImage}
+                alt=""
+                fill
                 priority
+                sizes="100vw"
                 className="
                     absolute inset-0
                     h-full w-full
@@ -85,11 +105,11 @@ export default function TheOpportunitySection() {
                     <div>
                         <div className="flex w-full flex-col gap-4">
                             <BubbleTag
-                                variant={theOpportunityData.title.variant}
-                                number={theOpportunityData.title.number}
+                                variant={opportunityData.tag[0].variant}
+                                number={opportunityData.tag[0].number}
                                 items={[
                                     {
-                                        text: theOpportunityData.title.text,
+                                        text: opportunityData.tag[0].text,
                                     },
                                 ]}
                             />
@@ -98,23 +118,34 @@ export default function TheOpportunitySection() {
                                 <TextSlideIn>
                                     <h1>
                                         {renderHighlightedText(
-                                            theOpportunityData.heading,
-                                            theOpportunityData.hightlightText
+                                            opportunityData.heading,
+                                            opportunityData.headingHighlight
                                         )}
                                     </h1>
                                 </TextSlideIn>
 
                                 <TextStagger
-                                    text={theOpportunityData.description}
+                                    text={opportunityData.description}
                                     delay={0.3}
                                     staggerSpeed={0.025}
                                     className="mb-4 max-w-md text-sm leading-relaxed text-white"
                                 />
                             </div>
 
-                            <GlassCardSection />
+                            <GlassCardSection
+                                cards={opportunityData.cardItems}
+                                externalCard={opportunityData.externalCard}
+                            />
 
-                            <BannerSection />
+                            <BannerSection
+                                bannerTitle={opportunityData.bannerTitle}
+                                bannerHightlightText={
+                                    opportunityData.bannerHightlightText
+                                }
+                                bannerSubheading={
+                                    opportunityData.bannerSubheading
+                                }
+                            />
                         </div>
                     </div>
                 </div>

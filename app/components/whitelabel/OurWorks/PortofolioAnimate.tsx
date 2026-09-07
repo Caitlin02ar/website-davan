@@ -9,14 +9,16 @@ import {
 } from "framer-motion";
 
 type PortofolioAnimateProps = {
-  src: string;
+  items: {
+    image: string;
+  }[];
 };
 
-const NORMAL_DURATION = 90;
-const HOVER_DURATION = 420;
+const NORMAL_DURATION = 50;
+const HOVER_DURATION = 90;
 
 export default function PortofolioAnimate({
-  src,
+  items,
 }: PortofolioAnimateProps) {
   const x = useMotionValue(0);
   const xPercent = useTransform(x, (v) => `${v}%`);
@@ -29,6 +31,7 @@ export default function PortofolioAnimate({
 
     const current = x.get();
     const remainingRatio = (0 - current) / 50;
+
     const remainingDuration = Math.max(
       duration * (1 - remainingRatio),
       0.5
@@ -62,6 +65,10 @@ export default function PortofolioAnimate({
     play(NORMAL_DURATION);
   };
 
+  const getOptimizedImage = (url: string) => {
+    return `${url}?w=800&auto=format`;
+  };
+
   return (
     <div
       className="relative mt-12 w-full overflow-hidden"
@@ -76,18 +83,30 @@ export default function PortofolioAnimate({
         className="flex w-max"
         style={{ x: xPercent }}
       >
-        <img
-          src={src}
-          alt="DAVAN Digital portfolio"
-          className="h-auto w-[8000px] max-w-none shrink-0 md:w-auto"
-        />
+        {/* First sequence */}
+        {items.map((item, index) => (
+          <img
+            key={`portfolio-${index}`}
+            src={getOptimizedImage(item.image)}
+            alt={`DAVAN Digital portfolio ${index + 1}`}
+            loading={index < 3 ? "eager" : "lazy"}
+            decoding="async"
+            className="h-auto w-[350px] max-w-none shrink-0 sm:w-[500px] md:w-[800px]"
+          />
+        ))}
 
-        <img
-          src={src}
-          alt=""
-          aria-hidden="true"
-          className="h-auto w-[8000px] max-w-none shrink-0 md:w-auto"
-        />
+        {/* Duplicate sequence for infinite loop */}
+        {items.map((item, index) => (
+          <img
+            key={`portfolio-duplicate-${index}`}
+            src={getOptimizedImage(item.image)}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            className="h-auto w-[350px] max-w-none shrink-0 sm:w-[500px] md:w-[800px]"
+          />
+        ))}
       </motion.div>
     </div>
   );

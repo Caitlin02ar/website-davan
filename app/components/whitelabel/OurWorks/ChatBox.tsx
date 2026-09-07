@@ -13,7 +13,6 @@ export default function ChatBox({
 }: ChatBoxProps) {
   return (
     <div className="relative mx-5 mt-16 w-auto rounded-[28px] bg-[#5b6064] px-6 py-8 md:mx-16 md:rounded-[36px] md:px-12 md:py-12 lg:mx-24 lg:px-16 lg:py-14 xl:mx-32">
-
       <div
         className="
           absolute right-20 top-0
@@ -27,9 +26,8 @@ export default function ChatBox({
       />
 
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-0">
-
         <div className="flex flex-col gap-8 md:pr-10 lg:pr-16">
-          <h2 className="max-w-xl font-heading text-2xl leading-snug tracking-wide text-white md:text-xl lg:text-xl">
+          <h2 className="max-w-xl font-heading text-lg leading-snug tracking-wide text-white md:text-xl lg:text-xl">
             {title}
           </h2>
 
@@ -47,7 +45,6 @@ export default function ChatBox({
             {description}
           </p>
         </div>
-
       </div>
     </div>
   );
