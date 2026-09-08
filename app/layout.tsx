@@ -159,7 +159,6 @@ export default async function RootLayout({
   `),
 ]);
 
-console.log("footer data", footerData)
 
   const orgLogoUrl = settings?.organizationLogo
     ? urlFor(settings.organizationLogo).width(512).url()

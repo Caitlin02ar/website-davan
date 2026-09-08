@@ -1,11 +1,9 @@
 "use client";
 
 import Image from "next/image";
-
 import { useState } from "react";
-
 import { motion } from "framer-motion";
-
+import { urlFor } from "@/lib/image";
 import { renderMultiHighlight } from "@/lib/renderMultiHighlight";
 
 type CardWithPictureProps = {
@@ -14,6 +12,13 @@ type CardWithPictureProps = {
         titleHighlightText: string[];
         subtitle: string;
         description: string[];
+        image: {
+            asset: {
+                _ref: string;
+                _type: "reference";
+            };
+            alt?: string;
+        };
     }[];
 };
 
@@ -34,7 +39,6 @@ export default function CardWithPicture({
         <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {cards.map((card, cardIndex) => {
                 const index = String(cardIndex + 1);
-
                 const isHovered = hoveredIndex === index;
 
                 const titleHighlights = card.titleHighlightText.map(
@@ -44,10 +48,25 @@ export default function CardWithPicture({
                     })
                 );
 
+                // Minta Sanity generate versi high-res + auto format (webp/avif).
+                // width 1600 dipilih supaya ada headroom buat retina/HiDPI mobile
+                // (mobile bisa full-bleed 1 kolom dgn devicePixelRatio 2-3x, jadi
+                // butuh source jauh lebih besar dari lebar visualnya).
+                // Gak pakai .height() fixed di sini — biarin `fill` + object-cover
+                // di <Image> yang nentuin crop sesuai container (beda rasio antara
+                // mobile 1-kolom yg tinggi vs desktop 4-kolom yg lebih landscape).
+                const imageUrl = card.image?.asset
+                    ? urlFor(card.image)
+                          .width(1600)
+                          .auto("format")
+                          .quality(90)
+                          .url()
+                    : `/photos/whitelabel/card-${index}.png`; // fallback kalau image belum ke-set di CMS
+
                 return (
                     <div
                         key={index}
-                        className="group relative flex min-h-[320px] w-full flex-col overflow-hidden rounded-3xl"
+                        className="group relative flex aspect-[3/4] w-full flex-col overflow-hidden rounded-3xl sm:aspect-auto sm:min-h-[320px]"
                         onMouseEnter={() =>
                             setHoveredIndex(index)
                         }
@@ -58,13 +77,22 @@ export default function CardWithPicture({
                             toggleCardOnTouch(index)
                         }
                     >
+                        {/* Card Image */}
                         <Image
-                            src={`/photos/whitelabel/card-${index}.png`}
-                            alt={card.title}
+                            src={imageUrl}
+                            alt={card.image?.alt || card.title}
                             fill
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                            priority={cardIndex < 4}
+                            quality={90}
+                            sizes="
+                                (max-width: 640px) calc(100vw - 2rem),
+                                (max-width: 1024px) calc(50vw - 2rem),
+                                25vw
+                            "
                             className="object-cover"
                         />
+
+                        {/* Hover Overlay */}
                         <motion.div
                             className="pointer-events-none absolute inset-0 bg-dark/30"
                             initial={false}
@@ -77,6 +105,7 @@ export default function CardWithPicture({
                             }}
                         />
 
+                        {/* Content */}
                         <div className="relative z-10 flex h-full flex-col p-6 pb-16">
                             <div className="shrink-0">
                                 <h3 className="font-heading text-xl leading-snug">
@@ -91,6 +120,7 @@ export default function CardWithPicture({
                                 </p>
                             </div>
 
+                            {/* Description */}
                             <motion.ul
                                 initial={false}
                                 animate={{
@@ -135,9 +165,8 @@ export default function CardWithPicture({
                                 )}
                             </motion.ul>
 
-                            <div
-                                className="absolute inset-x-0 bottom-5 flex justify-center"
-                            >
+                            {/* Read More */}
+                            <div className="absolute inset-x-0 bottom-5 flex justify-center">
                                 <motion.span
                                     animate={{
                                         opacity: isHovered ? 0 : 1,
