@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 import WhiteLabelButton from "../Common/Button";
+import { getLinkHref } from "@/lib/link";
 
 type PricingGlassCardData = {
   icon: string;
@@ -29,6 +30,7 @@ export default function PricingGlassCard({
   const [hoverCount, setHoverCount] = useState(0);
 
   const button = data.buttons[0];
+  const buttonHref = getLinkHref(button.href);
 
   const handleMouseEnter = () => {
     setHoverCount((prev) => prev + 1);
@@ -120,7 +122,7 @@ export default function PricingGlassCard({
           <WhiteLabelButton
             variant={button.variant}
             animated={button.animated ?? true}
-            href={button.href}
+            href={buttonHref}
           >
             {button.text ?? button.buttonText ?? ""}
           </WhiteLabelButton>

@@ -55,8 +55,6 @@ export default function HeroSection({
 }: {
   heroData: HeroData;
 }) {
-  const descriptionWords = heroData.description.split(" ");
-
   const cmsTag = heroData.tag?.[0];
 
   const tagItems = cmsTag
@@ -142,57 +140,51 @@ export default function HeroSection({
     };
   });
 
-
-const countdownItems = heroData.countdownItems.map((item, index) => ({
-  number: item.value,
-  start: index === 0 ? 10 : index === 1 ? 1 : 0,
-  title: item.description,
-  direction: (index === 0 ? "up" : "left") as "up" | "left",
-  suffix: item.suffix,
-}));
+  const countdownItems = heroData.countdownItems.map((item, index) => ({
+    number: item.value,
+    start: index === 0 ? 10 : index === 1 ? 1 : 0,
+    title: item.description,
+    direction: (index === 0 ? "up" : "left") as "up" | "left",
+    suffix: item.suffix,
+  }));
 
   const runningTextItems = heroData.runningTextItems.map((item, index) => ({
-  id: String(index + 1),
-  textBefore: item.textBefore,
-  highlightText: item.highlightText,
-  textAfter: item.textAfter,
-}));
+    id: String(index + 1),
+    textBefore: item.textBefore,
+    highlightText: item.highlightText,
+    textAfter: item.textAfter,
+  }));
 
   return (
     <section
       id="hero-section"
       className="relative mt-24 min-h-screen w-full overflow-hidden bg-dark md:mt-32"
     >
+      {/* Background Image - Optimized for Mobile & Desktop */}
       <Image
         src={heroData.backgroundImage}
         alt="White Label Delivery"
         width={1920}
         height={1080}
         priority
-        className="absolute inset-0 h-full w-full object-cover object-[75%_center] md:object-center"
+        quality={90}
+        sizes="(max-width: 768px) 150vw, 100vw"
+        className="absolute inset-0 h-full w-full object-cover object-[76%_center] md:object-center"
       />
-
+      {/* Top Gradient for Navigation contrast */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-dark via-black/60 to-transparent md:h-96" />
 
-      <div className="absolute inset-0 bg-dark/30" />
+      {/* Dark Overlay for Text Legibility (Stronger on Mobile) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-dark/70 via-dark/40 to-dark/80 md:bg-dark/30" />
 
       <div className="relative z-10 flex min-h-screen items-center">
         <div className="w-full px-5 py-12 md:px-16 md:py-0 lg:px-24 xl:px-32">
           <div className="max-w-3xl">
             <motion.div
               className="mb-8"
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <BubbleTag
                 variant={tagData.variant as "tag" | "title"}
@@ -202,12 +194,7 @@ const countdownItems = heroData.countdownItems.map((item, index) => ({
 
             <div className="max-w-2xl overflow-hidden">
               <TextSlideIn className="font-heading text-white leading-normal">
-                <h1>
-                  {renderMultiHighlight(
-                    headingText,
-                    headingHighlights
-                  )}
-                </h1>
+                <h1>{renderMultiHighlight(headingText, headingHighlights)}</h1>
               </TextSlideIn>
             </div>
 
@@ -219,14 +206,8 @@ const countdownItems = heroData.countdownItems.map((item, index) => ({
 
             <motion.div
               className="mt-8 flex flex-wrap items-center gap-4"
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: 0.6,
                 delay: 2.3,
