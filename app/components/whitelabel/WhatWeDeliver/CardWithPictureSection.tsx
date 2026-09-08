@@ -10,6 +10,13 @@ type CardWithPictureSectionProps = {
             titleHighlightText: string[];
             subtitle: string;
             description: string[];
+            image: {
+                asset: {
+                    _ref: string;
+                    _type: "reference";
+                };
+                alt?: string;
+            };
         }[];
     };
 };

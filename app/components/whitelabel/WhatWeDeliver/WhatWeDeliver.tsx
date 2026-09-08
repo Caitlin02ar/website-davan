@@ -1,13 +1,8 @@
 import BubbleTag from "../Common/BubbleTag";
-
 import { renderHighlightedText } from "@/lib/highlightText";
-
 import CardWithPictureSection from "./CardWithPictureSection";
-
 import AddOnsCardSection from "./AddOnsCardSection";
-
 import TextSlideIn from "../Common/TextSlideIn";
-
 import TextStagger from "../Common/TextStagger";
 
 type WhatWeDeliverData = {
@@ -25,17 +20,28 @@ type WhatWeDeliverData = {
     firstcardSection: {
         title: string;
         subtitle: string;
+
         cardItems: {
             title: string;
             titleHighlightText: string[];
             subtitle: string;
             description: string[];
+
+            // Image dari Sanity
+            image: {
+                asset: {
+                    _ref: string;
+                    _type: "reference";
+                };
+                alt?: string;
+            };
         }[];
     }[];
 
     secondCardSection: {
         title: string;
         subtitle: string;
+
         cardItems: {
             heading: string;
             subheading: string;
@@ -90,7 +96,7 @@ export default function WhatWeDeliverSection({
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-6 mt-6">
+                    <div className="mt-6 flex flex-col gap-6">
                         <CardWithPictureSection
                             data={deliverData.firstcardSection[0]}
                         />
