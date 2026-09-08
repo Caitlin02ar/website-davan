@@ -14,8 +14,8 @@ type PortofolioAnimateProps = {
   }[];
 };
 
-const NORMAL_DURATION = 50;
-const HOVER_DURATION = 90;
+const NORMAL_DURATION = 100;
+const HOVER_DURATION = 190;
 
 export default function PortofolioAnimate({
   items,
