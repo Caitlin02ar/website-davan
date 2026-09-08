@@ -59,8 +59,8 @@ export default function NavbarWhiteLabel() {
       aria-label="White label navigation"
     >
       <div className="flex items-center justify-between gap-3 sm:gap-4">
-        <Link
-          href="/"
+        <a
+          href="https://davan.digital"
           className="relative h-8 w-24 shrink-0 outline-none focus:outline-none sm:h-9 sm:w-28 lg:h-10 lg:w-32"
         >
           <Image
@@ -71,7 +71,7 @@ export default function NavbarWhiteLabel() {
             sizes="(max-width: 640px) 96px, (max-width: 1024px) 112px, 128px"
             className="object-contain object-left"
           />
-        </Link>
+        </a>
 
         <ul className="hidden items-center gap-7 lg:flex">
           {navItems.map((item) => {

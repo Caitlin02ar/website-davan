@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import HeroSection from "@/app/components/whitelabel/Hero/Hero";
 import NavbarWhiteLabel from "../components/whitelabel/Common/Navbar";
 import TheProblemSection from "../components/whitelabel/TheProblem/TheProblem";
@@ -24,6 +26,12 @@ import { thePricingQuery } from "@/sanity/lib/queries/thePricing";
 import { commonQuestionsQuery } from "@/sanity/lib/queries/commonQuestions";
 import { getStartedQuery } from "@/sanity/lib/queries/getStarted";
 
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function whiteLabelPage(){
     const hero = await client.fetch(heroQuery);

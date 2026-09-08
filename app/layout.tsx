@@ -129,20 +129,37 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const [settings, footerData] = await Promise.all([
-    client.fetch(SITE_SETTINGS_QUERY),
-    client.fetch(`
-      *[
-        _type == "footerContent"
-        ][0]{
-          copyright,
-          "footerLogo": footerLogo.asset->url,
-          information[]{
-            "icon": icon.asset->url,
-            text
-          }
+  client.fetch(SITE_SETTINGS_QUERY),
+  client.fetch(`
+    *[
+      _type == "footerContent"
+    ][0]{
+      copyright,
+      "footerLogo": footerLogo.asset->url,
+
+      information[]{
+        "icon": icon.asset->url,
+        text
+      },
+
+      navigationSections[]{
+        title,
+        href,
+        links[]{
+          name,
+          href
         }
-    `),
-  ]);
+      },
+
+      legalLinks[]{
+        name,
+        href
+      }
+    }
+  `),
+]);
+
+console.log("footer data", footerData)
 
   const orgLogoUrl = settings?.organizationLogo
     ? urlFor(settings.organizationLogo).width(512).url()
