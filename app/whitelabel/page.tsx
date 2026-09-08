@@ -45,19 +45,6 @@ export default async function whiteLabelPage(){
     const thePricing = await client.fetch(thePricingQuery);
     const commonQuestion = await client.fetch(commonQuestionsQuery);
     const getStarted = await client.fetch(getStartedQuery);
-
-
-    console.log("Hero", hero);
-    console.log("Problem", problem);
-    console.log("Opportunity", opportunity);
-    console.log("What We Deliver", whatWeDeliver);
-    console.log("Confidentiality", confidentiality);
-    console.log("How it works", howItWorks);
-    console.log("Why DAVAN", whyDavan);
-    console.log("Our Works", ourWorks);
-    console.log("The Pricing", thePricing);
-    console.log("Common Question", commonQuestion);
-    console.log("Get Started", getStarted); 
     
     return(
         <div className="flex min-h-screen flex-col items-center justify-center gap-12 md:gap-16">
