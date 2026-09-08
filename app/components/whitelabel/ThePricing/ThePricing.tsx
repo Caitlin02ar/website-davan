@@ -54,6 +54,7 @@ export default function ThePricingSection({
         width={1920}
         height={1080}
         priority
+        unoptimized
         className="absolute inset-0 h-full w-full object-cover object-[72%_center] md:object-center"
       />
 

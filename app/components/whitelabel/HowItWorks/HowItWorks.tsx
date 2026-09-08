@@ -45,7 +45,8 @@ export default function HowItWorksSection({
       id="how-it-works"
       className="relative min-h-0 w-full md:min-h-[600vh]"
     >
-      <div className="top-0 flex w-full flex-col justify-between md:sticky md:min-h-screen">
+      {/* Diubah dari `md:sticky md:min-h-screen` ke `sticky min-h-screen` agar responsif di mobile */}
+      <div className="sticky top-0 flex min-h-screen w-full flex-col justify-between">
         <div className="absolute inset-0 -z-10">
           <Image
             src="/photos/whitelabel/how-it-works-bg.png"
@@ -53,13 +54,14 @@ export default function HowItWorksSection({
             width={1920}
             height={1080}
             priority
+            unoptimized
             className="h-full w-full object-cover object-[60%_center] md:object-center"
           />
 
           <div className="absolute inset-0 bg-dark/10" />
         </div>
 
-        <div className="relative z-10 grid grid-rows-[auto_1fr] md:min-h-screen">
+        <div className="relative z-10 grid min-h-screen grid-rows-[auto_1fr]">
           <div className="flex flex-col items-center px-5 pt-16 md:px-16 md:pt-20 lg:px-24 xl:px-32">
             <div className="flex flex-col items-center gap-3">
               <BubbleTag

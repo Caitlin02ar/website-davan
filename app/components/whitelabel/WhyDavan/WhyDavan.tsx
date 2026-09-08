@@ -54,6 +54,7 @@ export default function WhyDavanSection({
         width={1920}
         height={1080}
         priority
+        unoptimized
         className="absolute inset-0 h-full w-full object-cover object-[40%_center] md:object-center"
       />
 
